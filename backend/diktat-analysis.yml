@@ -1,0 +1,38 @@
+- name: DIKTAT_COMMON
+  configuration:
+    domainName: ch.learnup.backend
+    disabledChapters: "Comments"
+    kotlinVersion: 1.9
+- name: MAGIC_NUMBER
+  enabled: false
+- name: GENERIC_VARIABLE_WRONG_DECLARATION
+  enabled: false
+- name: EXTENSION_FUNCTION_WITH_CLASS
+  enabled: false
+- name: USE_DATA_CLASS
+  enabled: false
+- name: TOO_LONG_FUNCTION
+  enabled: true
+  ignoreAnnotated: [ Test ]
+- name: TOO_MANY_PARAMETERS
+  enabled: true
+  configuration:
+    maxParameterListSize: '6'
+  ignoreAnnotated: [ GetMapping ]
+- name: COMPLEX_EXPRESSION
+  enabled: true
+  ignoreAnnotated: [ Test ]
+- name: TRAILING_COMMA
+  enabled: true
+  configuration:
+    valueArgument: true
+    valueParameter: true
+    referenceExpression: true
+    whenConditions: false
+    collectionLiteral: true
+    typeArgument: true
+    typeParameter: true
+    destructuringDeclaration: true
+- name: BACKTICKS_PROHIBITED
+  enabled: true
+  ignoreAnnotated: [ Test, ParameterizedTest, ArchTest ]

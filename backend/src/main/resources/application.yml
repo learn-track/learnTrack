@@ -1,0 +1,22 @@
+spring:
+  sql:
+    init:
+      mode: always
+  jooq:
+    sql-dialect: mariadb
+  datasource:
+    driverClassName: org.mariadb.jdbc.Driver
+
+management:
+  server:
+    port: 8090
+  endpoints:
+    web:
+      exposure:
+        include: "health"
+
+springdoc:
+  api-docs:
+    path: "/openapi/v3/api-docs"
+  swagger-ui:
+    url: "../openapi/v3/api-docs" # url is relative to /swagger-ui/index.html so it also works with the /api prefix

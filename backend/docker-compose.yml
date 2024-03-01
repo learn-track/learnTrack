@@ -1,0 +1,16 @@
+name: learnup-backend
+services:
+  backend-mariadb:
+    image: mariadb:10
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: learnup_backend
+      MYSQL_USER: backend
+      MYSQL_PASSWORD: backend
+    ports:
+      - "3309:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+
+volumes:
+  mariadb_data:
