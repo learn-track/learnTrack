@@ -1,0 +1,20 @@
+name: delete-old-packages
+
+on:
+  push:
+    branches:
+      - 'master'
+
+jobs:
+  clean-ghcr:
+    name: Delete old unused container images
+    runs-on: ubuntu-latest
+    steps:
+      - uses: snok/container-retention-policy@v2.2.1
+        with:
+          image-names: learnup*
+          cut-off: One month ago UTC
+          keep-at-least: 10
+          skip-tags: v*
+          account-type: personal
+          token: ${{ secrets.DELETE_PACKAGES_TOKEN }}
