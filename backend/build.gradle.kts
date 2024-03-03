@@ -192,3 +192,24 @@ jooq {
 		}
 	}
 }
+
+sonar {
+	properties {
+		property("sonar.projectKey", "learnUP_backend")
+		property("sonar.organization", "deepspace1000")
+		property("sonar.host.url", "https://sonarcloud.io")
+		property("sonar.sources", "src/main")
+		property("sonar.tests", "src/test")
+		property("sonar.log.level", "DEBUG")
+
+		property("sonar.exclusions", "src/main/kotlin-gen/jooq-gen/**/*")
+		property("sonar.cpd.exclusions", "src/main/**/*.sql")
+
+		property("sonar.issue.ignore.multicriteria", "duplicatedStringsInSql,setCallsInJooq")
+		property("sonar.issue.ignore.multicriteria.duplicatedStringsInSql.ruleKey", "plsql:S1192")
+		property("sonar.issue.ignore.multicriteria.duplicatedStringsInSql.resourceKey", "**/*.sql")
+		property("sonar.issue.ignore.multicriteria.setCallsInJooq.ruleKey", "kotlin:S6518")
+		property("sonar.issue.ignore.multicriteria.setCallsInJooq.resourceKey", "**/*Queries.kt")
+
+	}
+}
