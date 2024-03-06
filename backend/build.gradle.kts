@@ -12,6 +12,8 @@ plugins {
 	alias(libs.plugins.detekt)
 	jacoco
 	alias(libs.plugins.sonarqube)
+	alias(libs.plugins.versions)
+	alias(libs.plugins.version.catalog.update)
 }
 
 group = "ch.learnup"
@@ -40,7 +42,6 @@ dependencies {
 	implementation(libs.jooq)
 	implementation(libs.jooq.codegen)
 	implementation(libs.kotlin.reflect)
-	implementation(libs.liquibase.core)
 	implementation(libs.mariadb.java.client)
 	implementation(libs.springdoc.openapi.ui)
 	implementation(libs.springdoc.openapi.kotlin)
@@ -52,6 +53,7 @@ dependencies {
 	testImplementation(libs.mockserver)
 	testImplementation(libs.mockserver.client.java)
 	testImplementation(libs.spring.webflux)
+	testImplementation(libs.mockito.kotlin)
 
 	jooqGenerator(libs.mariadb.java.client)
 	jooqGenerator(libs.jakarta.xml.bind.api)

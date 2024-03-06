@@ -8,31 +8,22 @@ springdoc = "2.3.0"
 detekt-formatting = "io.gitlab.arturbosch.detekt:detekt-formatting:1.23.5"
 jackson-module-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin" }
 
-jackson-dataformat-csv = { module = "com.fasterxml.jackson.dataformat:jackson-dataformat-csv" }
-jackson-datatype-jsr310 = { module = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310" }
 jakarta-xml-bind-api = "jakarta.xml.bind:jakarta.xml.bind-api:4.0.1"
 jooq = { module = "org.jooq:jooq" }
 jooq-codegen = { module = "org.jooq:jooq-codegen" }
 jsr305 = "com.google.code.findbugs:jsr305:3.0.2"
-junit-jupiter = { module = "org.testcontainers:junit-jupiter" }
-kotlin-allopen = { module = "org.jetbrains.kotlin:kotlin-allopen", version.ref = "kotlin" }
 kotlin-bom = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlin" }
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect" }
-kotlin-scripting-compiler-embeddable = { module = "org.jetbrains.kotlin:kotlin-scripting-compiler-embeddable", version.ref = "kotlin" }
-kotlin-stdlib-jdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8" }
 liquibase-core = { module = "org.liquibase:liquibase-core" }
 mariadb-java-client = "org.mariadb.jdbc:mariadb-java-client:2.7.12"
 mockserver = { module = "org.testcontainers:mockserver" }
 mockserver-client-java = "org.mock-server:mockserver-client-java:5.15.0"
 mockito-kotlin = "org.mockito.kotlin:mockito-kotlin:5.2.1"
 org-testcontainers-mariadb = { module = "org.testcontainers:mariadb" }
-pgpainless-core = "org.pgpainless:pgpainless-core:1.6.6"
 spring-boot-configuration-processor = "org.springframework.boot:spring-boot-configuration-processor:3.2.3"
 spring-boot-dependencies = { module = "org.springframework.boot:spring-boot-dependencies", version.ref = "springboot" }
-spring-boot-docker-compose = { module = "org.springframework.boot:spring-boot-docker-compose", version.ref = "springboot" }
 spring-boot-starter-actuator = { module = "org.springframework.boot:spring-boot-starter-actuator" }
 spring-boot-starter-jooq = { module = "org.springframework.boot:spring-boot-starter-jooq" }
-spring-boot-starter-oauth2-resource-server = { module = "org.springframework.boot:spring-boot-starter-oauth2-resource-server" }
 spring-boot-starter-security = { module = "org.springframework.boot:spring-boot-starter-security" }
 spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
 spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" }
@@ -43,9 +34,6 @@ springdoc-openapi-kotlin = { module = "org.springdoc:springdoc-openapi-starter-c
 springdoc-openapi-ui = { module = "org.springdoc:springdoc-openapi-starter-webmvc-ui", version.ref = "springdoc" }
 testcontainers-bom = "org.testcontainers:testcontainers-bom:1.19.7"
 archunit = "com.tngtech.archunit:archunit-junit5:1.2.1"
-jsonwebtoken = "io.jsonwebtoken:jjwt-api:0.12.5"
-jsonwebtoken-impl = "io.jsonwebtoken:jjwt-impl:0.12.5"
-jsonwebtoken-orgjson = "io.jsonwebtoken:jjwt-orgjson:0.12.5"
 
 [plugins]
 detekt = "io.gitlab.arturbosch.detekt:1.23.5"
@@ -56,4 +44,4 @@ kotlin-plugin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref 
 springframework-boot = { id = "org.springframework.boot", version.ref = "springboot" }
 version-catalog-update = "nl.littlerobots.version-catalog-update:0.8.4"
 sonarqube = "org.sonarqube: 4.3.1.3277"
-
+versions = "com.github.ben-manes.versions:0.51.0"
