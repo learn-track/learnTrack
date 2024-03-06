@@ -1,0 +1,4 @@
+#!/bin/bash
+
+commit_message="$(cat $1)"
+./tools/lint-commit.sh "$commit_message"
