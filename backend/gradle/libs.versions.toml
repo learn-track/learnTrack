@@ -41,7 +41,7 @@ spring-security-test = { module = "org.springframework.security:spring-security-
 spring-webflux = { module = "org.springframework:spring-webflux" }
 springdoc-openapi-kotlin = { module = "org.springdoc:springdoc-openapi-starter-common", version.ref = "springdoc" }
 springdoc-openapi-ui = { module = "org.springdoc:springdoc-openapi-starter-webmvc-ui", version.ref = "springdoc" }
-testcontainers-bom = "org.testcontainers:testcontainers-bom:1.19.6"
+testcontainers-bom = "org.testcontainers:testcontainers-bom:1.19.7"
 archunit = "com.tngtech.archunit:archunit-junit5:1.2.1"
 jsonwebtoken = "io.jsonwebtoken:jjwt-api:0.12.5"
 jsonwebtoken-impl = "io.jsonwebtoken:jjwt-impl:0.12.5"
