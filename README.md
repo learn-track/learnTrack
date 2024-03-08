@@ -44,7 +44,7 @@ Start the dev environment:
 (cd backend && docker compose up -d)
 ```
 
-Start [V7-Backend](./backend/src/main/kotlin/ch/learnup/backend/BackendApplication.kt)
+Start [learnUP-Backend](./backend/src/main/kotlin/ch/learnup/backend/BackendApplication.kt)
 with the [**dev** profile](./.run/learnUP-Backend%20dev.run.xml).
 
 #### Frontend
@@ -88,5 +88,19 @@ cd frontend
 yarn generate-api-client
 ```
 
+### Best practice
+
+#### Brach/Commit 
+
+Branch naming: 
+- feat/LERN-TicketNR
+
+Commit messages format:
+- feat(LERN-ticketNR): description
+
+Valid prefixes are:
+- feat
+- fix
+- chores
 
 
