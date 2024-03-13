@@ -43,5 +43,5 @@ kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-plugin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin" }
 springframework-boot = { id = "org.springframework.boot", version.ref = "springboot" }
 version-catalog-update = "nl.littlerobots.version-catalog-update:0.8.4"
-sonarqube = "org.sonarqube: 4.3.1.3277"
+sonarqube = "org.sonarqube: 3.5.0.2730"
 versions = "com.github.ben-manes.versions:0.51.0"
