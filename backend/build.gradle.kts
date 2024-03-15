@@ -55,6 +55,9 @@ dependencies {
 	testImplementation(libs.spring.webflux)
 	testImplementation(libs.mockito.kotlin)
 
+	developmentOnly(libs.spring.boot.docker.compose)
+	developmentOnly(libs.spring.boot.devtools)
+
 	jooqGenerator(libs.mariadb.java.client)
 	jooqGenerator(libs.jakarta.xml.bind.api)
 
