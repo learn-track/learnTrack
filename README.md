@@ -88,19 +88,8 @@ cd frontend
 yarn generate-api-client
 ```
 
-### Best practice
+### Tutorials
 
-#### Brach/Commit 
-
-Branch naming: 
-- feat/LERN-TicketNR
-
-Commit messages format:
-- feat(LERN-ticketNR): description
-
-Valid prefixes are:
-- feat
-- fix
-- chores
+If you have questions [see](./doc/tutorials) for some basic workflows.
 
 
