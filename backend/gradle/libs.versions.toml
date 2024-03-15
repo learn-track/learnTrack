@@ -34,6 +34,8 @@ springdoc-openapi-kotlin = { module = "org.springdoc:springdoc-openapi-starter-c
 springdoc-openapi-ui = { module = "org.springdoc:springdoc-openapi-starter-webmvc-ui", version.ref = "springdoc" }
 testcontainers-bom = "org.testcontainers:testcontainers-bom:1.19.7"
 archunit = "com.tngtech.archunit:archunit-junit5:1.2.1"
+spring-boot-docker-compose = { module = "org.springframework.boot:spring-boot-docker-compose", version.ref = "springboot" }
+spring-boot-devtools = { module = "org.springframework.boot:spring-boot-devtools", version.ref = "springboot" }
 
 [plugins]
 detekt = "io.gitlab.arturbosch.detekt:1.23.5"

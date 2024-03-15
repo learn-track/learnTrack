@@ -3,7 +3,7 @@
 [![Check & Release](https://github.com/deepspace1000/learnUP/actions/workflows/check-and-release.yml/badge.svg)](https://github.com/deepspace1000/learnUP/actions/workflows/check-and-release.yml)
 ![Uptime Robot ratio (30 days)](https://img.shields.io/uptimerobot/ratio/30/key)
 
-
+Backend:
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=learnUP_backend&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=learnUP_backend)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=learnUP_backend&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=learnUP_backend)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=learnUP_backend&metric=bugs)](https://sonarcloud.io/summary/new_code?id=learnUP_backend)
@@ -38,14 +38,13 @@ The learnUP Application is a digital learning platform. It is a school group pro
 
 #### Backend
 
-Start the dev environment:
+Start [learnUP-Backend](./backend/src/main/kotlin/ch/learnup/backend/BackendApplication.kt)
+with the [**dev** profile](./.run/learnUP-Backend%20dev.run.xml).
+The docker containers needed for development should be started automatically. If not run:
 
 ```shell
 (cd backend && docker compose up -d)
 ```
-
-Start [learnUP-Backend](./backend/src/main/kotlin/ch/learnup/backend/BackendApplication.kt)
-with the [**dev** profile](./.run/learnUP-Backend%20dev.run.xml).
 
 #### Frontend
 
