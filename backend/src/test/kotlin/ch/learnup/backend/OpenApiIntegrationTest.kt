@@ -1,4 +1,4 @@
-package ch.v7.backend
+package ch.learnup.backend
 
 import org.junit.jupiter.api.Test
 

@@ -1,7 +1,5 @@
-package ch.v7.backend
+package ch.learnup.backend
 
-import ch.learnup.backend.BackendApplication
-import ch.learnup.backend.beans
 import java.util.stream.Stream
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeAll
@@ -18,12 +16,12 @@ import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.web.reactive.server.WebTestClient
 import org.springframework.transaction.PlatformTransactionManager
 import org.testcontainers.containers.GenericContainer
-import org.testcontainers.containers.MariaDBContainer
 import org.testcontainers.containers.MockServerContainer
+import org.testcontainers.containers.PostgreSQLContainer
 import org.testcontainers.utility.DockerImageName
 
-val mariaDbContainer = MariaDBContainer<Nothing>("mariadb:11.2.2").apply {
-    withDatabaseName("v7_backend")
+val postgresSqlContainer = PostgreSQLContainer<Nothing>("postgres:16.2").apply {
+    withDatabaseName("learnup-backend")
     withUsername("backend")
     withPassword("backend")
 }
@@ -37,9 +35,9 @@ val mockServerContainer = MockServerContainer(
 class BeansInitializer : ApplicationContextInitializer<GenericApplicationContext> {
     override fun initialize(ac: GenericApplicationContext) {
         TestPropertyValues.of(
-            "spring.datasource.url=${mariaDbContainer.jdbcUrl}",
-            "spring.datasource.username=${mariaDbContainer.username}",
-            "spring.datasource.password=${mariaDbContainer.password}",
+            "spring.datasource.url=${postgresSqlContainer.jdbcUrl}",
+            "spring.datasource.username=${postgresSqlContainer.username}",
+            "spring.datasource.password=${postgresSqlContainer.password}",
         ).applyTo(ac.environment)
         beans.forEach { it.initialize(ac) }
     }
@@ -70,7 +68,7 @@ class IntegrationTest {
         @BeforeAll
         @JvmStatic
         fun beforeAllStatic() {
-            Stream.of(mariaDbContainer, mockServerContainer).parallel()
+            Stream.of(postgresSqlContainer, mockServerContainer).parallel()
                 .forEach(GenericContainer<*>::start)
             setSystemProperties()
             mockServerClient = MockServerClient(mockServerContainer.host, mockServerContainer.serverPort)

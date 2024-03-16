@@ -7,6 +7,9 @@ package ch.learnup.backend.persistence.tables.records
 import ch.learnup.backend.persistence.tables.TestTable
 import ch.learnup.backend.persistence.tables.pojos.Test
 
+import java.util.UUID
+
+import org.jetbrains.annotations.NotNull
 import org.jetbrains.annotations.Nullable
 import org.jooq.impl.TableRecordImpl
 
@@ -17,15 +20,21 @@ import org.jooq.impl.TableRecordImpl
 @Suppress("UNCHECKED_CAST")
 open class TestRecord private constructor() : TableRecordImpl<TestRecord>(TestTable.TEST) {
 
-    open var test: String?
+    open var id: UUID
         set(value): Unit = set(0, value)
+    @NotNull
+        get(): UUID = get(0) as UUID
+
+    open var test: String?
+        set(value): Unit = set(1, value)
     @Nullable
-        get(): String? = get(0) as String?
+        get(): String? = get(1) as String?
 
     /**
      * Create a detached, initialised TestRecord
      */
-    constructor(test: String? = null): this() {
+    constructor(id: UUID, test: String? = null): this() {
+        this.id = id
         this.test = test
         resetChangedOnNotNull()
     }
@@ -35,6 +44,7 @@ open class TestRecord private constructor() : TableRecordImpl<TestRecord>(TestTa
      */
     constructor(value: Test?): this() {
         if (value != null) {
+            this.id = value.id
             this.test = value.test
             resetChangedOnNotNull()
         }

@@ -5,6 +5,7 @@ package ch.learnup.backend.persistence.tables.pojos
 
 
 import java.io.Serializable
+import java.util.UUID
 
 
 /**
@@ -12,6 +13,7 @@ import java.io.Serializable
  */
 @Suppress("UNCHECKED_CAST")
 data class Test(
+    val id: UUID,
     val test: String? = null
 ): Serializable {
 
@@ -23,6 +25,8 @@ data class Test(
         if (this::class != other::class)
             return false
         val o: Test = other as Test
+        if (this.id != o.id)
+            return false
         if (this.test == null) {
             if (o.test != null)
                 return false
@@ -35,6 +39,7 @@ data class Test(
     override fun hashCode(): Int {
         val prime = 31
         var result = 1
+        result = prime * result + this.id.hashCode()
         result = prime * result + (if (this.test == null) 0 else this.test.hashCode())
         return result
     }
@@ -42,7 +47,8 @@ data class Test(
     override fun toString(): String {
         val sb = StringBuilder("Test (")
 
-        sb.append(test)
+        sb.append(id)
+        sb.append(", ").append(test)
 
         sb.append(")")
         return sb.toString()

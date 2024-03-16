@@ -1,6 +1,6 @@
 package ch.learnup.backend.user
 
-import ch.v7.backend.IntegrationTest
+import ch.learnup.backend.IntegrationTest
 import org.junit.jupiter.api.Test
 
 class UserIntegrationTest: IntegrationTest() {

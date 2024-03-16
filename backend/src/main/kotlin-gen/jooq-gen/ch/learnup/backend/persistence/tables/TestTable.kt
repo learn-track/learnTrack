@@ -4,8 +4,10 @@
 package ch.learnup.backend.persistence.tables
 
 
-import ch.learnup.backend.persistence.LearnupBackend
+import ch.learnup.backend.persistence.Public
 import ch.learnup.backend.persistence.tables.records.TestRecord
+
+import java.util.UUID
 
 import kotlin.collections.Collection
 
@@ -43,7 +45,7 @@ open class TestTable(
     where: Condition?
 ): TableImpl<TestRecord>(
     alias,
-    LearnupBackend.LEARNUP_BACKEND,
+    Public.PUBLIC,
     path,
     childPath,
     parentPath,
@@ -56,7 +58,7 @@ open class TestTable(
     companion object {
 
         /**
-         * The reference instance of <code>learnup_backend.t_test</code>
+         * The reference instance of <code>public.t_test</code>
          */
         val TEST: TestTable = TestTable()
     }
@@ -67,29 +69,34 @@ open class TestTable(
     override fun getRecordType(): Class<TestRecord> = TestRecord::class.java
 
     /**
-     * The column <code>learnup_backend.t_test.test</code>.
+     * The column <code>public.t_test.id</code>.
      */
-    val TEST_: TableField<TestRecord, String?> = createField(DSL.name("test"), SQLDataType.VARCHAR(255).defaultValue(DSL.field(DSL.raw("NULL"), SQLDataType.VARCHAR)), this, "")
+    val ID: TableField<TestRecord, UUID?> = createField(DSL.name("id"), SQLDataType.UUID.nullable(false), this, "")
+
+    /**
+     * The column <code>public.t_test.test</code>.
+     */
+    val TEST_: TableField<TestRecord, String?> = createField(DSL.name("test"), SQLDataType.VARCHAR, this, "")
 
     private constructor(alias: Name, aliased: Table<TestRecord>?): this(alias, null, null, null, aliased, null, null)
     private constructor(alias: Name, aliased: Table<TestRecord>?, parameters: Array<Field<*>?>?): this(alias, null, null, null, aliased, parameters, null)
     private constructor(alias: Name, aliased: Table<TestRecord>?, where: Condition): this(alias, null, null, null, aliased, null, where)
 
     /**
-     * Create an aliased <code>learnup_backend.t_test</code> table reference
+     * Create an aliased <code>public.t_test</code> table reference
      */
     constructor(alias: String): this(DSL.name(alias))
 
     /**
-     * Create an aliased <code>learnup_backend.t_test</code> table reference
+     * Create an aliased <code>public.t_test</code> table reference
      */
     constructor(alias: Name): this(alias, null)
 
     /**
-     * Create a <code>learnup_backend.t_test</code> table reference
+     * Create a <code>public.t_test</code> table reference
      */
     constructor(): this(DSL.name("t_test"), null)
-    override fun getSchema(): Schema? = if (aliased()) null else LearnupBackend.LEARNUP_BACKEND
+    override fun getSchema(): Schema? = if (aliased()) null else Public.PUBLIC
     override fun `as`(alias: String): TestTable = TestTable(DSL.name(alias), this)
     override fun `as`(alias: Name): TestTable = TestTable(alias, this)
     override fun `as`(alias: Table<*>): TestTable = TestTable(alias.qualifiedName, this)

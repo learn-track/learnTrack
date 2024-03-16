@@ -15,11 +15,9 @@ jsr305 = "com.google.code.findbugs:jsr305:3.0.2"
 kotlin-bom = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlin" }
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect" }
 liquibase-core = { module = "org.liquibase:liquibase-core" }
-mariadb-java-client = "org.mariadb.jdbc:mariadb-java-client:2.7.12"
 mockserver = { module = "org.testcontainers:mockserver" }
 mockserver-client-java = "org.mock-server:mockserver-client-java:5.15.0"
 mockito-kotlin = "org.mockito.kotlin:mockito-kotlin:5.2.1"
-org-testcontainers-mariadb = { module = "org.testcontainers:mariadb" }
 spring-boot-configuration-processor = "org.springframework.boot:spring-boot-configuration-processor:3.2.3"
 spring-boot-dependencies = { module = "org.springframework.boot:spring-boot-dependencies", version.ref = "springboot" }
 spring-boot-starter-actuator = { module = "org.springframework.boot:spring-boot-starter-actuator" }
@@ -36,6 +34,8 @@ testcontainers-bom = "org.testcontainers:testcontainers-bom:1.19.7"
 archunit = "com.tngtech.archunit:archunit-junit5:1.2.1"
 spring-boot-docker-compose = { module = "org.springframework.boot:spring-boot-docker-compose", version.ref = "springboot" }
 spring-boot-devtools = { module = "org.springframework.boot:spring-boot-devtools", version.ref = "springboot" }
+org-testcontainers-postgresql = { module = "org.testcontainers:postgresql" }
+postgresql = "org.postgresql:postgresql:42.7.2"
 
 [plugins]
 detekt = "io.gitlab.arturbosch.detekt:1.23.5"
