@@ -159,3 +159,34 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs:
+      - build-backend
+      - build-frontend
+    steps:
+      - name: Generate tag
+        id: tag
+        run: echo "TAG=sha-${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
+
+      - name: Create version file
+        uses: 'finnp/create-file-action@master'
+        if: github.event_name != 'pull_request'
+        env:
+          FILE_NAME: 'version'
+          FILE_DATA: 'LEARNUP_TAG=${{ steps.tag.outputs.TAG }}'
+
+      - name: Push version file
+        if: github.event_name != 'pull_request'
+        uses: dmnemec/copy_file_to_another_repo_action@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.LEARNUP_VERSION_BUMP }}
+        with:
+          source_file: 'version'
+          destination_repo: 'deepspace1000/learnUP-Deployment'
+          destination_branch: master
+          user_email: 'nilsrothe05@icloud.com'
+          user_name: 'deepspace1000'
+          commit_message: 'Update docker image version to the latest tag: ${{ steps.tag.outputs.TAG }}'
+
