@@ -4,11 +4,41 @@
 package ch.learnup.backend.persistence.tables.references
 
 
-import ch.learnup.backend.persistence.tables.TestTable
+import ch.learnup.backend.persistence.tables.GradeTable
+import ch.learnup.backend.persistence.tables.SchoolTable
+import ch.learnup.backend.persistence.tables.SubjectTable
+import ch.learnup.backend.persistence.tables.UserGradeTable
+import ch.learnup.backend.persistence.tables.UserSchoolTable
+import ch.learnup.backend.persistence.tables.UserTable
 
 
 
 /**
- * The table <code>public.t_test</code>.
+ * The table <code>public.t_grade</code>.
  */
-val TEST: TestTable = TestTable.TEST
+val GRADE: GradeTable = GradeTable.GRADE
+
+/**
+ * The table <code>public.t_school</code>.
+ */
+val SCHOOL: SchoolTable = SchoolTable.SCHOOL
+
+/**
+ * The table <code>public.t_subject</code>.
+ */
+val SUBJECT: SubjectTable = SubjectTable.SUBJECT
+
+/**
+ * The table <code>public.t_user</code>.
+ */
+val USER: UserTable = UserTable.USER
+
+/**
+ * The table <code>public.t_user_grade</code>.
+ */
+val USER_GRADE: UserGradeTable = UserGradeTable.USER_GRADE
+
+/**
+ * The table <code>public.t_user_school</code>.
+ */
+val USER_SCHOOL: UserSchoolTable = UserSchoolTable.USER_SCHOOL
