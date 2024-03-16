@@ -4,7 +4,12 @@
 package ch.learnup.backend.persistence
 
 
-import ch.learnup.backend.persistence.tables.TestTable
+import ch.learnup.backend.persistence.tables.GradeTable
+import ch.learnup.backend.persistence.tables.SchoolTable
+import ch.learnup.backend.persistence.tables.SubjectTable
+import ch.learnup.backend.persistence.tables.UserGradeTable
+import ch.learnup.backend.persistence.tables.UserSchoolTable
+import ch.learnup.backend.persistence.tables.UserTable
 
 import kotlin.collections.List
 
@@ -27,13 +32,43 @@ open class Public : SchemaImpl("public", DefaultCatalog.DEFAULT_CATALOG) {
     }
 
     /**
-     * The table <code>public.t_test</code>.
+     * The table <code>public.t_grade</code>.
      */
-    val TEST: TestTable get() = TestTable.TEST
+    val GRADE: GradeTable get() = GradeTable.GRADE
+
+    /**
+     * The table <code>public.t_school</code>.
+     */
+    val SCHOOL: SchoolTable get() = SchoolTable.SCHOOL
+
+    /**
+     * The table <code>public.t_subject</code>.
+     */
+    val SUBJECT: SubjectTable get() = SubjectTable.SUBJECT
+
+    /**
+     * The table <code>public.t_user</code>.
+     */
+    val USER: UserTable get() = UserTable.USER
+
+    /**
+     * The table <code>public.t_user_grade</code>.
+     */
+    val USER_GRADE: UserGradeTable get() = UserGradeTable.USER_GRADE
+
+    /**
+     * The table <code>public.t_user_school</code>.
+     */
+    val USER_SCHOOL: UserSchoolTable get() = UserSchoolTable.USER_SCHOOL
 
     override fun getCatalog(): Catalog = DefaultCatalog.DEFAULT_CATALOG
 
     override fun getTables(): List<Table<*>> = listOf(
-        TestTable.TEST
+        GradeTable.GRADE,
+        SchoolTable.SCHOOL,
+        SubjectTable.SUBJECT,
+        UserTable.USER,
+        UserGradeTable.USER_GRADE,
+        UserSchoolTable.USER_SCHOOL
     )
 }

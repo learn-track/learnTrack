@@ -148,6 +148,11 @@ jooq {
 									includeExpression = ".*"
 									includeTypes = "INET"
 								},
+								ForcedType().apply {
+									userType = "ch.learnup.backend.persistence.UserRole"
+									withEnumConverter(true)
+									includeExpression = "user_role"
+								}
 							)
 						)
 					}
