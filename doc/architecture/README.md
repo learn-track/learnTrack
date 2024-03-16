@@ -35,16 +35,60 @@ This maybe extended in the future with new features
 erDiagram
     user {
         UUID id
-        string test_name
+        string firstname
+        string middlename
+        string lastname
+        string e-mail
+        string password
+        string user_role
+        date birthdate
+        datetime created
+        datetime updated
+    }
+    
+    user_grade {
+        UUID user_id
+        UUID grade_id
+    }
+    
+    user_school {
+        UUID user_id
+        UUID school_id
+    }
+    
+    grade {
+        UUID id
+        string name
+        UUID school_id
+        datetime created
+        datetime updated
+    }
+    
+    school {
+        UUID id
+        string name
+        string address 
+        string city
+        number postcode
+        datetime created
+        datetime updated
     }
    
     subject {
         UUID id
-        string test_name 
+        string name 
+        UUID grade_id
+        datetime created
+        datetime updated
     }
    
     
-    user }|--|{ subject: contains
+    user ||--|{ user_grade: contains
+    grade ||--|{ user_grade: contains
+    user ||--|{ user_school: contains
+    school ||--|{ user_school: contains
+    school ||--|{ grade: contains
+    subject }|--|| grade: contains
 ```
 
 ## Building Block View
