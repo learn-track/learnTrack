@@ -42,14 +42,13 @@ dependencies {
 	implementation(libs.jooq)
 	implementation(libs.jooq.codegen)
 	implementation(libs.kotlin.reflect)
-	implementation(libs.mariadb.java.client)
 	implementation(libs.springdoc.openapi.ui)
 	implementation(libs.springdoc.openapi.kotlin)
 
 	testImplementation(libs.spring.boot.starter.test)
 	testImplementation(libs.archunit)
 	testImplementation(libs.testcontainers.bom)
-	testImplementation(libs.org.testcontainers.mariadb)
+	testImplementation(libs.org.testcontainers.postgresql)
 	testImplementation(libs.mockserver)
 	testImplementation(libs.mockserver.client.java)
 	testImplementation(libs.spring.webflux)
@@ -58,7 +57,9 @@ dependencies {
 	developmentOnly(libs.spring.boot.docker.compose)
 	developmentOnly(libs.spring.boot.devtools)
 
-	jooqGenerator(libs.mariadb.java.client)
+	runtimeOnly(libs.postgresql)
+
+	jooqGenerator(libs.postgresql)
 	jooqGenerator(libs.jakarta.xml.bind.api)
 
 	detektPlugins(libs.detekt.formatting)
@@ -124,23 +125,28 @@ jooq {
 			jooqConfiguration.apply {
 				logging = Logging.DEBUG
 				jdbc.apply {
-					driver = "org.mariadb.jdbc.Driver"
-					url = "jdbc:mariadb://localhost:3309/learnup_backend"
+					driver = "org.postgresql.Driver"
+					url = "jdbc:postgresql://localhost:5517/learnup_backend"
 					user = "backend"
 					password = "backend"
 				}
 				generator.apply {
 					name = "org.jooq.codegen.KotlinGenerator"
 					database.apply {
-						name = "org.jooq.meta.mariadb.MariaDBDatabase"
-						inputSchema = "learnup_backend"
+						name = "org.jooq.meta.postgres.PostgresDatabase"
+						inputSchema = "public"
 						excludes = "Databasechangelog|Databasechangeloglock"
 						forcedTypes.addAll(
 							listOf(
 								ForcedType().apply {
-									userType = "java.util.UUID"
-									isAutoConverter = true
-									includeExpression = ".*id.*"
+									name = "varchar"
+									includeExpression = ".*"
+									includeTypes = "JSONB?"
+								},
+								ForcedType().apply {
+									name = "varchar"
+									includeExpression = ".*"
+									includeTypes = "INET"
 								},
 							)
 						)

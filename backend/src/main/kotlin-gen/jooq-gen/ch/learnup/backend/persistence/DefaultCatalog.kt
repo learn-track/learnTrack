@@ -25,12 +25,12 @@ open class DefaultCatalog : CatalogImpl("") {
     }
 
     /**
-     * The schema <code>learnup_backend</code>.
+     * The schema <code>public</code>.
      */
-    val LEARNUP_BACKEND: LearnupBackend get(): LearnupBackend = LearnupBackend.LEARNUP_BACKEND
+    val PUBLIC: Public get(): Public = Public.PUBLIC
 
     override fun getSchemas(): List<Schema> = listOf(
-        LearnupBackend.LEARNUP_BACKEND
+        Public.PUBLIC
     )
 
     /**

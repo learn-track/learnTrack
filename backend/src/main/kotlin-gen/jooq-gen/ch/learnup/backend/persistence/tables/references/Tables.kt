@@ -9,6 +9,6 @@ import ch.learnup.backend.persistence.tables.TestTable
 
 
 /**
- * The table <code>learnup_backend.t_test</code>.
+ * The table <code>public.t_test</code>.
  */
 val TEST: TestTable = TestTable.TEST

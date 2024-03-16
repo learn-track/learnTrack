@@ -3,9 +3,7 @@ spring:
     init:
       mode: always
   jooq:
-    sql-dialect: mariadb
-  datasource:
-    driverClassName: org.mariadb.jdbc.Driver
+    sql-dialect: postgres
 
 management:
   server:
