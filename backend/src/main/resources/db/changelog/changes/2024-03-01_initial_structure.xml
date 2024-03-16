@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="2024-03-01_initial_structure" author="nils.rothe">
+        <createTable tableName="t_user">
+            <column name="id" type="uuid">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_user"/>
+            </column>
+            <column name="first_name" type="nvarchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="middle_name" type="nvarchar"/>
+            <column name="last_name" type="nvarchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="e-mail" type="nvarchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="nvarchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_role" type="nvarchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="birthdate" type="timestamp"/>
+            <column name="created" type="timestamp"/>
+            <column name="updated" type="timestamp"/>
+        </createTable>
+
+        <createTable tableName="t_school">
+            <column name="id" type="uuid">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_school"/>
+            </column>
+            <column name="name" type="nvarchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="address" type="nvarchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="city" type="nvarchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="postcode" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created" type="timestamp"/>
+            <column name="updated" type="timestamp"/>
+        </createTable>
+
+        <createTable tableName="t_grade">
+            <column name="id" type="uuid">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_grade"/>
+            </column>
+            <column name="name" type="nvarchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="school_id" type="uuid">
+                <constraints nullable="false" foreignKeyName="fk_grade_school" references="t_school(id)" />
+            </column>
+            <column name="created" type="timestamp"/>
+            <column name="updated" type="timestamp"/>
+        </createTable>
+
+        <createTable tableName="t_subject">
+            <column name="id" type="uuid">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_subject"/>
+            </column>
+            <column name="name" type="nvarchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="grade_id" type="uuid">
+                <constraints nullable="false" foreignKeyName="fk_subject_grade" references="t_grade(id)"/>
+            </column>
+            <column name="created" type="timestamp"/>
+            <column name="updated" type="timestamp"/>
+        </createTable>
+
+        <createTable tableName="t_user_grade">
+            <column name="user_id" type="uuid">
+                <constraints nullable="false"/>
+            </column>
+            <column name="grade_id" type="uuid">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="t_user_school">
+            <column name="user_id" type="uuid">
+                <constraints nullable="false"/>
+            </column>
+            <column name="school_id" type="uuid">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey tableName="t_user_grade" columnNames="user_id,grade_id" constraintName="pk_user_grade"/>
+        <addForeignKeyConstraint baseTableName="t_user_grade" baseColumnNames="user_id" constraintName="fk_user_grade_user" referencedTableName="t_user"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="t_user_grade" baseColumnNames="grade_id" constraintName="fk_user_grade_grade" referencedTableName="t_grade"
+                                 referencedColumnNames="id"/>
+
+        <addPrimaryKey columnNames="user_id,school_id" tableName="t_user_school" constraintName="pk_user_school"/>
+        <addForeignKeyConstraint baseTableName="t_user_school" baseColumnNames="user_id" constraintName="fk_user_school_user" referencedTableName="t_user"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="t_user_school" baseColumnNames="school_id" constraintName="fk_user_school_school" referencedTableName="t_school"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>
