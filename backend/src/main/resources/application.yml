@@ -11,7 +11,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: "health"
+        include: "health,info"
 
 springdoc:
   api-docs:

@@ -14,6 +14,7 @@ plugins {
 	alias(libs.plugins.sonarqube)
 	alias(libs.plugins.versions)
 	alias(libs.plugins.version.catalog.update)
+	alias(libs.plugins.gitproperties)
 }
 
 group = "ch.learnup"
