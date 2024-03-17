@@ -6,7 +6,7 @@ export function LandingPage() {
   return (
     <>
       <h1>learnUp 📚🥳</h1>
-      <div>{backendDto?.name}</div>
+      <div>{backendDto}</div>
     </>
   );
 }

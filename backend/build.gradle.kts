@@ -37,6 +37,7 @@ dependencies {
 
 	implementation(libs.spring.boot.starter.actuator)
 	implementation(libs.spring.boot.starter.jooq)
+	implementation(libs.spring.boot.starter.security)
 	implementation(libs.liquibase.core)
 	implementation(libs.spring.boot.starter.web)
 	implementation(libs.jackson.module.kotlin)
@@ -45,8 +46,10 @@ dependencies {
 	implementation(libs.kotlin.reflect)
 	implementation(libs.springdoc.openapi.ui)
 	implementation(libs.springdoc.openapi.kotlin)
+	implementation(libs.jsonwebtoken)
 
 	testImplementation(libs.spring.boot.starter.test)
+	testImplementation(libs.spring.security.test)
 	testImplementation(libs.archunit)
 	testImplementation(libs.testcontainers.bom)
 	testImplementation(libs.org.testcontainers.postgresql)
@@ -59,6 +62,10 @@ dependencies {
 	developmentOnly(libs.spring.boot.devtools)
 
 	runtimeOnly(libs.postgresql)
+	runtimeOnly(libs.jsonwebtoken.impl)
+	runtimeOnly(libs.jsonwebtoken.orgjson) {
+		exclude(group = "com.vaadin.external.google", module = "android-json")
+	}
 
 	jooqGenerator(libs.postgresql)
 	jooqGenerator(libs.jakarta.xml.bind.api)

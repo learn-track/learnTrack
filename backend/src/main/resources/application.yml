@@ -5,6 +5,10 @@ spring:
   jooq:
     sql-dialect: postgres
 
+learnup:
+  jwt:
+    expiration-in-hours: 5
+
 management:
   server:
     port: 8090

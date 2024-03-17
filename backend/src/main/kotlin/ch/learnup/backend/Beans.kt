@@ -1,5 +1,8 @@
 package ch.learnup.backend
 
+import ch.learnup.backend.common.LearnupExceptionHandler
+import ch.learnup.backend.jwt.jwtBeans
+import ch.learnup.backend.security.securityBeans
 import ch.learnup.backend.user.userBeans
 
 import io.swagger.v3.oas.models.OpenAPI
@@ -24,7 +27,14 @@ private val libraryBeans = beans {
     }
 }
 
+private val handlerBeans = beans {
+    bean<LearnupExceptionHandler>()
+}
+
 val beans = listOf(
     libraryBeans,
+    handlerBeans,
     userBeans,
+    jwtBeans,
+    securityBeans,
 )

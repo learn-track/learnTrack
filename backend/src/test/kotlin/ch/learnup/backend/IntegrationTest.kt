@@ -1,5 +1,8 @@
 package ch.learnup.backend
 
+import ch.learnup.backend.jwt.TokenService
+import ch.learnup.backend.persistence.tables.daos.UserDao
+import ch.learnup.backend.utils.userTemplateId
 import java.util.stream.Stream
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeAll
@@ -54,11 +57,18 @@ class IntegrationTest {
     @Autowired
     lateinit var transactionManager: PlatformTransactionManager
 
+    @Autowired
+    lateinit var tokenService: TokenService
+
+    @Autowired
+    lateinit var userDao: UserDao
+
     @BeforeEach
     fun beforeEach() {
         webClient =
             WebTestClient.bindToServer()
                 .baseUrl("http://localhost:$localServerPort")
+                .defaultHeaders { httpHeader -> httpHeader.setBearerAuth(tokenService.createJwtToken(userTemplateId)) }
                 .build()
     }
 

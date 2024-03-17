@@ -82,15 +82,15 @@ open class UserDao(configuration: Configuration?) : DAOImpl<UserRecord, User, UU
     fun fetchByLastName(vararg values: String): List<User> = fetch(UserTable.USER.LAST_NAME, *values)
 
     /**
-     * Fetch records that have <code>e-mail BETWEEN lowerInclusive AND
+     * Fetch records that have <code>e_mail BETWEEN lowerInclusive AND
      * upperInclusive</code>
      */
-    fun fetchRangeOfEMail(lowerInclusive: String, upperInclusive: String): List<User> = fetchRange(ch.learnup.backend.persistence.tables.UserTable.USER.`E-MAIL`, lowerInclusive, upperInclusive)
+    fun fetchRangeOfEMail(lowerInclusive: String, upperInclusive: String): List<User> = fetchRange(UserTable.USER.E_MAIL, lowerInclusive, upperInclusive)
 
     /**
-     * Fetch records that have <code>e-mail IN (values)</code>
+     * Fetch records that have <code>e_mail IN (values)</code>
      */
-    fun fetchByEMail(vararg values: String): List<User> = fetch(ch.learnup.backend.persistence.tables.UserTable.USER.`E-MAIL`, *values)
+    fun fetchByEMail(vararg values: String): List<User> = fetch(UserTable.USER.E_MAIL, *values)
 
     /**
      * Fetch records that have <code>password BETWEEN lowerInclusive AND
