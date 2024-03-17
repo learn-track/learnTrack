@@ -108,4 +108,8 @@
         <addForeignKeyConstraint baseTableName="t_user_school" baseColumnNames="school_id" constraintName="fk_user_school_school" referencedTableName="t_school"
                                  referencedColumnNames="id"/>
     </changeSet>
+
+    <changeSet id="2024-03-01_initial_structure_fix_typo" author="nils.rothe">
+        <renameColumn tableName="t_user" oldColumnName="e-mail" newColumnName="e_mail"/>
+    </changeSet>
 </databaseChangeLog>

@@ -36,6 +36,9 @@ spring-boot-docker-compose = { module = "org.springframework.boot:spring-boot-do
 spring-boot-devtools = { module = "org.springframework.boot:spring-boot-devtools", version.ref = "springboot" }
 org-testcontainers-postgresql = { module = "org.testcontainers:postgresql" }
 postgresql = "org.postgresql:postgresql:42.7.2"
+jsonwebtoken = "io.jsonwebtoken:jjwt-api:0.12.5"
+jsonwebtoken-impl = "io.jsonwebtoken:jjwt-impl:0.12.5"
+jsonwebtoken-orgjson = "io.jsonwebtoken:jjwt-orgjson:0.12.5"
 
 [plugins]
 detekt = "io.gitlab.arturbosch.detekt:1.23.5"

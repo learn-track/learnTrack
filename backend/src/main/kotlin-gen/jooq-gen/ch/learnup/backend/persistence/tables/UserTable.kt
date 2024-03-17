@@ -102,9 +102,9 @@ open class UserTable(
     val LAST_NAME: TableField<UserRecord, String?> = createField(DSL.name("last_name"), SQLDataType.VARCHAR.nullable(false), this, "")
 
     /**
-     * The column <code>public.t_user.e-mail</code>.
+     * The column <code>public.t_user.e_mail</code>.
      */
-    val `E-MAIL`: TableField<UserRecord, String?> = createField(DSL.name("e-mail"), SQLDataType.VARCHAR.nullable(false), this, "")
+    val E_MAIL: TableField<UserRecord, String?> = createField(DSL.name("e_mail"), SQLDataType.VARCHAR.nullable(false), this, "")
 
     /**
      * The column <code>public.t_user.password</code>.
