@@ -35,7 +35,7 @@ archunit = "com.tngtech.archunit:archunit-junit5:1.2.1"
 spring-boot-docker-compose = { module = "org.springframework.boot:spring-boot-docker-compose", version.ref = "springboot" }
 spring-boot-devtools = { module = "org.springframework.boot:spring-boot-devtools", version.ref = "springboot" }
 org-testcontainers-postgresql = { module = "org.testcontainers:postgresql" }
-postgresql = "org.postgresql:postgresql:42.7.2"
+postgresql = "org.postgresql:postgresql:42.7.3"
 jsonwebtoken = "io.jsonwebtoken:jjwt-api:0.12.5"
 jsonwebtoken-impl = "io.jsonwebtoken:jjwt-impl:0.12.5"
 jsonwebtoken-orgjson = "io.jsonwebtoken:jjwt-orgjson:0.12.5"
