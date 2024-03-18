@@ -1,9 +1,14 @@
 package ch.learnup.backend
 
 import ch.learnup.backend.common.LearnupExceptionHandler
+import ch.learnup.backend.grade.gradeBeans
 import ch.learnup.backend.jwt.jwtBeans
+import ch.learnup.backend.school.schoolBeans
 import ch.learnup.backend.security.securityBeans
 import ch.learnup.backend.user.userBeans
+import ch.learnup.backend.usergrade.userGradeBeans
+import ch.learnup.backend.userschool.userSchoolBeans
+import ch.learnup.backend.whoami.whoamiBeans
 
 import io.swagger.v3.oas.models.OpenAPI
 import io.swagger.v3.oas.models.media.Schema
@@ -37,4 +42,9 @@ val beans = listOf(
     userBeans,
     jwtBeans,
     securityBeans,
+    whoamiBeans,
+    gradeBeans,
+    schoolBeans,
+    userSchoolBeans,
+    userGradeBeans,
 )

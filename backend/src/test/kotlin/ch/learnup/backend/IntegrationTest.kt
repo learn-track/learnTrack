@@ -1,7 +1,7 @@
 package ch.learnup.backend
 
 import ch.learnup.backend.jwt.TokenService
-import ch.learnup.backend.persistence.tables.daos.UserDao
+import ch.learnup.backend.persistence.tables.daos.*
 import ch.learnup.backend.utils.userTemplateId
 import java.util.stream.Stream
 import org.junit.jupiter.api.AfterEach
@@ -62,6 +62,18 @@ class IntegrationTest {
 
     @Autowired
     lateinit var userDao: UserDao
+
+    @Autowired
+    lateinit var schoolDao: SchoolDao
+
+    @Autowired
+    lateinit var gradeDao: GradeDao
+
+    @Autowired
+    lateinit var userSchoolDao: UserSchoolDao
+
+    @Autowired
+    lateinit var userGradeDao: UserGradeDao
 
     @BeforeEach
     fun beforeEach() {
