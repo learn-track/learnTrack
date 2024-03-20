@@ -17,6 +17,10 @@ plugins {
 	alias(libs.plugins.gitproperties)
 }
 
+kotlin {
+	explicitApi()
+}
+
 group = "ch.learnup"
 version = "0.0.1-SNAPSHOT"
 
@@ -176,6 +180,7 @@ jooq {
 						isFluentSetters = true
 						isKotlinNotNullPojoAttributes = true
 						isKotlinNotNullRecordAttributes = true
+						visibilityModifier = VisibilityModifier.PUBLIC
 					}
 					target.apply {
 						packageName = "ch.learnup.backend.persistence"

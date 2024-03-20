@@ -16,29 +16,29 @@ import ch.learnup.backend.persistence.tables.UserTable
 /**
  * The table <code>public.t_grade</code>.
  */
-val GRADE: GradeTable = GradeTable.GRADE
+public val GRADE: GradeTable = GradeTable.GRADE
 
 /**
  * The table <code>public.t_school</code>.
  */
-val SCHOOL: SchoolTable = SchoolTable.SCHOOL
+public val SCHOOL: SchoolTable = SchoolTable.SCHOOL
 
 /**
  * The table <code>public.t_subject</code>.
  */
-val SUBJECT: SubjectTable = SubjectTable.SUBJECT
+public val SUBJECT: SubjectTable = SubjectTable.SUBJECT
 
 /**
  * The table <code>public.t_user</code>.
  */
-val USER: UserTable = UserTable.USER
+public val USER: UserTable = UserTable.USER
 
 /**
  * The table <code>public.t_user_grade</code>.
  */
-val USER_GRADE: UserGradeTable = UserGradeTable.USER_GRADE
+public val USER_GRADE: UserGradeTable = UserGradeTable.USER_GRADE
 
 /**
  * The table <code>public.t_user_school</code>.
  */
-val USER_SCHOOL: UserSchoolTable = UserSchoolTable.USER_SCHOOL
+public val USER_SCHOOL: UserSchoolTable = UserSchoolTable.USER_SCHOOL

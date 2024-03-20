@@ -7,7 +7,9 @@ import ch.learnup.backend.persistence.tables.pojos.School
 import ch.learnup.backend.persistence.tables.records.SchoolRecord
 import java.util.UUID
 
-class SchoolService(private val schoolDao: SchoolDao) : EntityService<SchoolDto, SchoolRecord, School>(schoolDao) {
+public class SchoolService(private val schoolDao: SchoolDao) : EntityService<SchoolDto, SchoolRecord, School>(
+    schoolDao,
+) {
     public override fun mapToDto(pojo: School): SchoolDto = SchoolDto(
         id = pojo.id,
         name = pojo.name,
@@ -16,5 +18,6 @@ class SchoolService(private val schoolDao: SchoolDao) : EntityService<SchoolDto,
         postcode = pojo.postcode,
     )
 
-    fun getSchoolsForUserByUserId(userId: UUID) = schoolDao.fetchSchoolsForUserByUserId(userId).map(::mapToDto)
+    public fun getSchoolsForUserByUserId(userId: UUID): List<SchoolDto> =
+        schoolDao.fetchSchoolsForUserByUserId(userId).map(::mapToDto)
 }

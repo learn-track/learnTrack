@@ -1,7 +1,8 @@
 package ch.learnup.backend.jwt
 
+import org.springframework.context.support.BeanDefinitionDsl
 import org.springframework.context.support.beans
 
-val jwtBeans = beans {
+public val jwtBeans: BeanDefinitionDsl = beans {
     bean<TokenService>()
 }

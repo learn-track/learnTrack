@@ -6,7 +6,7 @@ import ch.learnup.backend.persistence.tables.pojos.User
 import ch.learnup.backend.persistence.tables.records.UserRecord
 import ch.learnup.backend.persistence.tables.references.USER
 
-class UserService(private val userDao: UserDao) : EntityService<UserDto, UserRecord, User>(userDao) {
+public class UserService(private val userDao: UserDao) : EntityService<UserDto, UserRecord, User>(userDao) {
     public override fun mapToDto(pojo: User): UserDto = UserDto(
         id = pojo.id,
         email = pojo.eMail,
@@ -17,5 +17,5 @@ class UserService(private val userDao: UserDao) : EntityService<UserDto, UserRec
         birthDate = pojo.birthdate,
     )
 
-    fun findUserByEmail(email: String) = userDao.fetchOne(USER.E_MAIL, email)
+    public fun findUserByEmail(email: String): User? = userDao.fetchOne(USER.E_MAIL, email)
 }

@@ -2,7 +2,7 @@ package ch.learnup.backend.school
 
 import java.util.UUID
 
-data class SchoolDto(
+public data class SchoolDto(
     val id: UUID,
     val name: String,
     val address: String,

@@ -7,7 +7,7 @@ import ch.learnup.backend.persistence.tables.references.USER
 import ch.learnup.backend.persistence.tables.references.USER_GRADE
 import java.util.UUID
 
-fun GradeDao.fetchGradesForUserByUserId(userId: UUID): MutableList<Grade> = ctx()
+public fun GradeDao.fetchGradesForUserByUserId(userId: UUID): MutableList<Grade> = ctx()
     .select(GRADE)
     .from(USER_GRADE)
     .join(GRADE)

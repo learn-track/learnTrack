@@ -5,7 +5,7 @@ import org.springframework.security.authentication.ProviderManager
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationProvider
 import org.springframework.security.web.authentication.preauth.RequestHeaderAuthenticationFilter
 
-class UserAuthorizationFilter(authorizingUserDetailService: LearnupUserDetailService,
+public class UserAuthorizationFilter(authorizingUserDetailService: LearnupUserDetailService,
 ) : RequestHeaderAuthenticationFilter() {
     init {
         setExceptionIfHeaderMissing(false)

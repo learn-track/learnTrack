@@ -1,5 +1,6 @@
 package ch.learnup.backend.security
 
+import org.springframework.context.support.BeanDefinitionDsl
 import org.springframework.context.support.beans
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.invoke
@@ -14,7 +15,7 @@ private const val PATH_SWAGGER = "/swagger-ui/*"
 private const val PATH_HEALTH = "/actuator/health"
 private const val PATH_INFO = "/actuator/info"
 
-val securityBeans = beans {
+public val securityBeans: BeanDefinitionDsl = beans {
     bean<UserAccessAuthorizer>("UserAccessAuthorizer")
     bean<LearnupUserDetailService>()
     bean<UserAuthorizationFilter>()
