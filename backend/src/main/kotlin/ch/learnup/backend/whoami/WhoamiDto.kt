@@ -6,6 +6,6 @@ import ch.learnup.backend.user.UserDto
 
 data class WhoamiDto(
     val user: UserDto,
-    val grade: List<GradeDto>,
-    val school: List<SchoolDto>,
+    val grades: List<GradeDto>,
+    val schools: List<SchoolDto>,
 )

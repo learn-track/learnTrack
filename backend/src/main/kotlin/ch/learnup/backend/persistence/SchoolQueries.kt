@@ -7,7 +7,7 @@ import ch.learnup.backend.persistence.tables.references.USER
 import ch.learnup.backend.persistence.tables.references.USER_SCHOOL
 import java.util.UUID
 
-fun SchoolDao.fetchGradeByUserId(userId: UUID): MutableList<School> = ctx()
+fun SchoolDao.fetchSchoolsForUserByUserId(userId: UUID): MutableList<School> = ctx()
     .select(SCHOOL)
     .from(USER_SCHOOL)
     .join(SCHOOL)

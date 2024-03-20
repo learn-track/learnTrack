@@ -22,10 +22,10 @@ VALUES ('a2452b33-6ff3-4c0d-833d-9ae2af5a9d45', 'First Grade A', '736c2e92-6817-
 ON CONFLICT (id) DO NOTHING;
 
 INSERT INTO t_user_school (user_id, school_id)
-VALUES ('a085cc2d-21a5-4515-9ce5-9d02bb8a02c6', '736c2e92-6817-4d47-8f8f-1a4c42edfc73'),
+VALUES ('a085cc2d-21a5-4515-9ce5-9d02bb8a02c6', '736c2e92-6817-4d47-8f8f-1a4c42edfc73')
 ON CONFLICT (user_id, school_id) DO NOTHING;
 
 INSERT INTO t_user_grade (user_id, grade_id)
 VALUES ('a085cc2d-21a5-4515-9ce5-9d02bb8a02c6', 'a2452b33-6ff3-4c0d-833d-9ae2af5a9d45'),
-       ('a085cc2d-21a5-4515-9ce5-9d02bb8a02c6', '40c5e0a1-bbcf-4e14-b5c1-9a3df0488f2d'),
+       ('a085cc2d-21a5-4515-9ce5-9d02bb8a02c6', '40c5e0a1-bbcf-4e14-b5c1-9a3df0488f2d')
 ON CONFLICT (user_id, grade_id) DO NOTHING;

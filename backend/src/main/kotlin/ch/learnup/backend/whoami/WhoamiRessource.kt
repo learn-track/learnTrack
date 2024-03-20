@@ -19,10 +19,11 @@ class WhoamiRessource(
     @GetMapping
     fun getSelf(@AuthenticationPrincipal principal: LearnupUserDetails): WhoamiDto {
         val user = userService.mapToDto(principal.user)
+
         return WhoamiDto(
             user = user,
-            grade = gradeService.getGradeByUserId(user.id),
-            school = schoolService.getSchoolByUserId(user.id),
+            grades = gradeService.getGradesForUserByUserId(user.id),
+            schools = schoolService.getSchoolsForUserByUserId(user.id),
         )
     }
 }
