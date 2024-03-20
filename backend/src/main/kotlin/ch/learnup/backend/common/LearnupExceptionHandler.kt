@@ -9,9 +9,9 @@ import org.springframework.web.context.request.WebRequest
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler
 
 @ControllerAdvice
-class LearnupExceptionHandler : ResponseEntityExceptionHandler() {
+public class LearnupExceptionHandler : ResponseEntityExceptionHandler() {
     @ExceptionHandler(LearnupAuthorizationException::class)
-    fun handleUnauthorized(
+    public fun handleUnauthorized(
         ex: LearnupAuthorizationException,
         request: WebRequest,
     ): ResponseEntity<Any>? = handleExceptionInternal(ex, ex.message, HttpHeaders(), HttpStatus.UNAUTHORIZED, request)

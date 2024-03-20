@@ -4,7 +4,7 @@ import ch.learnup.backend.persistence.UserRole
 import java.time.LocalDateTime
 import java.util.UUID
 
-data class UserDto(
+public data class UserDto(
     val id: UUID,
     val email: String,
     val firstname: String,
@@ -14,11 +14,11 @@ data class UserDto(
     val birthDate: LocalDateTime?,
 )
 
-data class LoginDto(
+public data class LoginDto(
     val email: String,
     val password: String,
 )
 
-data class LoginResponseDto(
+public data class LoginResponseDto(
     val token: String,
 )

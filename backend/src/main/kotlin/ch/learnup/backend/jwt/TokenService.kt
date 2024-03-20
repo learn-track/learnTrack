@@ -12,14 +12,14 @@ import java.util.Date
 import java.util.UUID
 import javax.crypto.spec.SecretKeySpec
 
-class TokenService(private val backendProperties: BackendProperties) {
-    fun createJwtToken(userId: UUID): String = Jwts.builder()
+public class TokenService(private val backendProperties: BackendProperties) {
+    public fun createJwtToken(userId: UUID): String = Jwts.builder()
         .subject(userId.toString())
         .expiration(Date.from(Instant.now().plus(backendProperties.jwt.expirationInHours, ChronoUnit.HOURS)))
         .signWith(backendProperties.jwt.key.toSecretKey())
         .compact()
 
-    fun parseIdFromToken(jwt: String): UUID {
+    public fun parseIdFromToken(jwt: String): UUID {
         try {
             val userId = Jwts.parser()
                 .verifyWith(backendProperties.jwt.key.toSecretKey())

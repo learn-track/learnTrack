@@ -14,9 +14,9 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 @EnableMethodSecurity
 @EnableConfigurationProperties(value = [BackendProperties::class])
 @OpenAPIDefinition(servers = [Server(url = "/api")], info = Info(title = "learnUP API", version = "v0"))
-class BackendApplication
+public class BackendApplication
 
-fun main(args: Array<String>) {
+public fun main(args: Array<String>) {
     runApplication<BackendApplication>(args = args) {
         beans.forEach(::addInitializers)
     }

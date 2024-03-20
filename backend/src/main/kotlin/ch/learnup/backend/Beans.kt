@@ -13,6 +13,7 @@ import ch.learnup.backend.whoami.whoamiBeans
 import io.swagger.v3.oas.models.OpenAPI
 import io.swagger.v3.oas.models.media.Schema
 import org.springdoc.core.customizers.OpenApiCustomizer
+import org.springframework.context.support.BeanDefinitionDsl
 import org.springframework.context.support.beans
 
 private val libraryBeans = beans {
@@ -36,7 +37,7 @@ private val handlerBeans = beans {
     bean<LearnupExceptionHandler>()
 }
 
-val beans = listOf(
+public val beans: List<BeanDefinitionDsl> = listOf(
     libraryBeans,
     handlerBeans,
     userBeans,

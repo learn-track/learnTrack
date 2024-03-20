@@ -28,20 +28,20 @@ import org.jooq.impl.Internal
 // UNIQUE and PRIMARY KEY definitions
 // -------------------------------------------------------------------------
 
-val PK_GRADE: UniqueKey<GradeRecord> = Internal.createUniqueKey(GradeTable.GRADE, DSL.name("pk_grade"), arrayOf(GradeTable.GRADE.ID), true)
-val PK_SCHOOL: UniqueKey<SchoolRecord> = Internal.createUniqueKey(SchoolTable.SCHOOL, DSL.name("pk_school"), arrayOf(SchoolTable.SCHOOL.ID), true)
-val PK_SUBJECT: UniqueKey<SubjectRecord> = Internal.createUniqueKey(SubjectTable.SUBJECT, DSL.name("pk_subject"), arrayOf(SubjectTable.SUBJECT.ID), true)
-val PK_USER: UniqueKey<UserRecord> = Internal.createUniqueKey(UserTable.USER, DSL.name("pk_user"), arrayOf(UserTable.USER.ID), true)
-val PK_USER_GRADE: UniqueKey<UserGradeRecord> = Internal.createUniqueKey(UserGradeTable.USER_GRADE, DSL.name("pk_user_grade"), arrayOf(UserGradeTable.USER_GRADE.USER_ID, UserGradeTable.USER_GRADE.GRADE_ID), true)
-val PK_USER_SCHOOL: UniqueKey<UserSchoolRecord> = Internal.createUniqueKey(UserSchoolTable.USER_SCHOOL, DSL.name("pk_user_school"), arrayOf(UserSchoolTable.USER_SCHOOL.USER_ID, UserSchoolTable.USER_SCHOOL.SCHOOL_ID), true)
+public val PK_GRADE: UniqueKey<GradeRecord> = Internal.createUniqueKey(GradeTable.GRADE, DSL.name("pk_grade"), arrayOf(GradeTable.GRADE.ID), true)
+public val PK_SCHOOL: UniqueKey<SchoolRecord> = Internal.createUniqueKey(SchoolTable.SCHOOL, DSL.name("pk_school"), arrayOf(SchoolTable.SCHOOL.ID), true)
+public val PK_SUBJECT: UniqueKey<SubjectRecord> = Internal.createUniqueKey(SubjectTable.SUBJECT, DSL.name("pk_subject"), arrayOf(SubjectTable.SUBJECT.ID), true)
+public val PK_USER: UniqueKey<UserRecord> = Internal.createUniqueKey(UserTable.USER, DSL.name("pk_user"), arrayOf(UserTable.USER.ID), true)
+public val PK_USER_GRADE: UniqueKey<UserGradeRecord> = Internal.createUniqueKey(UserGradeTable.USER_GRADE, DSL.name("pk_user_grade"), arrayOf(UserGradeTable.USER_GRADE.USER_ID, UserGradeTable.USER_GRADE.GRADE_ID), true)
+public val PK_USER_SCHOOL: UniqueKey<UserSchoolRecord> = Internal.createUniqueKey(UserSchoolTable.USER_SCHOOL, DSL.name("pk_user_school"), arrayOf(UserSchoolTable.USER_SCHOOL.USER_ID, UserSchoolTable.USER_SCHOOL.SCHOOL_ID), true)
 
 // -------------------------------------------------------------------------
 // FOREIGN KEY definitions
 // -------------------------------------------------------------------------
 
-val T_GRADE__FK_GRADE_SCHOOL: ForeignKey<GradeRecord, SchoolRecord> = Internal.createForeignKey(GradeTable.GRADE, DSL.name("fk_grade_school"), arrayOf(GradeTable.GRADE.SCHOOL_ID), ch.learnup.backend.persistence.keys.PK_SCHOOL, arrayOf(SchoolTable.SCHOOL.ID), true)
-val T_SUBJECT__FK_SUBJECT_GRADE: ForeignKey<SubjectRecord, GradeRecord> = Internal.createForeignKey(SubjectTable.SUBJECT, DSL.name("fk_subject_grade"), arrayOf(SubjectTable.SUBJECT.GRADE_ID), ch.learnup.backend.persistence.keys.PK_GRADE, arrayOf(GradeTable.GRADE.ID), true)
-val T_USER_GRADE__FK_USER_GRADE_GRADE: ForeignKey<UserGradeRecord, GradeRecord> = Internal.createForeignKey(UserGradeTable.USER_GRADE, DSL.name("fk_user_grade_grade"), arrayOf(UserGradeTable.USER_GRADE.GRADE_ID), ch.learnup.backend.persistence.keys.PK_GRADE, arrayOf(GradeTable.GRADE.ID), true)
-val T_USER_GRADE__FK_USER_GRADE_USER: ForeignKey<UserGradeRecord, UserRecord> = Internal.createForeignKey(UserGradeTable.USER_GRADE, DSL.name("fk_user_grade_user"), arrayOf(UserGradeTable.USER_GRADE.USER_ID), ch.learnup.backend.persistence.keys.PK_USER, arrayOf(UserTable.USER.ID), true)
-val T_USER_SCHOOL__FK_USER_SCHOOL_SCHOOL: ForeignKey<UserSchoolRecord, SchoolRecord> = Internal.createForeignKey(UserSchoolTable.USER_SCHOOL, DSL.name("fk_user_school_school"), arrayOf(UserSchoolTable.USER_SCHOOL.SCHOOL_ID), ch.learnup.backend.persistence.keys.PK_SCHOOL, arrayOf(SchoolTable.SCHOOL.ID), true)
-val T_USER_SCHOOL__FK_USER_SCHOOL_USER: ForeignKey<UserSchoolRecord, UserRecord> = Internal.createForeignKey(UserSchoolTable.USER_SCHOOL, DSL.name("fk_user_school_user"), arrayOf(UserSchoolTable.USER_SCHOOL.USER_ID), ch.learnup.backend.persistence.keys.PK_USER, arrayOf(UserTable.USER.ID), true)
+public val T_GRADE__FK_GRADE_SCHOOL: ForeignKey<GradeRecord, SchoolRecord> = Internal.createForeignKey(GradeTable.GRADE, DSL.name("fk_grade_school"), arrayOf(GradeTable.GRADE.SCHOOL_ID), ch.learnup.backend.persistence.keys.PK_SCHOOL, arrayOf(SchoolTable.SCHOOL.ID), true)
+public val T_SUBJECT__FK_SUBJECT_GRADE: ForeignKey<SubjectRecord, GradeRecord> = Internal.createForeignKey(SubjectTable.SUBJECT, DSL.name("fk_subject_grade"), arrayOf(SubjectTable.SUBJECT.GRADE_ID), ch.learnup.backend.persistence.keys.PK_GRADE, arrayOf(GradeTable.GRADE.ID), true)
+public val T_USER_GRADE__FK_USER_GRADE_GRADE: ForeignKey<UserGradeRecord, GradeRecord> = Internal.createForeignKey(UserGradeTable.USER_GRADE, DSL.name("fk_user_grade_grade"), arrayOf(UserGradeTable.USER_GRADE.GRADE_ID), ch.learnup.backend.persistence.keys.PK_GRADE, arrayOf(GradeTable.GRADE.ID), true)
+public val T_USER_GRADE__FK_USER_GRADE_USER: ForeignKey<UserGradeRecord, UserRecord> = Internal.createForeignKey(UserGradeTable.USER_GRADE, DSL.name("fk_user_grade_user"), arrayOf(UserGradeTable.USER_GRADE.USER_ID), ch.learnup.backend.persistence.keys.PK_USER, arrayOf(UserTable.USER.ID), true)
+public val T_USER_SCHOOL__FK_USER_SCHOOL_SCHOOL: ForeignKey<UserSchoolRecord, SchoolRecord> = Internal.createForeignKey(UserSchoolTable.USER_SCHOOL, DSL.name("fk_user_school_school"), arrayOf(UserSchoolTable.USER_SCHOOL.SCHOOL_ID), ch.learnup.backend.persistence.keys.PK_SCHOOL, arrayOf(SchoolTable.SCHOOL.ID), true)
+public val T_USER_SCHOOL__FK_USER_SCHOOL_USER: ForeignKey<UserSchoolRecord, UserRecord> = Internal.createForeignKey(UserSchoolTable.USER_SCHOOL, DSL.name("fk_user_school_user"), arrayOf(UserSchoolTable.USER_SCHOOL.USER_ID), ch.learnup.backend.persistence.keys.PK_USER, arrayOf(UserTable.USER.ID), true)

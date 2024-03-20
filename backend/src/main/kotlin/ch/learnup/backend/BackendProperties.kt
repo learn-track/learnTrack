@@ -5,12 +5,12 @@ import org.springframework.boot.context.properties.NestedConfigurationProperty
 import org.springframework.boot.context.properties.bind.ConstructorBinding
 
 @ConfigurationProperties(prefix = "learnup")
-data class BackendProperties @ConstructorBinding constructor(
+public data class BackendProperties @ConstructorBinding constructor(
     @NestedConfigurationProperty
     val jwt: JwtProperties,
 )
 
-data class JwtProperties(
+public data class JwtProperties(
     val expirationInHours: Long,
     val key: String,
 )

@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/user")
-class UserRessource(
+public class UserRessource(
     private val userService: UserService,
     private val passwordService: PasswordService,
     private val tokenService: TokenService,
 ) {
     @PostMapping("/login")
-    fun login(@RequestBody loginDto: LoginDto): LoginResponseDto {
+    public fun login(@RequestBody loginDto: LoginDto): LoginResponseDto {
         val user = userService.findUserByEmail(loginDto.email)
             ?: throw LearnupAuthorizationException("Invalid login credentials")
 
@@ -31,5 +31,5 @@ class UserRessource(
     }
 
     @GetMapping("/test")
-    fun test(): String = "test string from backend"
+    public fun test(): String = "test string from backend"
 }

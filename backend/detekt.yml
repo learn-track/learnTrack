@@ -128,7 +128,7 @@ style:
   RedundantExplicitType:
     active: true
   RedundantVisibilityModifierRule:
-    active: true
+    active: false
   ReturnCount:
     active: true
     excludeGuardClauses: true

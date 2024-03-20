@@ -11,7 +11,7 @@ import org.springframework.security.web.authentication.preauth.PreAuthenticatedA
 
 private const val TOKEN_SUBSTRING = 7
 
-class LearnupUserDetailService(
+public class LearnupUserDetailService(
     private val userDao: UserDao,
     private val tokenService: TokenService,
 ) : AuthenticationUserDetailsService<PreAuthenticatedAuthenticationToken> {

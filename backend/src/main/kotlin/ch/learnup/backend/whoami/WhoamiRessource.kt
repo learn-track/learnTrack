@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/whoami")
-class WhoamiRessource(
+public class WhoamiRessource(
     private val userService: UserService,
     private val gradeService: GradeService,
     private val schoolService: SchoolService,
 ) {
     @GetMapping
-    fun getSelf(@AuthenticationPrincipal principal: LearnupUserDetails): WhoamiDto {
+    public fun getSelf(@AuthenticationPrincipal principal: LearnupUserDetails): WhoamiDto {
         val user = userService.mapToDto(principal.user)
 
         return WhoamiDto(
