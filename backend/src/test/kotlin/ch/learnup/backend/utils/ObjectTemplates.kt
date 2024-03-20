@@ -1,7 +1,11 @@
 package ch.learnup.backend.utils
 
 import ch.learnup.backend.persistence.UserRole
-import ch.learnup.backend.persistence.tables.pojos.*
+import ch.learnup.backend.persistence.tables.pojos.User
+import ch.learnup.backend.persistence.tables.pojos.School
+import ch.learnup.backend.persistence.tables.pojos.Grade
+import ch.learnup.backend.persistence.tables.pojos.UserSchool
+import ch.learnup.backend.persistence.tables.pojos.UserGrade
 import java.util.UUID
 
 val userTemplateId: UUID = UUID.fromString("40d8b918-8f80-4b92-a3f5-4548d7883c51")

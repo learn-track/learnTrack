@@ -1,7 +1,7 @@
 package ch.learnup.backend.school
 
 import ch.learnup.backend.common.EntityService
-import ch.learnup.backend.persistence.fetchGradeByUserId
+import ch.learnup.backend.persistence.fetchSchoolsForUserByUserId
 import ch.learnup.backend.persistence.tables.daos.SchoolDao
 import ch.learnup.backend.persistence.tables.pojos.School
 import ch.learnup.backend.persistence.tables.records.SchoolRecord
@@ -16,5 +16,5 @@ class SchoolService(private val schoolDao: SchoolDao) : EntityService<SchoolDto,
         postcode = pojo.postcode,
     )
 
-    fun getSchoolByUserId(userId: UUID) = schoolDao.fetchGradeByUserId(userId).map(::mapToDto)
+    fun getSchoolsForUserByUserId(userId: UUID) = schoolDao.fetchSchoolsForUserByUserId(userId).map(::mapToDto)
 }

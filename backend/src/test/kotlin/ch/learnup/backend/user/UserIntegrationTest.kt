@@ -42,7 +42,6 @@ class UserIntegrationTest: IntegrationTest() {
             .exchange()
             .expectStatus()
             .isUnauthorized
-
     }
 
     @Test
