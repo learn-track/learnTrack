@@ -3,12 +3,9 @@
 body {
   margin: 0;
   overflow-y: scroll;
-  overflow-x: hidden;
 }
 
 #root {
   min-height: 100%;
   height: auto;
-
-  /*padding: 2rem 4rem;*/
 }
