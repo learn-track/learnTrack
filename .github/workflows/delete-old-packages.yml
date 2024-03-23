@@ -16,5 +16,6 @@ jobs:
           cut-off: One month ago UTC
           keep-at-least: 10
           skip-tags: v*
-          account-type: personal
+          account-type: org
+          org-name: lernUP
           token: ${{ secrets.DELETE_PACKAGES_TOKEN }}

@@ -1,6 +1,6 @@
 # learnUP
 
-[![Check & Release](https://github.com/deepspace1000/learnUP/actions/workflows/check-and-release.yml/badge.svg)](https://github.com/deepspace1000/learnUP/actions/workflows/check-and-release.yml)
+[![Check & Release](https://github.com/lernUP/learnUP/actions/workflows/check-and-release.yml/badge.svg)](https://github.com/lernUP/learnUP/actions/workflows/check-and-release.yml)
 ![Uptime Robot ratio (30 days)](https://img.shields.io/uptimerobot/ratio/30/m796586558-f9a88c47069e786ed216bd8d)
 
 Backend:
@@ -19,9 +19,9 @@ The learnUP Application is a digital learning platform. It is a school group pro
 
 ## Deployment
 
-| Branch | Domain                     | Server        | Repo                                                |
-|--------|----------------------------|---------------|-----------------------------------------------------|
-| Master | http://learnup.brunner.top | 46.232.178.95 | https://github.com/deepspace1000/learnUP-Deployment |
+| Branch | Domain                     | Server        | Repo                                         |
+|--------|----------------------------|---------------|----------------------------------------------|
+| Master | http://learnup.brunner.top | 46.232.178.95 | https://github.com/lernUP/learnUP-Deployment |
 
 To get the currently deployed version got to: http://learnup.brunner.top/info
 
