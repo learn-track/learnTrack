@@ -220,7 +220,7 @@ jooq {
 sonar {
 	properties {
 		property("sonar.projectKey", "learnUP_backend")
-		property("sonar.organization", "deepspace1000")
+		property("sonar.organization", "lernup")
 		property("sonar.host.url", "https://sonarcloud.io")
 		property("sonar.sources", "src/main")
 		property("sonar.tests", "src/test")
