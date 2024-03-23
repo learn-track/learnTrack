@@ -19,7 +19,7 @@ jobs:
   build-backend:
     timeout-minutes: 15
     env:
-      IMAGE_NAME: deepspace1000/learnup-backend
+      IMAGE_NAME: lernUP/learnup-backend
     runs-on: ubuntu-latest
 
     defaults:
@@ -98,7 +98,7 @@ jobs:
   build-frontend:
     runs-on: ubuntu-latest
     env:
-      IMAGE_NAME: deepspace1000/learnup-frontend
+      IMAGE_NAME: lernUP/learnup-frontend
     defaults:
       run:
         working-directory: ./frontend
@@ -183,7 +183,7 @@ jobs:
           API_TOKEN_GITHUB: ${{ secrets.LEARNUP_VERSION_BUMP }}
         with:
           source_file: 'version'
-          destination_repo: 'deepspace1000/learnUP-Deployment'
+          destination_repo: 'lernUP/learnUP-Deployment'
           destination_branch: master
           user_email: 'nilsrothe05@icloud.com'
           user_name: 'deepspace1000'
