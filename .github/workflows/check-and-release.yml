@@ -162,6 +162,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
+    if: github.event_name != 'pull_request'
     needs:
       - build-backend
       - build-frontend
@@ -171,14 +172,12 @@ jobs:
         run: echo "TAG=sha-${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
 
       - name: Create version file
-        uses: 'finnp/create-file-action@master'
-        if: github.event_name != 'pull_request'
+        uses: finnp/create-file-action@master
         env:
           FILE_NAME: 'version'
           FILE_DATA: 'LEARNUP_TAG=${{ steps.tag.outputs.TAG }}'
 
       - name: Push version file
-        if: github.event_name != 'pull_request'
         uses: dmnemec/copy_file_to_another_repo_action@main
         env:
           API_TOKEN_GITHUB: ${{ secrets.LEARNUP_VERSION_BUMP }}
