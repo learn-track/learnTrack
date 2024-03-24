@@ -11,5 +11,14 @@ services:
     volumes:
       - postgres_data:/var/lib/postgres
 
+  backoffice-appsmith:
+    image: index.docker.io/appsmith/appsmith-ee:v1.17
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./stacks:/appsmith-stacks
+    restart: unless-stopped
+
 volumes:
   postgres_data:

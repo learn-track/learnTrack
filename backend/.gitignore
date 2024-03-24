@@ -1,9 +1,5 @@
-HELP.md
 .gradle
-build/
-!gradle/wrapper/gradle-wrapper.jar
-!**/src/main/**/build/
-!**/src/test/**/build/
+build
 
 ### STS ###
 .apt_generated
@@ -38,3 +34,10 @@ out/
 
 ### Kotlin ###
 .kotlin
+
+### Appsmith ###
+stacks/data
+stacks/logs
+stacks/ssl
+stacks/letsencrypt
+stacks/git-storage

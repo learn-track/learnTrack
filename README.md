@@ -89,6 +89,26 @@ cd frontend
 yarn generate-api-client
 ```
 
+### Backoffice
+
+#### Development Flow
+
+Make sure to always pull the latest changes before you start developing. Then develop locally and push the changes to the repo.
+When the API changes are deployed pull the backoffice on the server.
+
+#### Local Setup
+
+1. Start de [backend dev environment](#backend)
+2. Navigate to http://localhost
+3. Sign up with the email `nilsrothe05@icloud.com`
+4. Create a new Workspace
+5. Click on the three dots in the top right and select **Import**
+6. Choose **Import from Git repository**
+7. Enter `git@github.com:lernUP/backoffice-appsmith.git` as remote url
+8. Add the generated key to the [repo's deployment keys](https://github.com/lernUP/backoffice-appsmith/settings/keys) with write access
+9. Click **Import**
+10. **TBD**
+
 ### Tutorials
 
 If you have questions [see](./doc/tutorials) for some basic workflows.
