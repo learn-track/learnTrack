@@ -12,10 +12,10 @@ jobs:
     steps:
       - uses: snok/container-retention-policy@v2.2.1
         with:
-          image-names: learnup*
+          image-names: learntrack*
           cut-off: One month ago UTC
           keep-at-least: 10
           skip-tags: v*
           account-type: org
-          org-name: lernUP
+          org-name: learn-track
           token: ${{ secrets.DELETE_PACKAGES_TOKEN }}

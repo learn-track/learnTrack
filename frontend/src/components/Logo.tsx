@@ -1,10 +1,10 @@
 import { styled, Typography } from '@mui/joy';
-import LearnupLogo from '../assets/logo.svg?react';
+import LearnTrackLogo from '../assets/logo.svg?react';
 
 export function Logo() {
   return (
     <LogoContainer>
-      <LearnupLogo />
+      <LearnTrackLogo />
       <Typography level="h2" component={'h2'} sx={{ color: `#E191A1`, marginLeft: '20px' }}>
         <Typography sx={{ color: '#89DAD5' }}>Learn</Typography> UP
       </Typography>

@@ -21,7 +21,7 @@ kotlin {
 	explicitApi()
 }
 
-group = "ch.learnup"
+group = "ch.learntrack"
 version = "0.0.1-SNAPSHOT"
 
 java {
@@ -138,7 +138,7 @@ jooq {
 				logging = Logging.DEBUG
 				jdbc.apply {
 					driver = "org.postgresql.Driver"
-					url = "jdbc:postgresql://localhost:5517/learnup_backend"
+					url = "jdbc:postgresql://localhost:5517/learntrack_backend"
 					user = "backend"
 					password = "backend"
 				}
@@ -161,7 +161,7 @@ jooq {
 									includeTypes = "INET"
 								},
 								ForcedType().apply {
-									userType = "ch.learnup.backend.persistence.UserRole"
+									userType = "ch.learntrack.backend.persistence.UserRole"
 									withEnumConverter(true)
 									includeExpression = "user_role"
 								}
@@ -183,7 +183,7 @@ jooq {
 						visibilityModifier = VisibilityModifier.PUBLIC
 					}
 					target.apply {
-						packageName = "ch.learnup.backend.persistence"
+						packageName = "ch.learntrack.backend.persistence"
 						directory = "src/main/kotlin-gen/jooq-gen"
 					}
 					strategy.apply {
@@ -224,13 +224,13 @@ jooq {
 
 sonar {
 	properties {
-		property("sonar.projectKey", "learnUP_backend")
-		property("sonar.organization", "lernup")
+		property("sonar.projectKey", "learntrack_backend")
+		property("sonar.organization", "learntrack")
 		property("sonar.host.url", "https://sonarcloud.io")
 		property("sonar.sources", "src/main")
 		property("sonar.tests", "src/test")
 		property("sonar.log.level", "DEBUG")
-		property("sonar.projectName", "learnUP_backend")
+		property("sonar.projectName", "learnTrack_backend")
 
 		property("sonar.exclusions", "src/main/kotlin-gen/jooq-gen/**/*")
 		property("sonar.cpd.exclusions", "src/main/**/*.sql")

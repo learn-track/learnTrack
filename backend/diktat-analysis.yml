@@ -1,6 +1,6 @@
 - name: DIKTAT_COMMON
   configuration:
-    domainName: ch.learnup.backend
+    domainName: ch.learntrack.backend
     disabledChapters: "Comments"
     kotlinVersion: 1.9
 - name: MAGIC_NUMBER

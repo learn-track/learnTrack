@@ -3733,9 +3733,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"learnup-frontend@workspace:.":
+"learntrack-frontend@workspace:.":
   version: 0.0.0-use.local
-  resolution: "learnup-frontend@workspace:."
+  resolution: "learntrack-frontend@workspace:."
   dependencies:
     "@emotion/react": "npm:^11.11.4"
     "@emotion/styled": "npm:^11.11.0"

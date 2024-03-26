@@ -1,9 +1,9 @@
-# learnUP Architecture Documentation
+# learnTrack Architecture Documentation
 Architecture documentation based on [arc42](https://www.innoq.com/en/blog/brief-introduction-to-arc42/)
 
 ## Introduction / Goals
 
-The learnUP is a digital learning platform and a project for the Modul 345
+The learnTrack is a digital learning platform and a project for the Modul 345
 
 ### Quality Goals
 
@@ -24,7 +24,7 @@ Coding: There is only one Developer with experience with the tech stack we use
 
 ## Solution Strategy
 
-The lernUp dev team develops this application and uses an open source technology stack, which will consist of a conventional three tier architecture 
+The learnTrack dev team develops this application and uses an open source technology stack, which will consist of a conventional three tier architecture 
 with frontend (a single-page application), backend and relational database.
 
 ### ER Diagram

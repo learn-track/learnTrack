@@ -1,27 +1,27 @@
-# learnUP
+# learnTrack
 
-[![Check & Release](https://github.com/lernUP/learnUP/actions/workflows/check-and-release.yml/badge.svg)](https://github.com/lernUP/learnUP/actions/workflows/check-and-release.yml)
+[![Check & Release](https://github.com/learn-track/learnTrack/actions/workflows/check-and-release.yml/badge.svg)](https://github.com/learn-track/learnTrack/actions/workflows/check-and-release.yml)
 ![Uptime Robot ratio (30 days)](https://img.shields.io/uptimerobot/ratio/30/m796586558-f9a88c47069e786ed216bd8d)
 
 Backend:
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=learnUP_backend&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=learnUP_backend)
-[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=learnUP_backend&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=learnUP_backend)
-[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=learnUP_backend&metric=bugs)](https://sonarcloud.io/summary/new_code?id=learnUP_backend)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=learntrack_backend&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=learntrack_backend)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=learntrack_backend&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=learntrack_backend)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=learntrack_backend&metric=bugs)](https://sonarcloud.io/summary/new_code?id=learntrack_backend)
 
 Frontend:
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=learnUP_frontend&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=learnUP_frontend)
-[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=learnUP_frontend&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=learnUP_frontend)
-[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=learnUP_frontend&metric=bugs)](https://sonarcloud.io/summary/new_code?id=learnUP_frontend)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=learntrack_frontend&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=learntrack_frontend)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=learntrack_frontend&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=learntrack_frontend)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=learntrack_frontend&metric=bugs)](https://sonarcloud.io/summary/new_code?id=learntrack_frontend)
 
-The learnUP Application is a digital learning platform. It is a school group project fot the Modul 345 
+The learnTrack Application is a digital learning platform. It is a school group project fot the Modul 345 
 - [Documentation](./doc/architecture/README.md)
-- [Jira](https://v7bauma.atlassian.net/jira/software/projects/LERN/boards/2/backlog)
+- [Jira](https://learntrack.atlassian.net/jira/software/projects/LERN/boards/2/backlog)
 
 ## Deployment
 
-| Branch | Domain                     | Server        | Repo                                         |
-|--------|----------------------------|---------------|----------------------------------------------|
-| Master | http://learnup.brunner.top | 46.232.178.95 | https://github.com/lernUP/learnUP-Deployment |
+| Branch | Domain                     | Server        | Repo                                                 |
+|--------|----------------------------|---------------|------------------------------------------------------|
+| Master | http://learnup.brunner.top | 46.232.178.95 | https://github.com/learn-track/learnTrack-Deployment |
 
 To get the currently deployed version got to: http://learnup.brunner.top/info
 
@@ -40,8 +40,8 @@ To get the currently deployed version got to: http://learnup.brunner.top/info
 
 #### Backend
 
-Start [learnUP-Backend](./backend/src/main/kotlin/ch/learnup/backend/BackendApplication.kt)
-with the [**dev** profile](./.run/learnUP-Backend%20dev.run.xml).
+Start [learnTrack-Backend](./backend/src/main/kotlin/ch/learntrack/backend/BackendApplication.kt)
+with the [**dev** profile](./.run/learnTrack-Backend%20dev.run.xml).
 The docker containers needed for development should be started automatically. If not run:
 
 ```shell
@@ -104,8 +104,8 @@ When the API changes are deployed pull the backoffice on the server.
 4. Create a new Workspace
 5. Click on the three dots in the top right and select **Import**
 6. Choose **Import from Git repository**
-7. Enter `git@github.com:lernUP/backoffice-appsmith.git` as remote url
-8. Add the generated key to the [repo's deployment keys](https://github.com/lernUP/backoffice-appsmith/settings/keys) with write access
+7. Enter `git@github.com:learn-track/backoffice-appsmith.git` as remote url
+8. Add the generated key to the [repo's deployment keys](https://github.com/learn-track/backoffice-appsmith/settings/keys) with write access
 9. Click **Import**
 10. **TBD**
 

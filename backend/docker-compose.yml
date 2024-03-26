@@ -1,11 +1,11 @@
-name: learnup-backend
+name: learntrack-backend
 services:
   backend-postgres:
     image: postgres:16.2
     environment:
       - POSTGRES_PASSWORD=backend
       - POSTGRES_USER=backend
-      - POSTGRES_DB=learnup_backend
+      - POSTGRES_DB=learntrack_backend
     ports:
       - 5517:5432
     volumes:
