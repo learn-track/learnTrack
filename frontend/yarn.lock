@@ -22,16 +22,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@apidevtools/json-schema-ref-parser@npm:^10.1.0":
-  version: 10.1.0
-  resolution: "@apidevtools/json-schema-ref-parser@npm:10.1.0"
+"@apidevtools/json-schema-ref-parser@npm:^11.5.4":
+  version: 11.5.4
+  resolution: "@apidevtools/json-schema-ref-parser@npm:11.5.4"
   dependencies:
     "@jsdevtools/ono": "npm:^7.1.3"
-    "@types/json-schema": "npm:^7.0.11"
-    "@types/lodash.clonedeep": "npm:^4.5.7"
+    "@types/json-schema": "npm:^7.0.15"
     js-yaml: "npm:^4.1.0"
-    lodash.clonedeep: "npm:^4.5.0"
-  checksum: 2d54b04e8d73a29be20100c29e2c9b6e6e6c30c476f536daee868889a09ddc6809afd96a798ee37c66be6242b7cff19f1ce2ff91d3e54de134c63b46d888a583
+  checksum: a5e013fe7749ac2f3a35beb7c86f95b3f1cee25f270660ff00ed24101369e282cd5058e2b1a19f08540f8e9b67e3f709f6775fbd19f3a6668b5ed569fd4349fb
   languageName: node
   linkType: hard
 
@@ -1419,26 +1417,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/json-schema@npm:^7.0.11, @types/json-schema@npm:^7.0.12":
+"@types/json-schema@npm:^7.0.12, @types/json-schema@npm:^7.0.15":
   version: 7.0.15
   resolution: "@types/json-schema@npm:7.0.15"
   checksum: a996a745e6c5d60292f36731dd41341339d4eeed8180bb09226e5c8d23759067692b1d88e5d91d72ee83dfc00d3aca8e7bd43ea120516c17922cbcb7c3e252db
-  languageName: node
-  linkType: hard
-
-"@types/lodash.clonedeep@npm:^4.5.7":
-  version: 4.5.9
-  resolution: "@types/lodash.clonedeep@npm:4.5.9"
-  dependencies:
-    "@types/lodash": "npm:*"
-  checksum: 2f224ce9578046bccd1cd9594fb73540600ebd3d59a45695166a6123e2c376b84ab106b005a00453f357907f25bc8bfd2271b822be76e8f5527eadb4690b5e96
-  languageName: node
-  linkType: hard
-
-"@types/lodash@npm:*":
-  version: 4.14.202
-  resolution: "@types/lodash@npm:4.14.202"
-  checksum: 6064d43c8f454170841bd67c8266cc9069d9e570a72ca63f06bceb484cb4a3ee60c9c1f305c1b9e3a87826049fd41124b8ef265c4dd08b00f6766609c7fe9973
   languageName: node
   linkType: hard
 
@@ -2163,10 +2145,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commander@npm:^11.1.0":
-  version: 11.1.0
-  resolution: "commander@npm:11.1.0"
-  checksum: 13cc6ac875e48780250f723fb81c1c1178d35c5decb1abb1b628b3177af08a8554e76b2c0f29de72d69eef7c864d12613272a71fabef8047922bc622ab75a179
+"commander@npm:^12.0.0":
+  version: 12.0.0
+  resolution: "commander@npm:12.0.0"
+  checksum: e51cac1d1d0aa1f76581981d2256a9249497e08f5a370bf63b0dfc7e76a647fc8cbc3ddd507928f2bdca6c514c83834e87e2687ace2fe2fc7cc7e631bf80f83d
   languageName: node
   linkType: hard
 
@@ -3771,7 +3753,7 @@ __metadata:
     eslint-plugin-react: "npm:^7.34.0"
     eslint-plugin-react-hooks: "npm:^4.6.0"
     eslint-plugin-react-refresh: "npm:^0.4.6"
-    openapi-typescript-codegen: "npm:^0.27.0"
+    openapi-typescript-codegen: "npm:^0.28.0"
     prettier: "npm:^3.2.5"
     prettier-plugin-organize-imports: "npm:^3.2.4"
     react: "npm:^18.2.0"
@@ -3807,13 +3789,6 @@ __metadata:
   dependencies:
     p-locate: "npm:^5.0.0"
   checksum: d3972ab70dfe58ce620e64265f90162d247e87159b6126b01314dd67be43d50e96a50b517bce2d9452a79409c7614054c277b5232377de50416564a77ac7aad3
-  languageName: node
-  linkType: hard
-
-"lodash.clonedeep@npm:^4.5.0":
-  version: 4.5.0
-  resolution: "lodash.clonedeep@npm:4.5.0"
-  checksum: 2caf0e4808f319d761d2939ee0642fa6867a4bbf2cfce43276698828380756b99d4c4fa226d881655e6ac298dd453fe12a5ec8ba49861777759494c534936985
   languageName: node
   linkType: hard
 
@@ -4242,18 +4217,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"openapi-typescript-codegen@npm:^0.27.0":
-  version: 0.27.0
-  resolution: "openapi-typescript-codegen@npm:0.27.0"
+"openapi-typescript-codegen@npm:^0.28.0":
+  version: 0.28.0
+  resolution: "openapi-typescript-codegen@npm:0.28.0"
   dependencies:
-    "@apidevtools/json-schema-ref-parser": "npm:^10.1.0"
+    "@apidevtools/json-schema-ref-parser": "npm:^11.5.4"
     camelcase: "npm:^6.3.0"
-    commander: "npm:^11.1.0"
+    commander: "npm:^12.0.0"
     fs-extra: "npm:^11.2.0"
     handlebars: "npm:^4.7.8"
   bin:
     openapi: bin/index.js
-  checksum: e917864f2999fd64c27c7fb7ae2bc8a395eecad51e9c7219f711c2b2881660eda65d48303b886b1cc879bfba504f02dd2040f796f4e7e8b52eb403e4bd6073a6
+  checksum: b3f4d80b7bbb7a5ebe75ea8f57edc30b58a98ef9b37281ae377e8d2caa4cac58ff8fe0dc096be897344d0685287be1325984e4f1218d6b4d1b83dd94ecce0f69
   languageName: node
   linkType: hard
 
