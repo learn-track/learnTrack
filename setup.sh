@@ -20,7 +20,7 @@ echo '
 
 '
 
-echo "Hi there! This script will set up your development environment for learnUP."
+echo "Hi there! This script will set up your development environment for learnTrack."
 read -p "ℹ️ Press Enter to continue..."
 echo
 
