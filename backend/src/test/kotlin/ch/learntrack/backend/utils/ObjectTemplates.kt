@@ -18,13 +18,14 @@ fun createUserFromTemplate(
     lastName: String = "user",
     eMail: String = "testuser@gmail.com",
     password: String = "\$2a\$10\$IVLBCJ8ed8zh1aYeui6Nwu4uauH/Uwtrdkd5PshFdCP9Yo0U2ltjK",
+    userRole: UserRole = UserRole.ADMIN
 ) = User(
     id = id,
     firstName = firstName,
     lastName = lastName,
     eMail = eMail,
     password = password,
-    userRole = UserRole.ADMIN,
+    userRole = userRole,
 )
 
 fun createSchoolFromTemplate(
