@@ -1,5 +1,6 @@
 package ch.learntrack.backend
 
+import ch.learntrack.backend.backoffice.backofficeBeans
 import ch.learntrack.backend.common.LearnTrackExceptionHandler
 import ch.learntrack.backend.grade.gradeBeans
 import ch.learntrack.backend.jwt.jwtBeans
@@ -37,6 +38,7 @@ private val handlerBeans = beans {
 }
 
 public val beans: List<BeanDefinitionDsl> = listOf(
+    backofficeBeans,
     libraryBeans,
     handlerBeans,
     userBeans,

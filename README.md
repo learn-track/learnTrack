@@ -102,12 +102,13 @@ When the API changes are deployed pull the backoffice on the server.
 2. Navigate to http://localhost
 3. Sign up with the email `nilsrothe05@icloud.com`
 4. Create a new Workspace
-5. Click on the three dots in the top right and select **Import**
+5. Click on **Create new** in the top right and select **Import**
 6. Choose **Import from Git repository**
-7. Enter `git@github.com:learn-track/backoffice-appsmith.git` as remote url
-8. Add the generated key to the [repo's deployment keys](https://github.com/learn-track/backoffice-appsmith/settings/keys) with write access
-9. Click **Import**
-10. **TBD**
+7. Select **Github** and check the **I have an existing repository**.
+8. Enter `git@github.com:learn-track/backoffice-appsmith.git` as remote url
+9. Add the generated key to the [repo's deployment keys](https://github.com/learn-track/backoffice-appsmith/settings/keys) with write access
+10. Click **Import**
+11. When asked for Datasource credentials. Enter the credentials found in the [application-dev.yml](./backend/src/main/resources/application-dev.yml)
 
 ### Tutorials
 

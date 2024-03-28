@@ -54,6 +54,9 @@ class IntegrationTest {
     lateinit var webClient: WebTestClient
 
     @Autowired
+    lateinit var backendProperties: BackendProperties
+
+    @Autowired
     lateinit var transactionManager: PlatformTransactionManager
 
     @Autowired
