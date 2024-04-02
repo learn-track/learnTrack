@@ -2,7 +2,7 @@
 kotlin = "1.9.23"
 spring = "6.1.5"
 springboot = "3.2.4"
-springdoc = "2.4.0"
+springdoc = "2.5.0"
 
 [libraries]
 detekt-formatting = "io.gitlab.arturbosch.detekt:detekt-formatting:1.23.6"
