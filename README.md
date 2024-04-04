@@ -109,6 +109,7 @@ When the API changes are deployed pull the backoffice on the server.
 9. Add the generated key to the [repo's deployment keys](https://github.com/learn-track/backoffice-appsmith/settings/keys) with write access
 10. Click **Import**
 11. When asked for Datasource credentials. Enter the credentials found in the [application-dev.yml](./backend/src/main/resources/application-dev.yml)
+    - URL: http://host.docker.internal:8080/backoffice
 
 ### Tutorials
 

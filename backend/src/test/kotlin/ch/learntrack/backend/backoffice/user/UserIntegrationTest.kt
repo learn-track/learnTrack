@@ -7,7 +7,7 @@ import ch.learntrack.backend.utils.deleteAll
 import ch.learntrack.backend.utils.runInTransaction
 import ch.learntrack.backend.utils.setBasicAuthHeader
 import ch.learntrack.backend.utils.userTemplateId
-import java.util.*
+import java.util.UUID
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
