@@ -3,7 +3,7 @@
     <option name="ACTIVE_PROFILES" value="dev" />
     <option name="ALTERNATIVE_JRE_PATH" value="temurin-21" />
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-    <module name="learnTrack.main" />
+    <module name="ch.learntrack.learnTrack.main" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="ch.learntrack.backend.BackendApplication" />
     <method v="2">
       <option name="Make" enabled="true" />
