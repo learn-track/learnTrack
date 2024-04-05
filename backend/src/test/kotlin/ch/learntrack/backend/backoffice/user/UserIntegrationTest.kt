@@ -84,6 +84,25 @@ class UserIntegrationTest: IntegrationTest() {
         assertThat(user?.password).isNotSameAs(validUserDto.password)
         assertThat(user?.eMail).isEqualTo(validUserDto.email)
 
+        val validUserDto1 = CreateUserDto("John2", null, "test2", "test2.edu@gmail.com", "test" )
+
+        webClient.post()
+                .uri("/backoffice/user/create")
+                .body(BodyInserters.fromValue(validUserDto1))
+                .setBasicAuthHeader(backendProperties)
+                .exchange()
+                .expectStatus()
+                .isOk
+
+        val user1 = userDao.fetchOne(USER.E_MAIL, validUserDto1.email)
+
+        assertThat(user1).isNotNull
+        assertThat(user1?.firstName).isEqualTo(validUserDto1.firstname)
+        assertThat(user1?.middleName).isEqualTo(validUserDto1.middlename)
+        assertThat(user1?.lastName).isEqualTo(validUserDto1.lastname)
+        assertThat(user1?.password).isNotNull
+        assertThat(user1?.password).isNotSameAs(validUserDto1.password)
+        assertThat(user1?.eMail).isEqualTo(validUserDto1.email)
     }
 
     @Test
