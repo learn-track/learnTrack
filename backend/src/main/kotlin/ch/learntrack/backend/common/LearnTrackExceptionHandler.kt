@@ -15,4 +15,10 @@ public class LearnTrackExceptionHandler : ResponseEntityExceptionHandler() {
         ex: LearnTrackAuthorizationException,
         request: WebRequest,
     ): ResponseEntity<Any>? = handleExceptionInternal(ex, ex.message, HttpHeaders(), HttpStatus.UNAUTHORIZED, request)
+
+    @ExceptionHandler(LearnTrackConflictException::class)
+    public fun handleConflict(
+        ex: LearnTrackConflictException,
+        request: WebRequest,
+    ): ResponseEntity<Any>? = handleExceptionInternal(ex, ex.message, HttpHeaders(), HttpStatus.CONFLICT, request)
 }
