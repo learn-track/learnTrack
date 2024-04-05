@@ -1,6 +1,6 @@
 import { ErrorOutline, Lock, Mail } from '@mui/icons-material';
 
-import { Button, FormControl, FormHelperText, Input, Link, Snackbar, Stack, styled } from '@mui/joy';
+import { Button, FormControl, Input, Link, Snackbar, Stack, styled } from '@mui/joy';
 import { useState } from 'react';
 import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router-dom';
@@ -19,77 +19,66 @@ export function LoginForm() {
   const inputBorderColor = showInputError ? '2px solid #fc0303' : '2px solid #5EC2B7';
 
   return (
-    <form
-      onSubmit={(event) => {
-        event.preventDefault();
-        console.log(event.target);
-      }}>
-      <FormControl error={showInputError}>
+    <>
+      <form
+        onSubmit={(event) => {
+          event.preventDefault();
+          loginMutation.mutate();
+        }}>
         <Stack spacing={3} width={350}>
-          <Input
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            startDecorator={
-              <Mail
-                sx={{
-                  fontSize: '25px',
-                  color: '#333',
-                  borderRight: inputBorderColor,
-                  width: '50px',
-                  height: '20px',
-                }}
-              />
-            }
-            placeholder={'E-Mail'}
-            sx={{
-              background: inputBackgroundColor,
-              padding: '12px 20px',
-              fontFamily: 'Montserrat, sans-serif',
-              fontSize: '15px',
-            }}
-            variant="plain"
-            size={'lg'}
-          />
-          <Input
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            type={'password'}
-            startDecorator={
-              <Lock
-                sx={{
-                  fontSize: '25px',
-                  color: '#333',
-                  borderRight: inputBorderColor,
-                  width: '50px',
-                  height: '20px',
-                }}
-              />
-            }
-            placeholder={'Passwort'}
-            sx={{
-              background: inputBackgroundColor,
-              padding: '12px 20px',
-              fontFamily: 'Montserrat, sans-serif',
-              fontSize: '15px',
-            }}
-            variant="plain"
-            size={'lg'}
-          />
-          <FormHelperText>
-            <Snackbar
-              autoHideDuration={4000}
-              open={showSnackbarError}
-              color={'danger'}
-              sx={{ backgroundColor: '#f6e0e0' }}
-              onClose={(clickaway) => {
-                if (clickaway) {
-                  setShowSnackbarError(false);
-                }
-              }}>
-              <ErrorOutline /> E-Mail oder Passwort ist falsch!
-            </Snackbar>
-          </FormHelperText>
-
+          <FormControl error={showInputError}>
+            <Input
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              startDecorator={
+                <Mail
+                  sx={{
+                    fontSize: '25px',
+                    color: '#333',
+                    borderRight: inputBorderColor,
+                    width: '50px',
+                    height: '20px',
+                  }}
+                />
+              }
+              placeholder={'E-Mail'}
+              sx={{
+                background: inputBackgroundColor,
+                padding: '12px 20px',
+                fontFamily: 'Montserrat, sans-serif',
+                fontSize: '15px',
+              }}
+              variant="plain"
+              size={'lg'}
+            />
+          </FormControl>
+          <FormControl error={showInputError}>
+            <Input
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              type={'password'}
+              startDecorator={
+                <Lock
+                  sx={{
+                    fontSize: '25px',
+                    color: '#333',
+                    borderRight: inputBorderColor,
+                    width: '50px',
+                    height: '20px',
+                  }}
+                />
+              }
+              placeholder={'Passwort'}
+              sx={{
+                background: inputBackgroundColor,
+                padding: '12px 20px',
+                fontFamily: 'Montserrat, sans-serif',
+                fontSize: '15px',
+              }}
+              variant="plain"
+              size={'lg'}
+            />
+          </FormControl>
           <LinkContainer>
             <Link
               sx={{
@@ -100,15 +89,24 @@ export function LoginForm() {
               }}>
               Passwort vergessen
             </Link>
-            {/* @todo implement login functionality */}
           </LinkContainer>
-
-          <Button onClick={() => loginMutation.mutate()} type="submit">
-            Anmelden
-          </Button>
+          <Button type={'submit'}>Anmelden</Button>
         </Stack>
-      </FormControl>
-    </form>
+      </form>
+
+      <Snackbar
+        open={showSnackbarError}
+        color={'danger'}
+        sx={{ backgroundColor: '#f6e0e0' }}
+        onClose={(clickaway) => {
+          if (clickaway) {
+            setShowSnackbarError(false);
+          }
+        }}
+        startDecorator={<ErrorOutline />}>
+        E-Mail oder Passwort ist falsch!
+      </Snackbar>
+    </>
   );
 }
 

@@ -75,7 +75,7 @@ const floatAnimation2 = keyframes`
 
 const RightSide = styled('div')`
   background-color: #5ec2b7;
-  min-height: 100vh;
+  height: 100vh;
   padding: 2vh 5vw;
   display: flex;
   justify-content: space-between;
@@ -85,7 +85,7 @@ const RightSide = styled('div')`
 
 const LeftSide = styled('div')`
   background-color: #d6f8f4;
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
