@@ -93,6 +93,11 @@ public open class UserDao(configuration: Configuration?) : DAOImpl<UserRecord, U
     public fun fetchByEMail(vararg values: String): List<User> = fetch(UserTable.USER.E_MAIL, *values)
 
     /**
+     * Fetch a unique record that has <code>e_mail = value</code>
+     */
+    public fun fetchOneByEMail(value: String): User? = fetchOne(UserTable.USER.E_MAIL, value)
+
+    /**
      * Fetch records that have <code>password BETWEEN lowerInclusive AND
      * upperInclusive</code>
      */
