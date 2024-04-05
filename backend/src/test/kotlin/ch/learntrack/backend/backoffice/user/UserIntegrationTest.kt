@@ -165,4 +165,20 @@ class UserIntegrationTest: IntegrationTest() {
                 .isEqualTo(HttpStatus.CONFLICT)
     }
 
+    @Test
+    fun `should be able to create a user even if email is in upper case`() {
+        val validUser = CreateUserDto("John", "Doe", "test", "TESTLOWERCASE@GMAIL.COM", "test" )
+
+        webClient.post()
+                .uri("/backoffice/user/create")
+                .body(BodyInserters.fromValue(validUser))
+                .setBasicAuthHeader(backendProperties)
+                .exchange()
+                .expectStatus()
+                .isOk
+
+        val user = userDao.fetchOne(USER.E_MAIL, validUser.email.lowercase())
+        assertThat(user).isNotNull
+    }
+
 }

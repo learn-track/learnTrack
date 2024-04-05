@@ -17,7 +17,7 @@ public class UserRessource(
 ) {
     @PostMapping("/login")
     public fun login(@RequestBody loginDto: LoginDto): LoginResponseDto {
-        val user = userService.findUserByEmail(loginDto.email)
+        val user = userService.findUserByEmail(loginDto.email.lowercase())
             ?: throw LearnTrackAuthorizationException("Invalid login credentials")
 
         if (!passwordService.isPasswordMatchingHash(loginDto.password, user.password)) {
