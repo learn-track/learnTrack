@@ -30,11 +30,13 @@ public class UserService(
     public fun getAllAdminUsers(): List<UserDto> = userDao.fetchAllAdminUsers().map(::mapToDto)
 
     public fun createAdminUser(createUserDto: CreateUserDto) {
-        if (!isEmailValid(createUserDto.email)) {
+        val emailToLowerCase = createUserDto.email.trim().lowercase()
+
+        if (!isEmailValid(emailToLowerCase)) {
             throw LearnTrackConflictException("Invalid email")
         }
 
-        if (isEmailExisting(createUserDto.email)) {
+        if (isEmailExisting(emailToLowerCase)) {
             throw LearnTrackConflictException("Email already exists")
         }
 
@@ -43,7 +45,7 @@ public class UserService(
             firstName = createUserDto.firstname.trim(),
             middleName = createUserDto.middlename?.trim(),
             lastName = createUserDto.lastname.trim(),
-            eMail = createUserDto.email.trim(),
+            eMail = emailToLowerCase,
             password = passwordService.createPasswordHash(createUserDto.password),
             userRole = UserRole.ADMIN,
             birthdate = null,
