@@ -9,6 +9,7 @@ import ch.learntrack.backend.persistence.UserRole
 import ch.learntrack.backend.persistence.keys.PK_USER
 import ch.learntrack.backend.persistence.keys.T_USER_GRADE__FK_USER_GRADE_USER
 import ch.learntrack.backend.persistence.keys.T_USER_SCHOOL__FK_USER_SCHOOL_USER
+import ch.learntrack.backend.persistence.keys.USER_E_MAIL_ID
 import ch.learntrack.backend.persistence.tables.GradeTable.TGradePath
 import ch.learntrack.backend.persistence.tables.SchoolTable.TSchoolPath
 import ch.learntrack.backend.persistence.tables.UserGradeTable.TUserGradePath
@@ -19,6 +20,7 @@ import java.time.LocalDateTime
 import java.util.UUID
 
 import kotlin.collections.Collection
+import kotlin.collections.List
 
 import org.jooq.Condition
 import org.jooq.Field
@@ -164,6 +166,7 @@ public open class UserTable(
     }
     public override fun getSchema(): Schema? = if (aliased()) null else Public.PUBLIC
     public override fun getPrimaryKey(): UniqueKey<UserRecord> = PK_USER
+    public override fun getUniqueKeys(): List<UniqueKey<UserRecord>> = listOf(USER_E_MAIL_ID)
 
     private lateinit var _tUserGrade: TUserGradePath
 

@@ -23,7 +23,7 @@ class UserIntegrationTest: IntegrationTest() {
     fun setUp() {
         transactionManager.runInTransaction {
             userDao.insert(createUserFromTemplate())
-            userDao.insert(createUserFromTemplate(id = teacherUserId, userRole = UserRole.TEACHER))
+            userDao.insert(createUserFromTemplate(id = teacherUserId, eMail = "teacher@gmail.com", userRole = UserRole.TEACHER))
         }
     }
 

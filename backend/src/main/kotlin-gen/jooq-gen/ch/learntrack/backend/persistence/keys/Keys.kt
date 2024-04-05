@@ -32,6 +32,7 @@ public val PK_GRADE: UniqueKey<GradeRecord> = Internal.createUniqueKey(GradeTabl
 public val PK_SCHOOL: UniqueKey<SchoolRecord> = Internal.createUniqueKey(SchoolTable.SCHOOL, DSL.name("pk_school"), arrayOf(SchoolTable.SCHOOL.ID), true)
 public val PK_SUBJECT: UniqueKey<SubjectRecord> = Internal.createUniqueKey(SubjectTable.SUBJECT, DSL.name("pk_subject"), arrayOf(SubjectTable.SUBJECT.ID), true)
 public val PK_USER: UniqueKey<UserRecord> = Internal.createUniqueKey(UserTable.USER, DSL.name("pk_user"), arrayOf(UserTable.USER.ID), true)
+public val USER_E_MAIL_ID: UniqueKey<UserRecord> = Internal.createUniqueKey(UserTable.USER, DSL.name("user_e_mail_id"), arrayOf(UserTable.USER.E_MAIL), true)
 public val PK_USER_GRADE: UniqueKey<UserGradeRecord> = Internal.createUniqueKey(UserGradeTable.USER_GRADE, DSL.name("pk_user_grade"), arrayOf(UserGradeTable.USER_GRADE.USER_ID, UserGradeTable.USER_GRADE.GRADE_ID), true)
 public val PK_USER_SCHOOL: UniqueKey<UserSchoolRecord> = Internal.createUniqueKey(UserSchoolTable.USER_SCHOOL, DSL.name("pk_user_school"), arrayOf(UserSchoolTable.USER_SCHOOL.USER_ID, UserSchoolTable.USER_SCHOOL.SCHOOL_ID), true)
 
