@@ -19,6 +19,7 @@ public class UserService(
     public override fun mapToDto(pojo: User): UserDto = UserDto(
         id = pojo.id,
         firstname = pojo.firstName,
+        middlename = pojo.middleName,
         lastname = pojo.lastName,
         email = pojo.eMail,
         birthdate = pojo.birthdate,
@@ -28,7 +29,7 @@ public class UserService(
 
     public fun getAllAdminUsers(): List<UserDto> = userDao.fetchAllAdminUsers().map(::mapToDto)
 
-    public fun createUser(createUserDto: CreateUserDto) {
+    public fun createAdminUser(createUserDto: CreateUserDto) {
         if (!isEmailValid(createUserDto.email)) {
             throw LearnTrackConflictException("Invalid email")
         }

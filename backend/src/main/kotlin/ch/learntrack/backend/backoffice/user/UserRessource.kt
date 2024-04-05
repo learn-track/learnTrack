@@ -14,6 +14,6 @@ public class UserRessource(private val userService: UserService) {
 
     @PostMapping("/create")
     public fun createAdminUser(@RequestBody createUserDto: CreateUserDto) {
-        userService.createUser(createUserDto)
+        userService.createAdminUser(createUserDto)
     }
 }
