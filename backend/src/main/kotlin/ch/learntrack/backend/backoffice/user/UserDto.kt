@@ -1,4 +1,4 @@
-package ch.learntrack.backend.backoffice.user
+ package ch.learntrack.backend.backoffice.user
 
 import java.time.LocalDateTime
 import java.util.UUID
