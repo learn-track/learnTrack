@@ -17,10 +17,11 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.assertj.core.api.Assertions.assertThat
 
-private const val schoolNotAssigned = "eff58eb7-6214-468f-b7b4-2894d897dffb"
+private const val SCHOOL_NOT_ASSIGNED = "eff58eb7-6214-468f-b7b4-2894d897dffb"
+
 class WhoamiIntegrationTest: IntegrationTest() {
 
-    private val schoolNotAssignedId = UUID.fromString(schoolNotAssigned)
+    private val schoolNotAssignedId = UUID.fromString(SCHOOL_NOT_ASSIGNED)
     @BeforeEach
     fun seedDatabase() {
         transactionManager.runInTransaction {
