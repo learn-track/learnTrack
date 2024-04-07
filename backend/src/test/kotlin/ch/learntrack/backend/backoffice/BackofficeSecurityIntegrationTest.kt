@@ -34,4 +34,24 @@ class BackofficeSecurityIntegrationTest: IntegrationTest() {
             .expectStatus()
             .isOk
     }
+
+    @Test
+    fun `should not be able to access backoffice endpoint as school`() {
+        webClient.get()
+            .uri("/backoffice/school")
+            .exchange()
+            .expectStatus()
+            .isUnauthorized
+    }
+
+    @Test
+    fun `should be able to access backoffice school endpoint with correct credentials`() {
+        webClient.get()
+            .uri("/backoffice/school")
+            .setBasicAuthHeader(backendProperties)
+            .exchange()
+            .expectStatus()
+            .isOk
+    }
+
 }
