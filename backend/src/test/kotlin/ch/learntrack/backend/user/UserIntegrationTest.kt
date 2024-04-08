@@ -90,7 +90,7 @@ class UserIntegrationTest: IntegrationTest() {
     }
 
     @Test
-    fun `should return jws token even with uppercase email`() {
+    fun `should return jws token with uppercase login email`() {
         val loginDto = LoginDto(
                 email = "TESTUSER@GMAIL.COM",
                 password = "test",
