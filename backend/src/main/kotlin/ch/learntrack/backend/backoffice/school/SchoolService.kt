@@ -40,10 +40,9 @@ public class SchoolService(
         schoolDao.insert(school)
     }
 
-    private fun isSchoolExisting(createSchoolDto: CreateSchoolDto): Boolean = schoolDao.fetchAllSchools().any {
-        it.name.trim() == createSchoolDto.name.trim() &&
-                it.address.trim() == createSchoolDto.address.trim() &&
-                it.city.trim() == createSchoolDto.city.trim() &&
-                it.postcode == createSchoolDto.postcode
+    private fun isSchoolExisting(createSchoolDto: CreateSchoolDto): Boolean = schoolDao.fetchByName(
+        createSchoolDto.name.trim(),
+    ).any {
+        it.city.trim() == createSchoolDto.city.trim() && it.postcode == createSchoolDto.postcode
     }
 }

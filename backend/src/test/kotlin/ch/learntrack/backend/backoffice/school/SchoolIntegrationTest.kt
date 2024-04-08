@@ -15,10 +15,10 @@ import org.springframework.http.HttpStatus
 import org.springframework.web.reactive.function.BodyInserters
 import java.util.UUID
 
-private const val NEW_NAME_SCHOOL = "45ffeb7e-ce1c-46a2-8415-fe2b4196c12c"
+private const val ETH_SCHOOL = "45ffeb7e-ce1c-46a2-8415-fe2b4196c12c"
 
 class SchoolIntegrationTest: IntegrationTest() {
-    private val newNameSchoolId = UUID.fromString(NEW_NAME_SCHOOL)
+    private val newNameSchoolId = UUID.fromString(ETH_SCHOOL)
 
     @BeforeEach
     fun setUp() {
@@ -61,27 +61,27 @@ class SchoolIntegrationTest: IntegrationTest() {
 
     @Test
     fun `should be able to create a school`() {
-        val validSchoolDto = CreateSchoolDto("TEST_SCHOOL", "Teststrasse 214", "Zürich", 8405)
+        val schoolDto = CreateSchoolDto("TEST_SCHOOL", "Teststrasse 214", "Zürich", 8405)
 
         webClient.post()
             .uri("/backoffice/school/create")
-            .body(BodyInserters.fromValue(validSchoolDto))
+            .body(BodyInserters.fromValue(schoolDto))
             .setBasicAuthHeader(backendProperties)
             .exchange()
             .expectStatus()
             .isOk
 
-        val school = schoolDao.fetchOne(SCHOOL.NAME, validSchoolDto.name)
+        val school = schoolDao.fetchOne(SCHOOL.NAME, schoolDto.name)
 
         assertThat(school).isNotNull
-        assertThat(school?.name).isEqualTo(validSchoolDto.name)
-        assertThat(school?.address).isEqualTo(validSchoolDto.address)
-        assertThat(school?.city).isEqualTo(validSchoolDto.city)
-        assertThat(school?.postcode).isEqualTo(validSchoolDto.postcode)
+        assertThat(school?.name).isEqualTo(schoolDto.name)
+        assertThat(school?.address).isEqualTo(schoolDto.address)
+        assertThat(school?.city).isEqualTo(schoolDto.city)
+        assertThat(school?.postcode).isEqualTo(schoolDto.postcode)
     }
 
     @Test
-    fun `should throw exception if school already exists`() {
+    fun `should throw exception if all school parameters are the same`() {
         val schoolDtoExisting = CreateSchoolDto("Benedict", "Vulkanstrasse 106", "Zürich", 8048)
 
         webClient.post()
@@ -96,6 +96,26 @@ class SchoolIntegrationTest: IntegrationTest() {
 
         assertThat(school?.name).isEqualTo(schoolDtoExisting.name)
         assertThat(school?.address).isEqualTo(schoolDtoExisting.address)
+        assertThat(school?.city).isEqualTo(schoolDtoExisting.city)
+        assertThat(school?.postcode).isEqualTo(schoolDtoExisting.postcode)
+    }
+
+    @Test
+    fun `should throw exception if certain school parameters are the same`() {
+        val schoolDtoExisting = CreateSchoolDto("ETH", "Vulkanstrasse 112", "Zürich", 8048)
+
+        webClient.post()
+            .uri("/backoffice/school/create")
+            .body(BodyInserters.fromValue(schoolDtoExisting))
+            .setBasicAuthHeader(backendProperties)
+            .exchange()
+            .expectStatus()
+            .isEqualTo(HttpStatus.CONFLICT)
+
+        val school = schoolDao.fetchOne(SCHOOL.NAME, schoolDtoExisting.name)
+
+        assertThat(school?.name).isEqualTo(schoolDtoExisting.name)
+        assertThat(school?.address).isNotEqualTo(schoolDtoExisting.address)
         assertThat(school?.city).isEqualTo(schoolDtoExisting.city)
         assertThat(school?.postcode).isEqualTo(schoolDtoExisting.postcode)
     }
