@@ -166,7 +166,7 @@ class UserIntegrationTest: IntegrationTest() {
     }
 
     @Test
-    fun `should be able to create a user even if email is in upper case`() {
+    fun `should save uppercase email as lowercase on user creation`() {
         val validUser = CreateUserDto("John", "Doe", "test", "TESTLOWERCASE@GMAIL.COM", "test" )
 
         webClient.post()
@@ -179,6 +179,7 @@ class UserIntegrationTest: IntegrationTest() {
 
         val user = userDao.fetchOne(USER.E_MAIL, validUser.email.lowercase())
         assertThat(user).isNotNull
+        assertThat(user?.eMail).isEqualTo("testlowercase@gmail.com")
     }
 
 }
