@@ -36,7 +36,7 @@ class BackofficeSecurityIntegrationTest: IntegrationTest() {
     }
 
     @Test
-    fun `should not be able to access backoffice endpoint as school`() {
+    fun `should not be able to access backoffice school endpoint as normal user`() {
         webClient.get()
             .uri("/backoffice/school")
             .exchange()

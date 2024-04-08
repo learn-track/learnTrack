@@ -101,7 +101,7 @@ class UserIntegrationTest: IntegrationTest() {
         assertThat(user1?.middleName).isEqualTo(validUserDto1.middlename)
         assertThat(user1?.lastName).isEqualTo(validUserDto1.lastname)
         assertThat(user1?.password).isNotNull
-        assertThat(user1?.password).isNotSameAs(validUserDto1.password)
+        assertThat(user1?.password).isNotEqualTo(validUserDto1.password)
         assertThat(user1?.eMail).isEqualTo(validUserDto1.email)
     }
 
