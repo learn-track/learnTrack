@@ -17,7 +17,7 @@ kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect" }
 liquibase-core = { module = "org.liquibase:liquibase-core" }
 mockserver = { module = "org.testcontainers:mockserver" }
 mockserver-client-java = "org.mock-server:mockserver-client-java:5.15.0"
-mockito-kotlin = "org.mockito.kotlin:mockito-kotlin:5.2.1"
+mockito-kotlin = "org.mockito.kotlin:mockito-kotlin:5.3.1"
 spring-boot-configuration-processor = "org.springframework.boot:spring-boot-configuration-processor:3.2.4"
 spring-boot-dependencies = { module = "org.springframework.boot:spring-boot-dependencies", version.ref = "springboot" }
 spring-boot-starter-actuator = { module = "org.springframework.boot:spring-boot-starter-actuator" }
