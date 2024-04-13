@@ -21,7 +21,7 @@ jobs:
         run: echo "TAG=sha-${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
 
       - name: Set target branch to staging
-        if: github.event.inputs.TARGET == 'staging'
+        if: inputs.TARGET == 'staging'
         run: |
           echo "TARGET_BRANCH=staging" >> $GITHUB_ENV
 
@@ -55,7 +55,7 @@ jobs:
         run: echo "SHA=${GITHUB_SHA::7}" >> $GITHUB_OUTPUT
 
       - name: Set target url to staging
-        if: github.event.inputs.TARGET == 'staging'
+        if: inputs.TARGET == 'staging'
         run: |
           echo "TARGET_URL=https://staging.learntrack.ch/info" >> $GITHUB_ENV
 
