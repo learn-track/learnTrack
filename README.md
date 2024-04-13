@@ -19,11 +19,12 @@ The learnTrack Application is a digital learning platform. It is a school group 
 
 ## Deployment
 
-| Branch | Domain                     | Server        | Repo                                                 |
-|--------|----------------------------|---------------|------------------------------------------------------|
-| Master | http://learnup.brunner.top | 46.232.178.95 | https://github.com/learn-track/learnTrack-Deployment |
+| Branch | Domain                                                                      | Server        | Repo                                                              |
+|--------|-----------------------------------------------------------------------------|---------------|-------------------------------------------------------------------|
+| Master | https://testing.learntrack.ch                                               | 46.232.178.95 | https://github.com/learn-track/learnTrack-Deployment/tree/master  |
+| Master | https://staging.learntrack.ch <br> https://backoffice-staging.learntrack.ch | 5.45.111.246  | https://github.com/learn-track/learnTrack-Deployment/tree/staging |
 
-To get the currently deployed version got to: http://learnup.brunner.top/info
+To get the currently deployed version got to: https://testing.learntrack.ch/info
 
 ## Development
 

@@ -1,0 +1,113 @@
+name: deploy
+
+on:
+  workflow_call:
+
+jobs:
+  deploy_testing:
+    runs-on: ubuntu-latest
+    if: github.event_name != 'pull_request' && github.ref_type != 'tag'
+    steps:
+      - name: Generate tag
+        id: tag
+        run: echo "TAG=sha-${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
+
+      - name: Create version file
+        uses: finnp/create-file-action@master
+        env:
+          FILE_NAME: 'version'
+          FILE_DATA: 'LEARNTRACK_TAG=${{ steps.tag.outputs.TAG }}'
+
+      - name: Push version file
+        uses: dmnemec/copy_file_to_another_repo_action@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.LEARNTRACK_VERSION_BUMP }}
+        with:
+          source_file: 'version'
+          destination_repo: 'learn-track/learnTrack-Deployment'
+          destination_branch: master
+          user_email: 'nilsrothe05@icloud.com'
+          user_name: 'deepspace1000'
+          commit_message: 'Update learnTrack docker image version to the latest tag: ${{ steps.tag.outputs.TAG }}'
+
+  check_testing_environment:
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    if: github.event_name != 'pull_request' && github.ref_type != 'tag'
+    needs:
+      - deploy_testing
+    steps:
+      - name: Sleep for a minute to wait for deployment
+        run: sleep 60s
+        shell: bash
+
+      - uses: nick-fields/retry@v3
+        with:
+          timeout_minutes: 3
+          max_attempts: 10
+          retry_wait_seconds: 20
+          command: |
+            set -e
+            SHA_SHORT="${{ needs.check.outputs.sha_short }}"
+            ACTUAL_SHA_SHORT=$(curl -v --no-include https://testing.learntrack.ch/info | jq -r .git.commit.id)
+            echo "Waiting for $SHA_SHORT to be deployed. Currently: $ACTUAL_SHA_SHORT"
+            if [ "$ACTUAL_SHA_SHORT" = "$SHA_SHORT" ]; then
+              exit 0
+            else
+              exit 1
+            fi;    
+  
+
+  deploy_staging:
+    runs-on: ubuntu-latest
+    if: github.event_name != 'pull_request' && github.ref_type != 'tag'
+    needs: check_testing_environment
+    steps:
+      - name: Generate tag
+        id: tag
+        run: echo "TAG=sha-${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
+
+      - name: Create version file
+        uses: finnp/create-file-action@master
+        env:
+          FILE_NAME: 'version'
+          FILE_DATA: 'LEARNTRACK_TAG=${{ steps.tag.outputs.TAG }}'
+
+      - name: Push version file
+        uses: dmnemec/copy_file_to_another_repo_action@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.LEARNTRACK_VERSION_BUMP }}
+        with:
+          source_file: 'version'
+          destination_repo: 'learn-track/learnTrack-Deployment'
+          destination_branch: staging
+          user_email: 'nilsrothe05@icloud.com'
+          user_name: 'deepspace1000'
+          commit_message: 'Update learnTrack docker image version to the latest tag: ${{ steps.tag.outputs.TAG }}'
+
+  check_staging_environment:
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    if: github.event_name != 'pull_request' && github.ref_type != 'tag'
+    needs:
+      - deploy_staging
+    steps:
+      - name: Sleep for a minute to wait for deployment
+        run: sleep 60s
+        shell: bash
+
+      - uses: nick-fields/retry@v3
+        with:
+          timeout_minutes: 3
+          max_attempts: 10
+          retry_wait_seconds: 20
+          command: |
+            set -e
+            SHA_SHORT="${{ needs.check.outputs.sha_short }}"
+            ACTUAL_SHA_SHORT=$(curl -v --no-include https://staging.learntrack.ch/info | jq -r .git.commit.id)
+            echo "Waiting for $SHA_SHORT to be deployed. Currently: $ACTUAL_SHA_SHORT"
+            if [ "$ACTUAL_SHA_SHORT" = "$SHA_SHORT" ]; then
+              exit 0
+            else
+              exit 1
+            fi;
