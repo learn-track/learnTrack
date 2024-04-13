@@ -70,7 +70,7 @@ jobs:
           retry_wait_seconds: 20
           command: |
             set -e
-            SHA_SHORT="${{ needs.steps.sha.outputs.SHA }}"
+            SHA_SHORT="${{ steps.sha.outputs.SHA }}"
             ACTUAL_SHA_SHORT=$(curl -v --no-include ${{ env.TARGET_URL }} | jq -r .git.commit.id)
             echo "Waiting for $SHA_SHORT to be deployed. Currently: $ACTUAL_SHA_SHORT"
             if [ "$ACTUAL_SHA_SHORT" = "$SHA_SHORT" ]; then
