@@ -52,7 +52,7 @@ jobs:
     steps:
       - name: Generate sha
         id: sha
-        run: echo "SHA=$(git rev-parse --short=7 HEAD)" >> $GITHUB_OUTPUT
+        run: echo "SHA=${GITHUB_SHA::7}" >> $GITHUB_OUTPUT
 
       - name: Set target url to staging
         if: github.event.inputs.TARGET == 'staging'
