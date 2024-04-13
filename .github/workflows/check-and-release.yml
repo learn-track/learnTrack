@@ -160,10 +160,20 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
-  deploy:
-    if: github.event_name != 'pull_request'
+  deploy_testing:
+    if: github.event_name != 'pull_request' && github.ref_type != 'tag'
     needs:
       - build-backend
       - build-frontend
     uses: ./.github/workflows/deploy.yml
+    with:
+      TARGET: testing
+    secrets: inherit
+
+  deploy_staging:
+    if: github.event_name != 'pull_request' && github.ref_type != 'tag'
+    needs: deploy_testing
+    uses: ./.github/workflows/deploy.yml
+    with:
+      TARGET: staging
     secrets: inherit
