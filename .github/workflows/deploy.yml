@@ -50,6 +50,10 @@ jobs:
     needs:
       - deploy
     steps:
+      - name: Generate sha
+        id: sha
+        run: echo "SHA=$(git rev-parse --short=7 HEAD)" >> $GITHUB_OUTPUT
+
       - name: Set target url to staging
         if: github.event.inputs.TARGET == 'staging'
         run: |
@@ -66,7 +70,7 @@ jobs:
           retry_wait_seconds: 20
           command: |
             set -e
-            SHA_SHORT="${{ needs.check.outputs.sha_short }}"
+            SHA_SHORT="${{ needs.steps.sha.outputs.SHA }}"
             ACTUAL_SHA_SHORT=$(curl -v --no-include ${{ env.TARGET_URL }} | jq -r .git.commit.id)
             echo "Waiting for $SHA_SHORT to be deployed. Currently: $ACTUAL_SHA_SHORT"
             if [ "$ACTUAL_SHA_SHORT" = "$SHA_SHORT" ]; then
