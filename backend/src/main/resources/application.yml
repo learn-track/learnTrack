@@ -4,8 +4,6 @@ spring:
       mode: always
   jooq:
     sql-dialect: postgres
-  autoconfigure:
-    exclude: org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration
 
 learntrack:
   jwt:
@@ -18,9 +16,3 @@ management:
     web:
       exposure:
         include: "health,info"
-
-springdoc:
-  api-docs:
-    path: "/openapi/v3/api-docs"
-  swagger-ui:
-    url: "../openapi/v3/api-docs" # url is relative to /swagger-ui/index.html so it also works with the /api prefix
