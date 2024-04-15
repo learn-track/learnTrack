@@ -7,23 +7,16 @@ on:
         required: true
         type: string
 
-env:
-  TARGET_BRANCH: master
-  TARGET_URL: https://testing.learntrack.ch/info
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: ${{ inputs.TARGET }}
     if: github.event_name != 'pull_request'
     steps:
       - name: Generate tag
         id: tag
         run: echo "TAG=sha-${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
-
-      - name: Set target branch to staging
-        if: inputs.TARGET == 'staging'
-        run: |
-          echo "TARGET_BRANCH=staging" >> $GITHUB_ENV
 
       - name: Create version file
         uses: finnp/create-file-action@master
@@ -38,12 +31,14 @@ jobs:
         with:
           source_file: 'version'
           destination_repo: 'learn-track/learnTrack-Deployment'
-          destination_branch: ${{ env.TARGET_BRANCH }}
+          destination_branch: ${{ vars.TARGET_BRANCH }}
           user_email: 'nilsrothe05@icloud.com'
           user_name: 'deepspace1000'
           commit_message: 'Update learnTrack docker image version to the latest tag: ${{ steps.tag.outputs.TAG }}'
 
   check_environment:
+    environment:
+      name: ${{ inputs.TARGET }}
     timeout-minutes: 5
     runs-on: ubuntu-latest
     if: github.event_name != 'pull_request'
@@ -53,11 +48,6 @@ jobs:
       - name: Generate sha
         id: sha
         run: echo "SHA=${GITHUB_SHA::7}" >> $GITHUB_OUTPUT
-
-      - name: Set target url to staging
-        if: inputs.TARGET == 'staging'
-        run: |
-          echo "TARGET_URL=https://staging.learntrack.ch/info" >> $GITHUB_ENV
 
       - name: Sleep for a minute to wait for deployment
         run: sleep 60s
@@ -71,7 +61,7 @@ jobs:
           command: |
             set -e
             SHA_SHORT="${{ steps.sha.outputs.SHA }}"
-            ACTUAL_SHA_SHORT=$(curl -v --no-include ${{ env.TARGET_URL }} | jq -r .git.commit.id)
+            ACTUAL_SHA_SHORT=$(curl -v --no-include ${{ vars.TARGET_URL }} | jq -r .git.commit.id)
             echo "Waiting for $SHA_SHORT to be deployed. Currently: $ACTUAL_SHA_SHORT"
             if [ "$ACTUAL_SHA_SHORT" = "$SHA_SHORT" ]; then
               exit 0
