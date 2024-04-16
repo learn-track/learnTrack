@@ -12,11 +12,16 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: ${{ inputs.TARGET }}
+    timeout-minutes: 5
     if: github.event_name != 'pull_request'
     steps:
       - name: Generate tag
         id: tag
         run: echo "TAG=sha-${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
+
+      - name: Generate sha
+        id: sha
+        run: echo "SHA=${GITHUB_SHA::7}" >> $GITHUB_OUTPUT
 
       - name: Create version file
         uses: finnp/create-file-action@master
@@ -36,24 +41,12 @@ jobs:
           user_name: 'deepspace1000'
           commit_message: 'Update learnTrack docker image version to the latest tag: ${{ steps.tag.outputs.TAG }}'
 
-  check_environment:
-    environment:
-      name: ${{ inputs.TARGET }}
-    timeout-minutes: 5
-    runs-on: ubuntu-latest
-    if: github.event_name != 'pull_request'
-    needs:
-      - deploy
-    steps:
-      - name: Generate sha
-        id: sha
-        run: echo "SHA=${GITHUB_SHA::7}" >> $GITHUB_OUTPUT
-
       - name: Sleep for a minute to wait for deployment
         run: sleep 60s
         shell: bash
 
-      - uses: nick-fields/retry@v3
+      - name: check environment
+        uses: nick-fields/retry@v3
         with:
           timeout_minutes: 3
           max_attempts: 10
@@ -67,4 +60,4 @@ jobs:
               exit 0
             else
               exit 1
-            fi;    
+            fi;
