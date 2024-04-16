@@ -1515,13 +1515,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:^18.2.78":
-  version: 18.2.78
-  resolution: "@types/react@npm:18.2.78"
+"@types/react@npm:^18.2.79":
+  version: 18.2.79
+  resolution: "@types/react@npm:18.2.79"
   dependencies:
     "@types/prop-types": "npm:*"
     csstype: "npm:^3.0.2"
-  checksum: 5eb8e1dd98c29aeddf40b90f466d1a9ce83b113d42a096633d632b834e7ae9821f24ba7999928de9d98cca37764532a7ea35355a8103a377d8baa750f1841b5c
+  checksum: c8a8a005d8830a48cc1ef93c3510c4935a2a03e5557dbecaa8f1038450cbfcb18eb206fa7fba7077d54b8da21faeb25577e897a333392770a7797f625b62c78a
   languageName: node
   linkType: hard
 
@@ -3743,7 +3743,7 @@ __metadata:
     "@mui/icons-material": "npm:^5.15.15"
     "@mui/joy": "npm:^5.0.0-beta.32"
     "@mui/material": "npm:^5.15.15"
-    "@types/react": "npm:^18.2.78"
+    "@types/react": "npm:^18.2.79"
     "@types/react-dom": "npm:^18.2.25"
     "@typescript-eslint/eslint-plugin": "npm:^7.7.0"
     "@typescript-eslint/parser": "npm:^7.7.0"
@@ -3762,7 +3762,7 @@ __metadata:
     react-query: "npm:^3.39.3"
     react-router-dom: "npm:^6.22.3"
     typescript: "npm:^5.4.5"
-    vite: "npm:^5.2.8"
+    vite: "npm:^5.2.9"
     vite-plugin-svgr: "npm:^4.2.0"
   languageName: unknown
   linkType: soft
@@ -5314,9 +5314,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^5.2.8":
-  version: 5.2.8
-  resolution: "vite@npm:5.2.8"
+"vite@npm:^5.2.9":
+  version: 5.2.9
+  resolution: "vite@npm:5.2.9"
   dependencies:
     esbuild: "npm:^0.20.1"
     fsevents: "npm:~2.3.3"
@@ -5350,7 +5350,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: b5717bb00c2570c08ff6d8ed917655e79184efcafa9dd62d52eea19c5d6dfc5a708ec3de9ebc670a7165fc5d401c2bdf1563bb39e2748d8e51e1593d286a9a13
+  checksum: 2bf8faa7ae84d5fffabc28b2b2462128a839b8a7ce6d4dde1794975c8c896443df49a54ef95ad8f0326457648426fd9317a618479ef28049cb195d91985729ed
   languageName: node
   linkType: hard
 
