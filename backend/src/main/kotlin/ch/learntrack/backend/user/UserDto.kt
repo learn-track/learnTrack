@@ -22,3 +22,11 @@ public data class LoginDto(
 public data class LoginResponseDto(
     val token: String,
 )
+
+public data class CreateUserDto(
+    val firstname: String,
+    val middlename: String?,
+    val lastname: String,
+    val email: String,
+    val password: String,
+)
