@@ -1,7 +1,7 @@
 [versions]
 kotlin = "1.9.23"
 spring = "6.1.6"
-springboot = "3.2.4"
+springboot = "3.2.5"
 springdoc = "2.5.0"
 
 [libraries]
@@ -18,7 +18,7 @@ liquibase-core = { module = "org.liquibase:liquibase-core" }
 mockserver = { module = "org.testcontainers:mockserver" }
 mockserver-client-java = "org.mock-server:mockserver-client-java:5.15.0"
 mockito-kotlin = "org.mockito.kotlin:mockito-kotlin:5.3.1"
-spring-boot-configuration-processor = "org.springframework.boot:spring-boot-configuration-processor:3.2.4"
+spring-boot-configuration-processor = "org.springframework.boot:spring-boot-configuration-processor:3.2.5"
 spring-boot-dependencies = { module = "org.springframework.boot:spring-boot-dependencies", version.ref = "springboot" }
 spring-boot-starter-actuator = { module = "org.springframework.boot:spring-boot-starter-actuator" }
 spring-boot-starter-jooq = { module = "org.springframework.boot:spring-boot-starter-jooq" }
@@ -48,6 +48,6 @@ kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-plugin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin" }
 springframework-boot = { id = "org.springframework.boot", version.ref = "springboot" }
 version-catalog-update = "nl.littlerobots.version-catalog-update:0.8.4"
-sonarqube = "org.sonarqube: 4.3.1.3277"
+sonarqube = "org.sonarqube: 3.5.0.2730"
 versions = "com.github.ben-manes.versions:0.51.0"
 gitproperties = "com.gorylenko.gradle-git-properties:2.4.1"
