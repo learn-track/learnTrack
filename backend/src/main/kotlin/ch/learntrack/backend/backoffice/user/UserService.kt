@@ -10,7 +10,7 @@ import ch.learntrack.backend.security.PasswordService
 import java.time.LocalDateTime
 import java.util.UUID
 
-private const val EMAIL_REGEX = """^[\w-.]+@([\w-]+\.)+[\w-]{2,4}${'$'}"""
+private const val EMAIL_REGEX = """^[\w-.]+@([\w-]+\.)+[\w-]{2,}${'$'}"""
 
 public class UserService(
     private val userDao: UserDao,

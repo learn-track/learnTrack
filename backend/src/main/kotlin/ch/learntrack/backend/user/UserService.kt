@@ -13,14 +13,14 @@ import java.time.LocalDateTime
 import java.util.UUID
 
 // Regular expression for email validation. It checks if the input is in the format of an email.
-private const val EMAIL_REGEX = """^[\w-.]+@([\w-]+\.)+[\w-]{2,4}${'$'}"""
+private const val EMAIL_REGEX = """^[\w-.]+@([\w-]+\.)+[\w-]{2,}${'$'}"""
 
 // Regular expression for password validation. It checks if the password contains at least one digit,
 // one uppercase letter, one lowercase letter, one special character, and is at least 8 characters long.
 private const val PASSWORD_REGEX = """^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){8,}${'$'}"""
 
 // Regular expression to match HTML entities
-private const val HTML_ENTITY_REGEX = """"&[^;]+;"""
+private const val HTML_ENTITY_REGEX = """"&[a-z]+;"""
 
 public class UserService(
     private val userDao: UserDao,
@@ -78,7 +78,6 @@ public class UserService(
     private fun isPasswordValid(password: String): Boolean = PASSWORD_REGEX.toRegex().containsMatchIn(password)
 
     private fun sanitizeInputString(input: String): String = StringEscapeUtils.escapeHtml4(
-        StringEscapeUtils.escapeEcmaScript(input.replace("'", "''")),
+        StringEscapeUtils.escapeEcmaScript(input.replace("'", "''").replace(HTML_ENTITY_REGEX.toRegex(), " ")),
     )
-        .replace(HTML_ENTITY_REGEX.toRegex(), " ")
 }
