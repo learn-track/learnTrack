@@ -1,16 +1,16 @@
 package ch.learntrack.backend.backoffice.user
 
 import ch.learntrack.backend.common.EntityService
+import ch.learntrack.backend.common.LearnTrackBadRequestException
 import ch.learntrack.backend.common.LearnTrackConflictException
 import ch.learntrack.backend.persistence.UserRole
 import ch.learntrack.backend.persistence.tables.daos.UserDao
 import ch.learntrack.backend.persistence.tables.pojos.User
 import ch.learntrack.backend.persistence.tables.records.UserRecord
 import ch.learntrack.backend.security.PasswordService
+import ch.learntrack.backend.utils.isEmailValid
 import java.time.LocalDateTime
 import java.util.UUID
-
-private const val EMAIL_REGEX = """^[\w-.]+@([\w-]+\.)+[\w-]{2,}${'$'}"""
 
 public class UserService(
     private val userDao: UserDao,
@@ -32,8 +32,8 @@ public class UserService(
     public fun createAdminUser(createUserDto: CreateUserDto) {
         val emailLowerCase = createUserDto.email.trim().lowercase()
 
-        if (!isEmailValid(emailLowerCase)) {
-            throw LearnTrackConflictException("Invalid email $emailLowerCase")
+        if (!emailLowerCase.isEmailValid()) {
+            throw LearnTrackBadRequestException("Email $emailLowerCase is not valid")
         }
 
         if (isEmailExisting(emailLowerCase)) {
@@ -54,8 +54,6 @@ public class UserService(
         )
         userDao.insert(user)
     }
-
-    private fun isEmailValid(email: String): Boolean = EMAIL_REGEX.toRegex().containsMatchIn(email)
 
     private fun isEmailExisting(email: String): Boolean = userDao.fetchByEMail(email).isNotEmpty()
 }

@@ -115,7 +115,7 @@ class UserIntegrationTest: IntegrationTest() {
                 .setBasicAuthHeader(backendProperties)
                 .exchange()
                 .expectStatus()
-                .isEqualTo(HttpStatus.CONFLICT)
+                .isEqualTo(HttpStatus.BAD_REQUEST)
 
         val user = userDao.fetchOne(USER.E_MAIL, userDtoInvalidEmail.email)
 
@@ -129,7 +129,7 @@ class UserIntegrationTest: IntegrationTest() {
                 .setBasicAuthHeader(backendProperties)
                 .exchange()
                 .expectStatus()
-                .isEqualTo(HttpStatus.CONFLICT)
+                .isEqualTo(HttpStatus.BAD_REQUEST)
 
         val userDtoInvalidEmail2 = CreateUserDto("John", "Doe", "test", "test.edu@gmail.", "test" )
 
@@ -139,7 +139,7 @@ class UserIntegrationTest: IntegrationTest() {
                 .setBasicAuthHeader(backendProperties)
                 .exchange()
                 .expectStatus()
-                .isEqualTo(HttpStatus.CONFLICT)
+                .isEqualTo(HttpStatus.BAD_REQUEST)
 
         val userDtoInvalidEmail3 = CreateUserDto("John", "Doe", "test", "testedu@gmailcom", "test" )
 
@@ -149,7 +149,7 @@ class UserIntegrationTest: IntegrationTest() {
                 .setBasicAuthHeader(backendProperties)
                 .exchange()
                 .expectStatus()
-                .isEqualTo(HttpStatus.CONFLICT)
+                .isEqualTo(HttpStatus.BAD_REQUEST)
     }
 
     @Test
