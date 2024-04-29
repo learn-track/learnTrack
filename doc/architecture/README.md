@@ -3,15 +3,14 @@ Architecture documentation based on [arc42](https://www.innoq.com/en/blog/brief-
 
 ## Introduction / Goals
 
-The learnTrack is a digital learning platform and a project for the Modul 345
+The learnTrack is a LMS (Learn Management System) for swiss schools.
 
 ### Quality Goals
 
 The main quality goals of this project include:
 
 - Secure Login
-- Easy to use for teachers and students
-- 
+- Easy to use for teachers, students and principals
 
 ## Constraints
 
@@ -116,5 +115,5 @@ in the future.
 
 | Term | Description             |
 |------|-------------------------|
-| term | description of the term |
+| LMS  | Learn Management System |
 

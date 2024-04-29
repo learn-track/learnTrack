@@ -13,7 +13,7 @@ Frontend:
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=learntrack_frontend&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=learntrack_frontend)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=learntrack_frontend&metric=bugs)](https://sonarcloud.io/summary/new_code?id=learntrack_frontend)
 
-The learnTrack Application is a digital learning platform. It is a school group project fot the Modul 345 
+The learnTrack Application is a LMS for swiss schools.  
 - [Documentation](./doc/architecture/README.md)
 - [Jira](https://learntrack.atlassian.net/jira/software/projects/LERN/boards/2/backlog)
 

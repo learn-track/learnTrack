@@ -50,5 +50,18 @@ echo
 
 popd > /dev/null || exit
 
+echo "⚙️ Configuring testcontainers for reuse"
+file_path=~/.testcontainer.properties
+line_to_add="testcontainers.reuse.enable=true"
+if [ ! -e "$file_path" ]; then
+  touch "$file_path"
+fi
+if ! grep -qF "$line_to_add" "$file_path"; then
+  echo "$line_to_add" >>"$file_path"
+  echo " 👉 testcontainers will now be reused"
+else
+  echo " 👉 testcontainers reuse already configured"
+fi
+
 echo "🎉 Setup complete, happy hacking!"
 echo
