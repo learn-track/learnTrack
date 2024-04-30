@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.web.reactive.function.BodyInserters
 
+
 class UserIntegrationTest: IntegrationTest() {
     @BeforeEach
     fun seedDatabase() {

@@ -21,4 +21,10 @@ public class LearnTrackExceptionHandler : ResponseEntityExceptionHandler() {
         ex: LearnTrackConflictException,
         request: WebRequest,
     ): ResponseEntity<Any>? = handleExceptionInternal(ex, ex.message, HttpHeaders(), HttpStatus.CONFLICT, request)
+
+    @ExceptionHandler(LearnTrackBadRequestException::class)
+    public fun handleBadRequest(
+        ex: LearnTrackBadRequestException,
+        request: WebRequest,
+    ): ResponseEntity<Any>? = handleExceptionInternal(ex, ex.message, HttpHeaders(), HttpStatus.BAD_REQUEST, request)
 }

@@ -29,6 +29,15 @@ public class UserRessource(
         )
     }
 
+    @PostMapping("/register")
+    public fun register(@RequestBody createUserDto: CreateUserDto): LoginResponseDto {
+        val user = userService.createUser(createUserDto)
+
+        return LoginResponseDto(
+            token = tokenService.createJwtToken(user.id),
+        )
+    }
+
     @GetMapping("/test")
     public fun test(): String = "test string from backend"
 }

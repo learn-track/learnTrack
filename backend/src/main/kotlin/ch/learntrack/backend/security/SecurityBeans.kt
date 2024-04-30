@@ -12,6 +12,7 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 
 private const val MATCH_EVERYTHING = "/**"
 private const val LOGIN_PATH = "/user/login"
+private const val REGISTER_PATH = "/user/register"
 private const val PATH_OPENAPI = "/openapi/*/api-docs"
 private const val PATH_SWAGGER = "/swagger-ui/*"
 private const val PATH_HEALTH = "/actuator/health"
@@ -34,6 +35,7 @@ public val securityBeans: BeanDefinitionDsl = beans {
                 authorize(PATH_OPENAPI, permitAll)
                 authorize(PATH_SWAGGER, permitAll)
                 authorize(LOGIN_PATH, permitAll)
+                authorize(REGISTER_PATH, permitAll)
                 authorize(PATH_HEALTH, permitAll)
                 authorize(PATH_INFO, permitAll)
                 authorize(MATCH_EVERYTHING, authenticated)
