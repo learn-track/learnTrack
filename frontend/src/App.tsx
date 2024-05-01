@@ -3,6 +3,7 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import { Header } from './components/Header.tsx';
 import { LandingPage } from './pages/LandingPage.tsx';
 import { LoginPage } from './pages/LoginPage.tsx';
+import {RegisterPage} from "./pages/RegisterPage.tsx";
 
 export function App() {
   const Wrapper = styled('div')`
@@ -20,6 +21,7 @@ export function App() {
       <Routes>
         <Route path={'/'} element={<LandingPage />} />
         <Route path={'/login'} element={<LoginPage />} />
+        <Route path={'/register'} element={<RegisterPage />} />
       </Routes>
     </Wrapper>
   );

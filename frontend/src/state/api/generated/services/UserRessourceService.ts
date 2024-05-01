@@ -8,6 +8,7 @@ import { request as __request } from '../core/request';
 import type { CreateUserDto } from '../models/CreateUserDto';
 import type { LoginDto } from '../models/LoginDto';
 import type { LoginResponseDto } from '../models/LoginResponseDto';
+import type { UserDto } from '../models/UserDto';
 export class UserRessourceService {
   /**
    * @param requestBody
@@ -36,6 +37,19 @@ export class UserRessourceService {
     });
   }
   /**
+   * @param requestBody
+   * @returns any OK
+   * @throws ApiError
+   */
+  public static createAdminUser(requestBody: CreateUserDto): CancelablePromise<any> {
+    return __request(OpenAPI, {
+      method: 'POST',
+      url: '/backoffice/user/create',
+      body: requestBody,
+      mediaType: 'application/json',
+    });
+  }
+  /**
    * @returns string OK
    * @throws ApiError
    */
@@ -43,6 +57,16 @@ export class UserRessourceService {
     return __request(OpenAPI, {
       method: 'GET',
       url: '/user/test',
+    });
+  }
+  /**
+   * @returns UserDto OK
+   * @throws ApiError
+   */
+  public static getAllAdminUsers(): CancelablePromise<Array<UserDto>> {
+    return __request(OpenAPI, {
+      method: 'GET',
+      url: '/backoffice/user',
     });
   }
 }
