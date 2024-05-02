@@ -3841,6 +3841,7 @@ __metadata:
     prettier-plugin-organize-imports: "npm:^3.2.4"
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
+    react-hook-form: "npm:^7.51.3"
     react-query: "npm:^3.39.3"
     react-router-dom: "npm:^6.23.1"
     typescript: "npm:^5.4.5"
@@ -4554,6 +4555,15 @@ __metadata:
   peerDependencies:
     react: ^18.3.1
   checksum: a752496c1941f958f2e8ac56239172296fcddce1365ce45222d04a1947e0cc5547df3e8447f855a81d6d39f008d7c32eab43db3712077f09e3f67c4874973e85
+  languageName: node
+  linkType: hard
+
+"react-hook-form@npm:^7.51.3":
+  version: 7.51.3
+  resolution: "react-hook-form@npm:7.51.3"
+  peerDependencies:
+    react: ^16.8.0 || ^17 || ^18
+  checksum: dd7dfc8514df19a13b7647b3faebdcb1329723afb52454626496eeaa657323d42bab12dc85e6b77d758a166c6427fa87f13c5bd9f5f78666c682e8263117e297
   languageName: node
   linkType: hard
 
