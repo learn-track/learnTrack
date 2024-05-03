@@ -13,10 +13,25 @@ import ch.learntrack.backend.whoami.whoamiBeans
 import io.swagger.v3.oas.models.OpenAPI
 import io.swagger.v3.oas.models.media.Schema
 import org.springdoc.core.customizers.OpenApiCustomizer
+import org.springdoc.core.models.GroupedOpenApi
 import org.springframework.context.support.BeanDefinitionDsl
 import org.springframework.context.support.beans
 
 private val libraryBeans = beans {
+    bean {
+        GroupedOpenApi.builder()
+            .group("learntrack-api")
+            .pathsToMatch("/**")
+            .build()
+    }
+    bean {
+        GroupedOpenApi.builder()
+            .group("learntrack-frontend-api")
+            .pathsToMatch("/**")
+            .pathsToExclude("/backoffice/**")
+            .addOpenApiCustomizer(ref<OpenApiCustomizer>())
+            .build()
+    }
     bean {
         OpenApiCustomizer { openApi: OpenAPI ->
             // Mark nullable types as such in the OpenAPI spec to improve the generated TypeScript types

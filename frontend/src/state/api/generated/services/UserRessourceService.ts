@@ -5,9 +5,23 @@
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
+import type { CreateUserDto } from '../models/CreateUserDto';
 import type { LoginDto } from '../models/LoginDto';
 import type { LoginResponseDto } from '../models/LoginResponseDto';
 export class UserRessourceService {
+  /**
+   * @param requestBody
+   * @returns LoginResponseDto OK
+   * @throws ApiError
+   */
+  public static register(requestBody: CreateUserDto): CancelablePromise<LoginResponseDto> {
+    return __request(OpenAPI, {
+      method: 'POST',
+      url: '/user/register',
+      body: requestBody,
+      mediaType: 'application/json',
+    });
+  }
   /**
    * @param requestBody
    * @returns LoginResponseDto OK

@@ -7,8 +7,10 @@ on:
 
 jobs:
   clean-ghcr:
+    timeout-minutes: 5
     name: Delete old unused container images
     runs-on: ubuntu-latest
+
     steps:
       - uses: snok/container-retention-policy@v2.2.1
         with:

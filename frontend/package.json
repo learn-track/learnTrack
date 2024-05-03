@@ -11,7 +11,7 @@
     "format:check": "prettier --check .",
     "lint": "yarn eslint . --fix",
     "lint:check": "eslint . --max-warnings 0",
-    "generate-api-client": "openapi -i http://localhost:8080/openapi/v3/api-docs -o src/state/api/generated --useUnionTypes -c axios && prettier --write src/state/api/generated"
+    "generate-api": "openapi -i http://localhost:8080/openapi/v3/api-docs/learntrack-frontend-api -o src/state/api/generated --useUnionTypes -c axios && prettier --write src/state/api/generated"
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",

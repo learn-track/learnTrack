@@ -16,12 +16,29 @@ permissions:
   packages: write
 
 jobs:
+  check:
+    timeout-minutes: 2
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: .
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Lint commit messages
+        env:
+          FROM_REF: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event.before }}
+          TO_REF: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.event.after }}
+        run: git log --format=%s ${{ env.FROM_REF }}..${{ env.TO_REF }} | xargs -I {} ./tools/lint-commit.sh {}
+
   build-backend:
     timeout-minutes: 15
     env:
       IMAGE_NAME: learn-track/learntrack-backend
     runs-on: ubuntu-latest
-
     defaults:
       run:
         working-directory: ./backend
@@ -96,6 +113,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
 
   build-frontend:
+    timeout-minutes: 15
     runs-on: ubuntu-latest
     env:
       IMAGE_NAME: learn-track/learntrack-frontend
