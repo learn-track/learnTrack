@@ -81,7 +81,7 @@ To generate the jooq classes run `(cd backend && ./gradlew generateJooq)`.
 
 ### Open API
 
-The backend exposes an [OpenAPI definition](http://localhost:8080/openapi/v3/api-docs) and the according [Swagger UI](http://localhost:3005/api/swagger-ui/index.html) for its API.
+The backend exposes an [OpenAPI definition](http://localhost:8080/openapi/v3/api-docs/learntrack-api) and the according [Swagger UI](http://localhost:3005/api/swagger-ui/index.html) for its API.
 
 Generate API client for the frontend:
 ```shell

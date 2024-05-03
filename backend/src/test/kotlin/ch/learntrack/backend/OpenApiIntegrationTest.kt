@@ -15,7 +15,7 @@ class OpenApiIntegrationTest : IntegrationTest() {
     @Test
     fun `should generate open api spec`() {
         webClient.get()
-            .uri("/openapi/v3/api-docs")
+            .uri("/openapi/v3/api-docs/learntrack-api")
             .exchange()
             .expectStatus()
             .isOk()

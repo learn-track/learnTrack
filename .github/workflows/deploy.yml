@@ -9,11 +9,12 @@ on:
 
 jobs:
   deploy:
+    timeout-minutes: 5
     runs-on: ubuntu-latest
     environment:
       name: ${{ inputs.TARGET }}
-    timeout-minutes: 5
     if: github.event_name != 'pull_request'
+
     steps:
       - name: Generate tag
         id: tag
