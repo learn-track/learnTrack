@@ -20,5 +20,12 @@ services:
       - ./stacks:/appsmith-stacks
     restart: unless-stopped
 
+  learntrack-mailcrab:
+    image: docker.io/marlonb/mailcrab:latest
+    ports:
+      - 1090:1080
+      - 1030:1025
+    restart: unless-stopped
+
 volumes:
   postgres_data:

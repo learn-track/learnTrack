@@ -112,6 +112,12 @@ When the API changes are deployed pull the backoffice on the server.
 11. When asked for Datasource credentials. Enter the credentials found in the [application-dev.yml](./backend/src/main/resources/application-dev.yml)
     - URL: http://host.docker.internal:8080/backoffice
 
+### E-Mail
+
+Locally send mails are received by a [mail crab](https://github.com/tweedegolf/mailcrab) container instance.
+
+You can find the mailbox under: http://localhost:1090.
+
 ### Tutorials
 
 If you have questions [see](./doc/tutorials) for some basic workflows.

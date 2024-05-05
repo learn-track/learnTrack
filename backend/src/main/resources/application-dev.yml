@@ -13,6 +13,9 @@ spring:
       lifecycle-management: start_only
       file: backend/docker-compose.yml
       enabled: true
+  mail:
+    host: localhost
+    port: 1030
 
 springdoc:
   api-docs:
@@ -26,3 +29,6 @@ learntrack:
   backoffice:
     username: james-kirk
     password: NCC-1701
+  mailService:
+    senderMailAddress: support-local@learntrack.ch
+    senderName: LearnTrack Support Local

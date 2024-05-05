@@ -42,6 +42,7 @@ dependencies {
 	implementation(libs.spring.boot.starter.actuator)
 	implementation(libs.spring.boot.starter.jooq)
 	implementation(libs.spring.boot.starter.security)
+	implementation(libs.spring.boot.starter.mail)
 	implementation(libs.liquibase.core)
 	implementation(libs.spring.boot.starter.web)
 	implementation(libs.jackson.module.kotlin)

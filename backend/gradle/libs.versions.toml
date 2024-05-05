@@ -25,6 +25,7 @@ spring-boot-starter-jooq = { module = "org.springframework.boot:spring-boot-star
 spring-boot-starter-security = { module = "org.springframework.boot:spring-boot-starter-security" }
 spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
 spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" }
+spring-boot-starter-mail = { module = "org.springframework.boot:spring-boot-starter-mail" }
 spring-framework-bom = { module = "org.springframework:spring-framework-bom", version.ref = "spring" }
 spring-security-test = { module = "org.springframework.security:spring-security-test" }
 spring-webflux = { module = "org.springframework:spring-webflux" }

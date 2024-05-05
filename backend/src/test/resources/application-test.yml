@@ -1,9 +1,17 @@
+spring:
+  mail:
+    host: ${MAIL_HOST}
+    port: ${MAIL_PORT}
+
 learntrack:
   jwt:
     key: f87f3c8cf30f902a5f906207108ba512b7ce51e53a098701700617ce47ddb06b
   backoffice:
     username: james-kirk
     password: NCC-1701
+  mailService:
+    senderMailAddress: support-test@learntrack.ch
+    senderName: LearnTrack Support Local
 
 springdoc:
   api-docs:

@@ -34,6 +34,10 @@ val mockServerContainer = MockServerContainer(
         .withTag("mockserver-${MockServerClient::class.java.getPackage().implementationVersion}"),
 )
 
+val smtpContainer = GenericContainer<Nothing>("reachfive/fake-smtp-server:latest").apply {
+    addExposedPorts(1_025, 1_080)
+}
+
 class BeansInitializer : ApplicationContextInitializer<GenericApplicationContext> {
     override fun initialize(ac: GenericApplicationContext) {
         TestPropertyValues.of(
@@ -92,7 +96,7 @@ class IntegrationTest {
         @BeforeAll
         @JvmStatic
         fun beforeAllStatic() {
-            Stream.of(postgresSqlContainer, mockServerContainer).parallel()
+            Stream.of(postgresSqlContainer, mockServerContainer, smtpContainer).parallel()
                 .forEach(GenericContainer<*>::start)
             setSystemProperties()
             mockServerClient = MockServerClient(mockServerContainer.host, mockServerContainer.serverPort)
@@ -107,5 +111,7 @@ class IntegrationTest {
 
 private fun setSystemProperties() {
     System.setProperty("MOCK_WEB_SERVER", mockServerContainer.endpoint)
+    System.setProperty("MAIL_HOST", smtpContainer.host)
+    System.setProperty("MAIL_PORT", smtpContainer.getMappedPort(1_025).toString())
 }
 
