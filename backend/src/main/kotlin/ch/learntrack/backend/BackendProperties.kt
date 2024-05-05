@@ -10,6 +10,8 @@ public data class BackendProperties @ConstructorBinding constructor(
     val jwt: JwtProperties,
     @NestedConfigurationProperty
     val backoffice: BackofficeProperties,
+    @NestedConfigurationProperty
+    val mailService: MailProperties,
 )
 
 public data class JwtProperties(
@@ -20,4 +22,9 @@ public data class JwtProperties(
 public data class BackofficeProperties(
     val username: String,
     val password: String,
+)
+
+public data class MailProperties(
+    val senderMailAddress: String,
+    val senderName: String,
 )
