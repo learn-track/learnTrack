@@ -90,7 +90,7 @@ export function LoginForm() {
               Passwort vergessen
             </Link>
           </LinkContainer>
-          <Button type={'submit'}>Anmelden</Button>
+          <SubmitButton type={'submit'}>Anmelden</SubmitButton>
         </Stack>
       </form>
 
@@ -124,4 +124,35 @@ const useLoginMutation = (email: string, password: string, onError: () => void) 
 
 const LinkContainer = styled('div')`
   width: 75%;
+`;
+
+const SubmitButton = styled(Button)`
+  &:hover {
+    background-color: #e191a1;
+    &::before {
+      height: 12px;
+    }
+
+    &::after {
+      height: 12px;
+    }
+  }
+
+  &::before {
+    transition: 0.3s;
+    content: '';
+    width: 2px;
+    height: 22px;
+    background: white;
+    margin-right: 30px;
+  }
+
+  &::after {
+    transition: 0.3s;
+    content: '';
+    width: 2px;
+    height: 22px;
+    background: white;
+    margin-left: 30px;
+  }
 `;

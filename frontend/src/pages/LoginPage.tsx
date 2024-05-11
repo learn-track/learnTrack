@@ -4,7 +4,7 @@ import CertificateIcon from '../assets/login/certificate-icon.svg?react';
 import GraduationHatIcon from '../assets/login/graduation-hat-icon.svg?react';
 import LearnImageIcon from '../assets/login/learn-image.svg?react';
 import { LoginForm } from '../components/LoginForm.tsx';
-import { Logo } from '../components/Logo.tsx';
+import { LogoLight } from '../components/LogoLight.tsx';
 
 export function LoginPage() {
   return (
@@ -35,7 +35,7 @@ export function LoginPage() {
       </Grid>
       <Grid xs={6.5}>
         <RightSide>
-          <Logo />
+          <LogoLight />
           <LearnImageIcon width={'85%'} />
           <Typography
             level="h2"
