@@ -3,6 +3,10 @@ import { extendTheme } from '@mui/joy/styles';
 const primaryColor = '#5EC2B7';
 
 export default extendTheme({
+  fontFamily: {
+    display: 'Montserrat',
+    body: 'Montserrat',
+  },
   colorSchemes: {
     light: {
       palette: {
@@ -40,37 +44,11 @@ export default extendTheme({
     JoyButton: {
       styleOverrides: {
         root: {
-          backgroundColor: '#5EC2B7',
           fontFamily: 'Montserrat, sans-serif',
           fontWeight: '300',
           fontSize: '18px',
           padding: '8px 20px',
           transition: '0.2s',
-          '&:hover': {
-            backgroundColor: '#E191A1',
-            '&::before': {
-              height: '12px',
-            },
-            '&::after': {
-              height: '12px',
-            },
-          },
-          '&::before': {
-            transition: '0.3s',
-            content: '""',
-            width: '2px',
-            height: '22px',
-            background: 'white',
-            marginRight: '30px',
-          },
-          '&::after': {
-            transition: '0.3s',
-            content: '""',
-            width: '2px',
-            height: '22px',
-            background: 'white',
-            marginLeft: '30px',
-          },
         },
       },
     },

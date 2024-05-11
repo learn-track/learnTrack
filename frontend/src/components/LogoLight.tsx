@@ -1,7 +1,7 @@
 import { styled, Typography } from '@mui/joy';
 import LearnTrackLogo from '../assets/logo.svg?react';
 
-export function Logo() {
+export function LogoLight() {
   return (
     <LogoContainer>
       <LearnTrackLogo width={'80px'} />

@@ -1545,7 +1545,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/query-core@npm:5.36.1":
+"@tanstack/query-core@npm:5.36.1, @tanstack/query-core@npm:^5.35.1":
   version: 5.36.1
   resolution: "@tanstack/query-core@npm:5.36.1"
   checksum: 53ba44c9934c99035122e586ae21bdc10a9978054d555f9608241c20b931c357eb60364e9d17adb1f30501494427bd63c00684923c8d08f41d41c5f346922d47
@@ -3692,6 +3692,32 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jotai-tanstack-query@npm:^0.8.5":
+  version: 0.8.5
+  resolution: "jotai-tanstack-query@npm:0.8.5"
+  peerDependencies:
+    "@tanstack/query-core": "*"
+    jotai: ">=2.0.0"
+    wonka: ^6.3.4
+  checksum: 761a9ed4b98b7c7899b11ffd94d29e1f3d8844b15f8c4175743e30a3ab99bd1ab672983c6b8b490c51fa166688c8f8575e9a9bf7b69be78c1a6dbc1907f1934a
+  languageName: node
+  linkType: hard
+
+"jotai@npm:^2.8.0":
+  version: 2.8.0
+  resolution: "jotai@npm:2.8.0"
+  peerDependencies:
+    "@types/react": ">=17.0.0"
+    react: ">=17.0.0"
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    react:
+      optional: true
+  checksum: 6b2f59749530478163e41b8b1260b99cdab533541a5b9b2dcd885f2ab440391c5ee7855d627cbe28e043b9bcd736d44837b4a8ab20a2761176bba92e623a284e
+  languageName: node
+  linkType: hard
+
 "js-tokens@npm:^3.0.0 || ^4.0.0, js-tokens@npm:^4.0.0":
   version: 4.0.0
   resolution: "js-tokens@npm:4.0.0"
@@ -3806,6 +3832,7 @@ __metadata:
     "@mui/icons-material": "npm:^5.15.18"
     "@mui/joy": "npm:^5.0.0-beta.36"
     "@mui/material": "npm:^5.15.18"
+    "@tanstack/query-core": "npm:^5.35.1"
     "@tanstack/react-query": "npm:^5.36.2"
     "@types/react": "npm:^18.3.2"
     "@types/react-dom": "npm:^18.3.0"
@@ -3818,6 +3845,8 @@ __metadata:
     eslint-plugin-react: "npm:^7.34.1"
     eslint-plugin-react-hooks: "npm:^4.6.2"
     eslint-plugin-react-refresh: "npm:^0.4.7"
+    jotai: "npm:^2.8.0"
+    jotai-tanstack-query: "npm:^0.8.5"
     openapi-typescript-codegen: "npm:^0.29.0"
     prettier: "npm:^3.2.5"
     prettier-plugin-organize-imports: "npm:^3.2.4"
@@ -3828,6 +3857,7 @@ __metadata:
     typescript: "npm:^5.4.5"
     vite: "npm:^5.2.11"
     vite-plugin-svgr: "npm:^4.2.0"
+    wonka: "npm:^6.3.4"
   languageName: unknown
   linkType: soft
 
@@ -5436,6 +5466,13 @@ __metadata:
   bin:
     node-which: bin/which.js
   checksum: 449fa5c44ed120ccecfe18c433296a4978a7583bf2391c50abce13f76878d2476defde04d0f79db8165bdf432853c1f8389d0485ca6e8ebce3bbcded513d5e6a
+  languageName: node
+  linkType: hard
+
+"wonka@npm:^6.3.4":
+  version: 6.3.4
+  resolution: "wonka@npm:6.3.4"
+  checksum: 77329eea673da07717476e1b8f1a22f1e1a4f261bb9a58fa446c03d3da13dbd5b254664f8aded5928d953f33ee5b399a17a4f70336e8b236e478209c0e78cda4
   languageName: node
   linkType: hard
 
