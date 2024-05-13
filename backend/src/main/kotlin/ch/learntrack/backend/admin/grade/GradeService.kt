@@ -1,10 +1,12 @@
 package ch.learntrack.backend.admin.grade
 
 import ch.learntrack.backend.common.EntityService
+import ch.learntrack.backend.common.LearnTrackConflictException
 import ch.learntrack.backend.grade.GradeDto
 import ch.learntrack.backend.persistence.tables.daos.GradeDao
 import ch.learntrack.backend.persistence.tables.pojos.Grade
 import ch.learntrack.backend.persistence.tables.records.GradeRecord
+import java.time.LocalDateTime
 import java.util.UUID
 
 public class GradeService(private val gradeDao: GradeDao) : EntityService<GradeDto, GradeRecord, Grade>(gradeDao) {
@@ -15,8 +17,8 @@ public class GradeService(private val gradeDao: GradeDao) : EntityService<GradeD
     )
 
     public fun createGrade(createGradeDto: CreateGradeDto): Grade {
-        if (gradeDao.fetchBySchoolId(createGradeDto.schoolId).any { it.name == createGradeDto.name.trim() }) {
-            throw IllegalArgumentException(
+        if (gradeDao.fetchBySchoolId(createGradeDto.schoolId).any { it.name.trim() == createGradeDto.name.trim() }) {
+            throw LearnTrackConflictException(
                 "Grade with name ${createGradeDto.name} already exists for school with id ${createGradeDto.schoolId}",
             )
         }
@@ -25,6 +27,8 @@ public class GradeService(private val gradeDao: GradeDao) : EntityService<GradeD
             id = UUID.randomUUID(),
             name = createGradeDto.name.trim(),
             schoolId = createGradeDto.schoolId,
+            created = LocalDateTime.now(),
+            updated = LocalDateTime.now(),
         )
 
         gradeDao.insert(grade)

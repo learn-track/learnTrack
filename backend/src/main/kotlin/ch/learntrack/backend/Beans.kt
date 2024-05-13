@@ -1,5 +1,6 @@
 package ch.learntrack.backend
 
+import ch.learntrack.backend.admin.adminBeans
 import ch.learntrack.backend.backoffice.backofficeBeans
 import ch.learntrack.backend.common.LearnTrackExceptionHandler
 import ch.learntrack.backend.email.emailBeans
@@ -66,4 +67,5 @@ public val beans: List<BeanDefinitionDsl> = listOf(
     schoolBeans,
     userSchoolBeans,
     userGradeBeans,
+    adminBeans,
 )
