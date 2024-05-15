@@ -7,7 +7,6 @@ export { CancelError, CancelablePromise } from './core/CancelablePromise';
 export { OpenAPI } from './core/OpenAPI';
 export type { OpenAPIConfig } from './core/OpenAPI';
 
-export type { CreateUserDto } from './models/CreateUserDto';
 export type { CreateSchoolDto } from './models/CreateSchoolDto';
 export type { CreateUserDto } from './models/CreateUserDto';
 export type { GradeDto } from './models/GradeDto';
