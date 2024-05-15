@@ -1,6 +1,6 @@
 import { ErrorOutline } from '@mui/icons-material';
 
-import { Button, FormControl, FormHelperText, FormLabel, Input, Snackbar, Typography, styled } from '@mui/joy';
+import { Button, FormControl, FormHelperText, FormLabel, Input, Snackbar, Tooltip, Typography, styled } from '@mui/joy';
 import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -81,23 +81,16 @@ export function RegisterForm() {
               <FormControl error={!!errors.password}>
                 <StyledFormLabel>Passwort: *</StyledFormLabel>
                 <Input {...register('password', { required: true })} type={'password'} placeholder={'****'} />
-                <FormHelperText>
-                  {errors.password?.type == 'required' && 'Passwort muss gesetzt sein'}
-                  {errors.password?.type == 'weak' && 'Passwort zu schwach'}
-                  {/*@Todo I would an info icon with a tooltip to this error where we can put in the specifications.
-                    <div style={{ gridColumn: 'span 2' }}>
-                      {errors.password?.type == 'weak' &&
-                        !showPasswordNotMatchError &&
-                        !errors.password &&
-                        !errors.confirmPassword && (
-                          <FormHelperText sx={{ color: 'danger' }}>
-                            Ihres Passwort muss mindesten 8 charaktere lang sein und muss Gross-/Kleinbuchstaben, Zahlen sowie
-                            Sonderzeichen beinhalten
-                          </FormHelperText>
-                        )}
-                    </div>
-                  */}
-                </FormHelperText>
+                {errors.password?.type == 'required' && <FormHelperText>Passwort muss gesetzt sein</FormHelperText>}
+                {errors.password?.type == 'weak' && (
+                  <Tooltip
+                    placement={'bottom-start'}
+                    color="danger"
+                    title="Ihres Passwort muss mindesten 8 charaktere lang sein und muss Gross-/Kleinbuchstaben, Zahlen sowie
+                            Sonderzeichen beinhalten">
+                    <FormHelperText>Passwort zu schwach</FormHelperText>
+                  </Tooltip>
+                )}
               </FormControl>
               <FormControl error={!!errors.confirmPassword}>
                 <StyledFormLabel>Passwort bestätigen: *</StyledFormLabel>
