@@ -1,0 +1,87 @@
+name: E2E Testing
+
+on:
+  workflow_dispatch:
+  workflow_call:
+
+jobs:
+  test-e2e-testing:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        shardIndex: [1, 2, 3]
+        shardTotal: [3]
+    defaults:
+      run:
+        working-directory: ./frontend
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: './frontend/.nvmrc'
+
+      - name: Install yarn dependencies
+        run: yarn
+
+      - name: Install Playwright Browsers
+        run: |
+          yarn playwright install --with-deps
+
+      - name: Run e2e test on testing system
+        run: yarn test:testing --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
+
+      - name: Upload blob report to GitHub Actions Artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: blob-report-testing-${{ matrix.shardIndex }}
+          path: ./frontend/blob-report
+          retention-days: 1
+
+  merge-reports-testing:
+    if: ${{ !cancelled() }}
+    needs: test-e2e-testing
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    defaults:
+      run:
+        working-directory: ./frontend
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: './frontend/.nvmrc'
+
+      - name: Download blob reports from GitHub Actions Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: frontend/all-blob-reports
+          pattern: blob-report-testing-*
+          merge-multiple: true
+
+      - name: Merge blob reports
+        env:
+          PLAYWRIGHT_JSON_OUTPUT_NAME: e2e-testing-results.json
+        run: yarn dlx playwright merge-reports --reporter html,json ./all-blob-reports
+
+      - name: Publish Playwright test results
+        uses: daun/playwright-report-summary@v3
+        if: always()
+        with:
+          report-file: ./frontend/e2e-testing-results.json
+          job-summary: true
+
+      - name: Upload HTML report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report-testing-e2e
+          path: ./frontend/playwright-report
+          retention-days: 7
+
+

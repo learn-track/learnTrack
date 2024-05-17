@@ -1,0 +1,16 @@
+version: '3'
+services:
+  backend-postgres:
+    image: postgres:16.2
+    environment:
+      - POSTGRES_PASSWORD=backend
+      - POSTGRES_USER=backend
+      - POSTGRES_DB=learntrack_backend
+    ports:
+      - 5517:5432
+
+  learntrack-mailcrab:
+    image: docker.io/marlonb/mailcrab:latest
+    ports:
+      - 1090:1080
+      - 1030:1025

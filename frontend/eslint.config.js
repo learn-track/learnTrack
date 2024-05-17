@@ -15,6 +15,8 @@ export default [
       'coverage',
       'sentry-upload-source-maps.js',
       '.yarn',
+      'playwright.config.ts',
+      'lostpixel.config.ts',
     ],
   },
   reactRecommended,

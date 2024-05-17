@@ -25,3 +25,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Playwright files
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/lost-pixel/
