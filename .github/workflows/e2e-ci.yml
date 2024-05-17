@@ -1,0 +1,175 @@
+name: E2E CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+permissions:
+  contents: write
+  pull-requests: write
+  actions: read
+
+jobs:
+  build-backend:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: ./backend
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21.0.2
+      - uses: gradle/actions/setup-gradle@v3
+
+      - name: Build backend
+        run: ./gradlew assemble --parallel
+
+      - name: Upload backend JAR to GitHub Actions Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: learntrack-backend
+          path: ./backend/build/libs/learnTrack.jar
+          retention-days: 1
+
+  test-e2e-ci:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        shardIndex: [1]
+        shardTotal: [1]
+    defaults:
+      run:
+        working-directory: .
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21.0.2
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: './frontend/.nvmrc'
+
+      - name: Setup dev environment
+        run: |
+          (
+            cd frontend/tests/resources
+            docker-compose up -d
+          ) &
+          (
+            cd frontend
+            yarn
+          ) &
+          wait
+
+      - name: Get current Playwright version
+        id: playwright-version
+        run: |
+          cd frontend
+          echo "PLAYWRIGHT_VERSION=$(node -e "console.log(require('playwright/package.json').version)")" >> $GITHUB_ENV
+
+      - name: Cache Playwright Browsers
+        id: cache-playwright-browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-browsers-chromium-${{ env.PLAYWRIGHT_VERSION }}
+
+      - name: Install Playwright Browsers
+        if: steps.cache-playwright-browsers.outputs.cache-hit != 'true'
+        run: |
+          cd frontend
+          yarn playwright install --with-deps chromium
+
+      - name: Wait for backend build
+        uses: NathanFirmo/wait-for-other-job@v1.1.1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          job: build-backend
+
+      - name: Download backend JAR from GitHub Actions Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: learntrack-backend
+
+      - name: Start backend
+        env:
+          SPRING_PROFILES_ACTIVE: dev
+          SPRING_DOCKER_COMPOSE_ENABLED: false
+        run: java -jar learnTrack.jar &
+
+      - name: Run Playwright E2E Tests
+        run: |
+          cd frontend
+          yarn test:ci --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
+
+      - name: Lost Pixel Visual Test
+        uses: lost-pixel/lost-pixel@v3.16.0
+        env:
+          LOST_PIXEL_CONFIG_DIR: ./frontend
+          LOST_PIXEL_API_KEY: ${{ secrets.LOST_PIXEL_API_KEY }}
+
+      - name: Upload blob report to GitHub Actions Artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: blob-report-ci-${{ matrix.shardIndex }}
+          path: ./frontend/blob-report
+          retention-days: 1
+
+      - name: Stop dev containers
+        if: always()
+        run: |
+          cd frontend/tests/resources
+          docker-compose down
+
+  merge-reports-ci:
+    if: ${{ !cancelled() }}
+    needs: test-e2e-ci
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    defaults:
+      run:
+        working-directory: ./frontend
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: './frontend/.nvmrc'
+
+      - name: Download blob reports from GitHub Actions Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: frontend/all-blob-reports
+          pattern: blob-report-ci-*
+          merge-multiple: true
+
+      - name: Merge blob reports
+        env:
+          PLAYWRIGHT_JSON_OUTPUT_NAME: e2e-ci-results.json
+        run: yarn dlx playwright merge-reports --reporter html,json ./all-blob-reports
+
+      - name: Publish Playwright test results
+        uses: daun/playwright-report-summary@v3
+        if: always()
+        with:
+          report-file: ./frontend/e2e-ci-results.json
+          job-summary: true
+
+      - name: Upload HTML report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report-ci-e2e
+          path: ./frontend/playwright-report
+          retention-days: 7

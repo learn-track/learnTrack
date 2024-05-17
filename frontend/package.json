@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "packageManager": "yarn@4.1.0",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -11,7 +12,9 @@
     "format:check": "prettier --check .",
     "lint": "yarn eslint . --fix",
     "lint:check": "eslint . --max-warnings 0",
-    "generate-api": "openapi -i http://localhost:8080/openapi/v3/api-docs/learntrack-frontend-api -o src/state/api/generated --useUnionTypes -c axios && prettier --write src/state/api/generated"
+    "generate-api": "openapi -i http://localhost:8080/openapi/v3/api-docs/learntrack-frontend-api -o src/state/api/generated --useUnionTypes -c axios && prettier --write src/state/api/generated",
+    "test:ci": "playwright test --project ci",
+    "test:testing": "playwright test --project testing-chrome --project testing-firefox --project testing-safari"
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",
@@ -31,6 +34,8 @@
     "wonka": "^6.3.4"
   },
   "devDependencies": {
+    "@playwright/test": "^1.44.0",
+    "@types/node": "^20.12.12",
     "@types/react": "^18.3.2",
     "@types/react-dom": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^7.9.0",
@@ -41,6 +46,7 @@
     "eslint-plugin-react": "^7.34.1",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.7",
+    "lost-pixel": "^3.16.0",
     "openapi-typescript-codegen": "^0.29.0",
     "prettier": "^3.2.5",
     "prettier-plugin-organize-imports": "^3.2.4",

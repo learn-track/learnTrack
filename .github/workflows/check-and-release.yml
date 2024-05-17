@@ -188,9 +188,16 @@ jobs:
       TARGET: testing
     secrets: inherit
 
+  e2e_testing:
+    if: github.event_name != 'pull_request' && github.ref_type != 'tag'
+    needs:
+      - deploy_testing
+    uses: ./.github/workflows/e2e-testing.yml
+    secrets: inherit
+
   deploy_staging:
     if: github.event_name != 'pull_request' && github.ref_type != 'tag'
-    needs: deploy_testing
+    needs: e2e_testing
     uses: ./.github/workflows/deploy.yml
     with:
       TARGET: staging

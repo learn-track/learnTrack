@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgres://localhost:5517/learntrack_backend
+    url: jdbc:postgresql://localhost:5517/learntrack_backend
     username: backend
     password: backend
   sql:
