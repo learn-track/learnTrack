@@ -1,6 +1,7 @@
 package ch.learntrack.backend.backoffice.school
 
 import ch.learntrack.backend.IntegrationTest
+import ch.learntrack.backend.backoffice.BACKOFFICE_ROOT_URL
 import ch.learntrack.backend.persistence.tables.references.SCHOOL
 import ch.learntrack.backend.utils.createSchoolFromTemplate
 import ch.learntrack.backend.utils.deleteAll
@@ -38,7 +39,7 @@ class SchoolIntegrationTest: IntegrationTest() {
     @Test
     fun `should get 401 with wrong credentials`() {
         webClient.get()
-            .uri("/backoffice/school")
+            .uri("$BACKOFFICE_ROOT_URL/school")
             .setBasicAuthHeader("wrong", "credentials")
             .exchange()
             .expectStatus()
@@ -48,7 +49,7 @@ class SchoolIntegrationTest: IntegrationTest() {
     @Test
     fun `should return a list with schools`() {
         val response = webClient.get()
-            .uri("/backoffice/school")
+            .uri("$BACKOFFICE_ROOT_URL/school")
             .setBasicAuthHeader(backendProperties)
             .exchange()
             .expectBodyList(SchoolDto::class.java)
@@ -64,7 +65,7 @@ class SchoolIntegrationTest: IntegrationTest() {
         val schoolDto = CreateSchoolDto("TEST_SCHOOL", "Teststrasse 214", "Zürich", 8405)
 
         webClient.post()
-            .uri("/backoffice/school/create")
+            .uri("$BACKOFFICE_ROOT_URL/school/create")
             .body(BodyInserters.fromValue(schoolDto))
             .setBasicAuthHeader(backendProperties)
             .exchange()
@@ -85,7 +86,7 @@ class SchoolIntegrationTest: IntegrationTest() {
         val schoolDtoExisting = CreateSchoolDto("Benedict", "Vulkanstrasse 106", "Zürich", 8048)
 
         webClient.post()
-            .uri("/backoffice/school/create")
+            .uri("$BACKOFFICE_ROOT_URL/school/create")
             .body(BodyInserters.fromValue(schoolDtoExisting))
             .setBasicAuthHeader(backendProperties)
             .exchange()
@@ -105,7 +106,7 @@ class SchoolIntegrationTest: IntegrationTest() {
         val schoolDtoExisting = CreateSchoolDto("ETH", "Vulkanstrasse 112", "Zürich", 8048)
 
         webClient.post()
-            .uri("/backoffice/school/create")
+            .uri("$BACKOFFICE_ROOT_URL/school/create")
             .body(BodyInserters.fromValue(schoolDtoExisting))
             .setBasicAuthHeader(backendProperties)
             .exchange()

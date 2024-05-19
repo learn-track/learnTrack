@@ -3,6 +3,7 @@ package ch.learntrack.backend.admin.grade
 import ch.learntrack.backend.common.EntityService
 import ch.learntrack.backend.common.LearnTrackConflictException
 import ch.learntrack.backend.grade.GradeDto
+import ch.learntrack.backend.persistence.fetchByNameAndSchoolId
 import ch.learntrack.backend.persistence.tables.daos.GradeDao
 import ch.learntrack.backend.persistence.tables.pojos.Grade
 import ch.learntrack.backend.persistence.tables.records.GradeRecord
@@ -17,9 +18,9 @@ public class GradeService(private val gradeDao: GradeDao) : EntityService<GradeD
     )
 
     public fun createGrade(createGradeDto: CreateGradeDto): Grade {
-        if (gradeDao.fetchBySchoolId(createGradeDto.schoolId).any { it.name.trim() == createGradeDto.name.trim() }) {
+        gradeDao.fetchByNameAndSchoolId(createGradeDto)?.let {
             throw LearnTrackConflictException(
-                "Grade with name ${createGradeDto.name} already exists for school with id ${createGradeDto.schoolId}",
+                "Grade ${createGradeDto.name} already exists for school ${createGradeDto.schoolId}",
             )
         }
 
