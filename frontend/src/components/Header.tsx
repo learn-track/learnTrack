@@ -16,11 +16,7 @@ export function Header() {
       <SideItems>
         <LogoDark />
       </SideItems>
-      <NavigationItems>
-        <HeaderLink to={'grades'}>Klassen</HeaderLink>
-        <HeaderLink to={'students'}>Schüler</HeaderLink>
-        <HeaderLink to={'teachers'}>Lehrer</HeaderLink>
-      </NavigationItems>
+      <NavigationItems>{whoami.user.userRole == 'ADMIN' && <AdminHeaderLinks />}</NavigationItems>
       <SideItems sx={{ justifyContent: 'center' }}>
         <Dropdown>
           <UserMenuButton>
@@ -29,7 +25,7 @@ export function Header() {
           <UserMenu>
             <UserDetails>
               <TopDescription>
-                <TopDescriptionTextWrapper>Logged in as</TopDescriptionTextWrapper>
+                <TopDescriptionTextWrapper>Angemeldet als</TopDescriptionTextWrapper>
 
                 <TopDescriptionEmailWrapper>{whoami.user.email}</TopDescriptionEmailWrapper>
               </TopDescription>
@@ -45,7 +41,7 @@ export function Header() {
 
             <MenuItem>
               <Button color={'danger'} variant="outlined" sx={{ minWidth: '100%' }} onClick={HandleLogout}>
-                Logout
+                Abmelden
               </Button>
             </MenuItem>
           </UserMenu>
@@ -55,6 +51,15 @@ export function Header() {
   );
 }
 
+function AdminHeaderLinks() {
+  return (
+    <>
+      <HeaderLink to={'grades'}>Klassen</HeaderLink>
+      <HeaderLink to={'students'}>Schüler</HeaderLink>
+      <HeaderLink to={'teachers'}>Lehrer</HeaderLink>
+    </>
+  );
+}
 function TeacherUserMenu() {
   return (
     <>
