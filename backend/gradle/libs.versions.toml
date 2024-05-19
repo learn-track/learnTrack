@@ -1,6 +1,6 @@
 [versions]
-kotlin = "1.9.23"
-spring = "6.1.6"
+kotlin = "1.9.24"
+spring = "6.1.7"
 springboot = "3.2.5"
 springdoc = "2.5.0"
 
@@ -31,7 +31,7 @@ spring-security-test = { module = "org.springframework.security:spring-security-
 spring-webflux = { module = "org.springframework:spring-webflux" }
 springdoc-openapi-kotlin = { module = "org.springdoc:springdoc-openapi-starter-common", version.ref = "springdoc" }
 springdoc-openapi-ui = { module = "org.springdoc:springdoc-openapi-starter-webmvc-ui", version.ref = "springdoc" }
-testcontainers-bom = "org.testcontainers:testcontainers-bom:1.19.7"
+testcontainers-bom = "org.testcontainers:testcontainers-bom:1.19.8"
 archunit = "com.tngtech.archunit:archunit-junit5:1.3.0"
 spring-boot-docker-compose = { module = "org.springframework.boot:spring-boot-docker-compose", version.ref = "springboot" }
 spring-boot-devtools = { module = "org.springframework.boot:spring-boot-devtools", version.ref = "springboot" }
