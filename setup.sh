@@ -47,6 +47,10 @@ echo "⚙️ Installing Yarn dependencies"
 yarn install
 echo
 
+echo "⚙️ Installing Playwright browsers"
+yarn playwright install --with-deps
+echo
+
 popd > /dev/null || exit
 
 echo "⚙️ Configuring testcontainers for reuse"

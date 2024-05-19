@@ -87,8 +87,31 @@ Generate API client for the frontend:
 ```shell
 # if necessary
 cd frontend
-yarn generate-api-client
+yarn generate-api
 ```
+
+### Testing
+
+We use Playwright for e2e test. To run the test the [backend](#backend) needs to be running.
+
+To execute the local tests run:
+
+```shell
+cd frontend
+yarn test:ci
+```
+
+To Run the test against the testing environment with different browsers run:
+
+```shell 
+cd frontend
+yarn test:testing
+```
+
+#### Troubleshooting
+
+If test fail which are dependent on data in the database reinitialise the database with the [DB seeds](backend/src/main/resources/db/seeds).
+
 
 ### Backoffice
 
