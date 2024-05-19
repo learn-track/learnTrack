@@ -15,6 +15,7 @@ echo "IS_FRONTEND_FOLDER_CHANGE --> $IS_FRONTEND_FOLDER_CHANGE"
 
 if [[ $IS_FRONTEND_FOLDER_CHANGE ]]; then
 pushd frontend
-yarn format:precommit
+yarn format:check
+yarn lint:check
 popd
 fi
