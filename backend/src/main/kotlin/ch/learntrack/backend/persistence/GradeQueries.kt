@@ -1,5 +1,6 @@
 package ch.learntrack.backend.persistence
 
+import ch.learntrack.backend.admin.grade.CreateGradeDto
 import ch.learntrack.backend.persistence.tables.daos.GradeDao
 import ch.learntrack.backend.persistence.tables.pojos.Grade
 import ch.learntrack.backend.persistence.tables.references.GRADE
@@ -18,3 +19,10 @@ public fun GradeDao.fetchGradesForUserByUserId(userId: UUID): MutableList<Grade>
     .where(USER.ID.eq(userId))
     .fetch()
     .into(Grade::class.java)
+
+public fun GradeDao.fetchByNameAndSchoolId(createGradeDto: CreateGradeDto): Grade? = ctx()
+    .select()
+    .from(GRADE)
+    .where(GRADE.SCHOOL_ID.eq(createGradeDto.schoolId))
+    .and(GRADE.NAME.eq(createGradeDto.name))
+    .fetchOneInto(Grade::class.java)

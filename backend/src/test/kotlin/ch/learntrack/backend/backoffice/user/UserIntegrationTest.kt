@@ -1,6 +1,7 @@
 package ch.learntrack.backend.backoffice.user
 
 import ch.learntrack.backend.IntegrationTest
+import ch.learntrack.backend.backoffice.BACKOFFICE_ROOT_URL
 import ch.learntrack.backend.persistence.UserRole
 import ch.learntrack.backend.persistence.tables.references.USER
 import ch.learntrack.backend.utils.createUserFromTemplate
@@ -40,7 +41,7 @@ class UserIntegrationTest: IntegrationTest() {
     @Test
     fun `should get 401 with wrong credentials`() {
         webClient.get()
-            .uri("/backoffice/user")
+            .uri("$BACKOFFICE_ROOT_URL/user")
             .setBasicAuthHeader("wrong", "credentials")
             .exchange()
             .expectStatus()
@@ -50,7 +51,7 @@ class UserIntegrationTest: IntegrationTest() {
     @Test
     fun `should return a list with only admin users`() {
         val response = webClient.get()
-            .uri("/backoffice/user")
+            .uri("$BACKOFFICE_ROOT_URL/user")
             .setBasicAuthHeader(backendProperties)
             .exchange()
             .expectBodyList(UserDto::class.java)
@@ -67,7 +68,7 @@ class UserIntegrationTest: IntegrationTest() {
         val validUserDto = CreateUserDto("John", "Doe", "test", "test.edu@gmail.com", "test" )
 
         webClient.post()
-                .uri("/backoffice/user/create")
+                .uri("$BACKOFFICE_ROOT_URL/user/create")
                 .body(BodyInserters.fromValue(validUserDto))
                 .setBasicAuthHeader(backendProperties)
                 .exchange()
@@ -87,7 +88,7 @@ class UserIntegrationTest: IntegrationTest() {
         val validUserDto1 = CreateUserDto("John2", null, "test2", "test2.edu@gmail.com", "test" )
 
         webClient.post()
-                .uri("/backoffice/user/create")
+                .uri("$BACKOFFICE_ROOT_URL/user/create")
                 .body(BodyInserters.fromValue(validUserDto1))
                 .setBasicAuthHeader(backendProperties)
                 .exchange()
@@ -110,7 +111,7 @@ class UserIntegrationTest: IntegrationTest() {
         val userDtoInvalidEmail = CreateUserDto("John", "Doe", "test", "test.edugmail.com", "test" )
 
         webClient.post()
-                .uri("/backoffice/user/create")
+                .uri("$BACKOFFICE_ROOT_URL/user/create")
                 .body(BodyInserters.fromValue(userDtoInvalidEmail))
                 .setBasicAuthHeader(backendProperties)
                 .exchange()
@@ -124,7 +125,7 @@ class UserIntegrationTest: IntegrationTest() {
         val userDtoInvalidEmail1 = CreateUserDto("John", "Doe", "test", "@gmail.com", "test" )
 
         webClient.post()
-                .uri("/backoffice/user/create")
+                .uri("$BACKOFFICE_ROOT_URL/user/create")
                 .body(BodyInserters.fromValue(userDtoInvalidEmail1))
                 .setBasicAuthHeader(backendProperties)
                 .exchange()
@@ -134,7 +135,7 @@ class UserIntegrationTest: IntegrationTest() {
         val userDtoInvalidEmail2 = CreateUserDto("John", "Doe", "test", "test.edu@gmail.", "test" )
 
         webClient.post()
-                .uri("/backoffice/user/create")
+                .uri("$BACKOFFICE_ROOT_URL/user/create")
                 .body(BodyInserters.fromValue(userDtoInvalidEmail2))
                 .setBasicAuthHeader(backendProperties)
                 .exchange()
@@ -144,7 +145,7 @@ class UserIntegrationTest: IntegrationTest() {
         val userDtoInvalidEmail3 = CreateUserDto("John", "Doe", "test", "testedu@gmailcom", "test" )
 
         webClient.post()
-                .uri("/backoffice/user/create")
+                .uri("$BACKOFFICE_ROOT_URL/user/create")
                 .body(BodyInserters.fromValue(userDtoInvalidEmail3))
                 .setBasicAuthHeader(backendProperties)
                 .exchange()
@@ -157,7 +158,7 @@ class UserIntegrationTest: IntegrationTest() {
         val userDtoInvalidEmail3 = CreateUserDto("John", "Doe", "test", "testuser@gmail.com", "test" )
 
         webClient.post()
-                .uri("/backoffice/user/create")
+                .uri("$BACKOFFICE_ROOT_URL/user/create")
                 .body(BodyInserters.fromValue(userDtoInvalidEmail3))
                 .setBasicAuthHeader(backendProperties)
                 .exchange()
@@ -170,7 +171,7 @@ class UserIntegrationTest: IntegrationTest() {
         val validUser = CreateUserDto("John", "Doe", "test", "TESTLOWERCASE@GMAIL.COM", "test" )
 
         webClient.post()
-                .uri("/backoffice/user/create")
+                .uri("$BACKOFFICE_ROOT_URL/user/create")
                 .body(BodyInserters.fromValue(validUser))
                 .setBasicAuthHeader(backendProperties)
                 .exchange()

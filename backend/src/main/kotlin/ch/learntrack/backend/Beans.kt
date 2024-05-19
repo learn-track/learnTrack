@@ -54,9 +54,8 @@ private val handlerBeans = beans {
     bean<LearnTrackExceptionHandler>()
 }
 
-public val beans: List<BeanDefinitionDsl> = listOf(
+public val coreBeans: List<BeanDefinitionDsl> = listOf(
     emailBeans,
-    backofficeBeans,
     libraryBeans,
     handlerBeans,
     userBeans,
@@ -67,5 +66,10 @@ public val beans: List<BeanDefinitionDsl> = listOf(
     schoolBeans,
     userSchoolBeans,
     userGradeBeans,
-    adminBeans,
 )
+
+public val beans: List<BeanDefinitionDsl> = mutableListOf<BeanDefinitionDsl>().apply {
+    addAll(coreBeans)
+    addAll(adminBeans)
+    addAll(backofficeBeans)
+}

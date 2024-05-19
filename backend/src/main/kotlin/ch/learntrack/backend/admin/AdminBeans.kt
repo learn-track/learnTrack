@@ -1,10 +1,10 @@
 package ch.learntrack.backend.admin
 
-import ch.learntrack.backend.admin.grade.GradeService
+import ch.learntrack.backend.admin.grade.gradeBeans
 import org.springframework.context.support.BeanDefinitionDsl
-import org.springframework.context.support.beans
 
-public val adminBeans: BeanDefinitionDsl = beans {
-    bean<AdminRessource>()
-    bean<GradeService>()
-}
+public const val ADMIN_ROOT_URL: String = "/admin"
+
+public val adminBeans: List<BeanDefinitionDsl> = listOf(
+    gradeBeans,
+)
