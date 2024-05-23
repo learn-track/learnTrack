@@ -9,6 +9,7 @@ import ch.learntrack.backend.persistence.tables.pojos.User
 import ch.learntrack.backend.persistence.tables.records.UserRecord
 import ch.learntrack.backend.security.PasswordService
 import ch.learntrack.backend.utils.isEmailValid
+import ch.learntrack.backend.utils.sanitizeInputString
 import java.time.LocalDateTime
 import java.util.UUID
 
@@ -42,9 +43,9 @@ public class UserService(
 
         val user = User(
             id = UUID.randomUUID(),
-            firstName = createUserDto.firstname.trim(),
-            middleName = createUserDto.middlename?.trim(),
-            lastName = createUserDto.lastname.trim(),
+            firstName = createUserDto.firstname.trim().sanitizeInputString(),
+            middleName = createUserDto.middlename?.trim()?.sanitizeInputString(),
+            lastName = createUserDto.lastname.trim().sanitizeInputString(),
             eMail = emailLowerCase,
             password = passwordService.createPasswordHash(createUserDto.password),
             userRole = UserRole.ADMIN,

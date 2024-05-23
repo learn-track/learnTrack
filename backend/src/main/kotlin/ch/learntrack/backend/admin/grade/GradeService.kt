@@ -7,6 +7,7 @@ import ch.learntrack.backend.persistence.fetchByNameAndSchoolId
 import ch.learntrack.backend.persistence.tables.daos.GradeDao
 import ch.learntrack.backend.persistence.tables.pojos.Grade
 import ch.learntrack.backend.persistence.tables.records.GradeRecord
+import ch.learntrack.backend.utils.sanitizeInputString
 import java.time.LocalDateTime
 import java.util.UUID
 
@@ -26,7 +27,7 @@ public class GradeService(private val gradeDao: GradeDao) : EntityService<GradeD
 
         val grade = Grade(
             id = UUID.randomUUID(),
-            name = createGradeDto.name.trim(),
+            name = createGradeDto.name.trim().sanitizeInputString(),
             schoolId = createGradeDto.schoolId,
             created = LocalDateTime.now(),
             updated = LocalDateTime.now(),
