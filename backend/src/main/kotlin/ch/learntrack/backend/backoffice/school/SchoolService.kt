@@ -5,6 +5,7 @@ import ch.learntrack.backend.common.LearnTrackConflictException
 import ch.learntrack.backend.persistence.tables.daos.SchoolDao
 import ch.learntrack.backend.persistence.tables.pojos.School
 import ch.learntrack.backend.persistence.tables.records.SchoolRecord
+import ch.learntrack.backend.utils.sanitizeInputString
 import java.time.LocalDateTime
 import java.util.UUID
 
@@ -30,8 +31,8 @@ public class SchoolService(
 
         val school = School(
             id = UUID.randomUUID(),
-            name = createSchoolDto.name.trim(),
-            address = createSchoolDto.address.trim(),
+            name = createSchoolDto.name.trim().sanitizeInputString(),
+            address = createSchoolDto.address.trim().sanitizeInputString(),
             city = createSchoolDto.city.trim(),
             postcode = createSchoolDto.postcode,
             created = LocalDateTime.now(),

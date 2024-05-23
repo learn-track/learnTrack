@@ -7,6 +7,7 @@ import ch.learntrack.backend.utils.deleteAll
 import ch.learntrack.backend.utils.runInTransaction
 import ch.learntrack.backend.utils.sanitizeInputString
 import ch.learntrack.backend.utils.setBasicAuthHeader
+import ch.learntrack.backend.utils.userTemplateId
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
@@ -31,7 +32,7 @@ class TeacherRegistrationIntegrationTest: IntegrationTest(){
 
     @Test
     fun `should return true if email does not exist`() {
-        val email = "testEmailCheck@gmail.com"
+        val email = "unusedEmail@gmail.com"
 
         webClient.get()
             .uri { uriBuilder ->
@@ -40,6 +41,7 @@ class TeacherRegistrationIntegrationTest: IntegrationTest(){
                     .queryParam("email", email)
                     .build()
             }
+            .setBasicAuthHeader("wrong", "credentials")
             .exchange()
             .expectStatus()
             .isOk
@@ -49,15 +51,18 @@ class TeacherRegistrationIntegrationTest: IntegrationTest(){
 
     @Test
     fun `should return false if email already exists`() {
-        val email = "testuser@gmail.com"
+        val user =  userDao.fetchOneById(userTemplateId)
+
+        assertThat(user).isNotNull
 
         webClient.get()
             .uri { uriBuilder ->
                 uriBuilder
                     .path("/user/register/check-email-free")
-                    .queryParam("email", email)
+                    .queryParam("email", user?.eMail)
                     .build()
             }
+            .setBasicAuthHeader("wrong", "credentials")
             .exchange()
             .expectStatus()
             .isOk
@@ -78,6 +83,7 @@ class TeacherRegistrationIntegrationTest: IntegrationTest(){
         webClient.post()
             .uri("/user/register")
             .body(BodyInserters.fromValue(createUserDto1))
+            .setBasicAuthHeader("wrong", "credentials")
             .exchange()
             .expectStatus()
             .isOk
@@ -106,6 +112,7 @@ class TeacherRegistrationIntegrationTest: IntegrationTest(){
         webClient.post()
             .uri("/user/register")
             .body(BodyInserters.fromValue(createUserDto2))
+            .setBasicAuthHeader("wrong", "credentials")
             .exchange()
             .expectStatus()
             .isOk
@@ -134,6 +141,7 @@ class TeacherRegistrationIntegrationTest: IntegrationTest(){
         webClient.post()
             .uri("/user/register")
             .body(BodyInserters.fromValue(createUserDto3))
+            .setBasicAuthHeader("wrong", "credentials")
             .exchange()
             .expectStatus()
             .isOk
@@ -165,6 +173,7 @@ class TeacherRegistrationIntegrationTest: IntegrationTest(){
         webClient.post()
             .uri("/user/register")
             .body(BodyInserters.fromValue(userDtoInvalidEmail))
+            .setBasicAuthHeader("wrong", "credentials")
             .exchange()
             .expectStatus()
             .isEqualTo(HttpStatus.BAD_REQUEST)
@@ -184,6 +193,7 @@ class TeacherRegistrationIntegrationTest: IntegrationTest(){
         webClient.post()
             .uri("/user/register")
             .body(BodyInserters.fromValue(userDtoInvalidEmail1))
+            .setBasicAuthHeader("wrong", "credentials")
             .exchange()
             .expectStatus()
             .isEqualTo(HttpStatus.BAD_REQUEST)
@@ -198,6 +208,7 @@ class TeacherRegistrationIntegrationTest: IntegrationTest(){
         webClient.post()
             .uri("/user/register")
             .body(BodyInserters.fromValue(userDtoInvalidEmail2))
+            .setBasicAuthHeader("wrong", "credentials")
             .exchange()
             .expectStatus()
             .isEqualTo(HttpStatus.BAD_REQUEST)
@@ -213,6 +224,7 @@ class TeacherRegistrationIntegrationTest: IntegrationTest(){
         webClient.post()
             .uri("/user/register")
             .body(BodyInserters.fromValue(userDtoInvalidEmail3))
+            .setBasicAuthHeader("wrong", "credentials")
             .exchange()
             .expectStatus()
             .isEqualTo(HttpStatus.BAD_REQUEST)
@@ -225,7 +237,7 @@ class TeacherRegistrationIntegrationTest: IntegrationTest(){
         webClient.post()
             .uri("/user/register")
             .body(BodyInserters.fromValue(userDtoEmailExisting))
-            .setBasicAuthHeader(backendProperties)
+            .setBasicAuthHeader("wrong", "credentials")
             .exchange()
             .expectStatus()
             .isEqualTo(HttpStatus.CONFLICT)
@@ -245,7 +257,7 @@ class TeacherRegistrationIntegrationTest: IntegrationTest(){
         webClient.post()
             .uri("/user/register")
             .body(BodyInserters.fromValue(userDtoInvalidPassword1))
-            .setBasicAuthHeader(backendProperties)
+            .setBasicAuthHeader("wrong", "credentials")
             .exchange()
             .expectStatus()
             .isEqualTo(HttpStatus.BAD_REQUEST)
@@ -262,7 +274,7 @@ class TeacherRegistrationIntegrationTest: IntegrationTest(){
         webClient.post()
             .uri("/user/register")
             .body(BodyInserters.fromValue(userDtoInvalidPassword2))
-            .setBasicAuthHeader(backendProperties)
+            .setBasicAuthHeader("wrong", "credentials")
             .exchange()
             .expectStatus()
             .isEqualTo(HttpStatus.BAD_REQUEST)
@@ -279,7 +291,7 @@ class TeacherRegistrationIntegrationTest: IntegrationTest(){
         webClient.post()
             .uri("/user/register")
             .body(BodyInserters.fromValue(userDtoInvalidPassword3))
-            .setBasicAuthHeader(backendProperties)
+            .setBasicAuthHeader("wrong", "credentials")
             .exchange()
             .expectStatus()
             .isEqualTo(HttpStatus.BAD_REQUEST)
@@ -296,7 +308,7 @@ class TeacherRegistrationIntegrationTest: IntegrationTest(){
         webClient.post()
             .uri("/user/register")
             .body(BodyInserters.fromValue(userDtoInvalidPassword4))
-            .setBasicAuthHeader(backendProperties)
+            .setBasicAuthHeader("wrong", "credentials")
             .exchange()
             .expectStatus()
             .isEqualTo(HttpStatus.BAD_REQUEST)
@@ -313,7 +325,7 @@ class TeacherRegistrationIntegrationTest: IntegrationTest(){
         webClient.post()
             .uri("/user/register")
             .body(BodyInserters.fromValue(userDtoInvalidPassword5))
-            .setBasicAuthHeader(backendProperties)
+            .setBasicAuthHeader("wrong", "credentials")
             .exchange()
             .expectStatus()
             .isEqualTo(HttpStatus.BAD_REQUEST)
@@ -332,7 +344,7 @@ class TeacherRegistrationIntegrationTest: IntegrationTest(){
         webClient.post()
             .uri("/user/register")
             .body(BodyInserters.fromValue(createUserDto1))
-            .setBasicAuthHeader(backendProperties)
+            .setBasicAuthHeader("wrong", "credentials")
             .exchange()
             .expectStatus()
             .isOk
@@ -361,7 +373,7 @@ class TeacherRegistrationIntegrationTest: IntegrationTest(){
         webClient.post()
             .uri("/user/register")
             .body(BodyInserters.fromValue(createUserDto2))
-            .setBasicAuthHeader(backendProperties)
+            .setBasicAuthHeader("wrong", "credentials")
             .exchange()
             .expectStatus()
             .isOk
@@ -390,7 +402,7 @@ class TeacherRegistrationIntegrationTest: IntegrationTest(){
         webClient.post()
             .uri("/user/register")
             .body(BodyInserters.fromValue(createUserDto3))
-            .setBasicAuthHeader(backendProperties)
+            .setBasicAuthHeader("wrong", "credentials")
             .exchange()
             .expectStatus()
             .isOk
