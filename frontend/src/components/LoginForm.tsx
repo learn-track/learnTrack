@@ -4,7 +4,7 @@ import { Button, FormControl, Input, Link, Snackbar, Stack, styled } from '@mui/
 import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { UserRessourceService } from '../state/api/generated';
+import { UserResourceService } from '../state/api/generated';
 
 export function LoginForm() {
   const [showInputError, setShowInputError] = useState(false);
@@ -113,7 +113,7 @@ export function LoginForm() {
 const useLoginMutation = (email: string, password: string, onError: () => void) => {
   const navigate = useNavigate();
   return useMutation({
-    mutationFn: () => UserRessourceService.login({ email, password }),
+    mutationFn: () => UserResourceService.login({ email, password }),
     onSuccess: (data) => {
       localStorage.setItem('token', data.token);
       navigate('/');

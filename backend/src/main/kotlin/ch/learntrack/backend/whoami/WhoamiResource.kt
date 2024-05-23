@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/whoami")
-public class WhoamiRessource(
+public class WhoamiResource(
     private val userService: UserService,
     private val gradeService: GradeService,
     private val schoolService: SchoolService,

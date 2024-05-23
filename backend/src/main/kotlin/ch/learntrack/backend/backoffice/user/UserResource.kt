@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("$BACKOFFICE_ROOT_URL/user")
-public class UserRessource(private val userService: UserService) {
+public class UserResource(private val userService: UserService) {
     @GetMapping
     public fun getAllAdminUsers(): List<UserDto> = userService.getAllAdminUsers()
 

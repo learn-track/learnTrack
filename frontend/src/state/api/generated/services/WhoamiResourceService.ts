@@ -6,7 +6,7 @@ import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
 import type { WhoamiDto } from '../models/WhoamiDto';
-export class WhoamiRessourceService {
+export class WhoamiResourceService {
   /**
    * @returns WhoamiDto OK
    * @throws ApiError

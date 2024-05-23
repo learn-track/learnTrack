@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("$BACKOFFICE_ROOT_URL/school")
-public class SchoolRessource(private val schoolService: SchoolService) {
+public class SchoolResource(private val schoolService: SchoolService) {
     @GetMapping
     public fun getAllSchools(): List<SchoolDto> = schoolService.getAllSchools()
 
