@@ -5,7 +5,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { CreateUserDto, UserRessourceService } from '../state/api/generated';
+import { CreateUserDto, UserResourceService } from '../state/api/generated';
 
 type Inputs = {
   firstname: string;
@@ -125,7 +125,7 @@ const useRegisterMutation = (onError: () => void) => {
   const navigate = useNavigate();
 
   return useMutation({
-    mutationFn: (createUserDto: CreateUserDto) => UserRessourceService.register(createUserDto),
+    mutationFn: (createUserDto: CreateUserDto) => UserResourceService.register(createUserDto),
     onSuccess: (response) => {
       localStorage.setItem('token', response.token);
       navigate('/');

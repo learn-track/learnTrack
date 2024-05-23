@@ -2,9 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type CreateSchoolDto = {
+export type CreateGradeDto = {
   name: string;
-  address: string;
-  city: string;
-  postcode: number;
+  schoolId: string;
 };

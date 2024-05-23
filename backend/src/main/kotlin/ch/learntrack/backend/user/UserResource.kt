@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/user")
-public class UserRessource(
+public class UserResource(
     private val userService: UserService,
     private val passwordService: PasswordService,
     private val tokenService: ch.learntrack.backend.jwt.TokenService,

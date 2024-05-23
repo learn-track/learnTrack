@@ -1,9 +1,9 @@
 import { atomWithSuspenseQuery } from 'jotai-tanstack-query';
-import { WhoamiRessourceService } from './generated';
+import { WhoamiResourceService } from './generated';
 
 const whoamiAtom = atomWithSuspenseQuery(() => ({
   queryKey: ['whoami'],
-  queryFn: () => WhoamiRessourceService.getSelf(),
+  queryFn: () => WhoamiResourceService.getSelf(),
 }));
 
 export { whoamiAtom };

@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import { UserRessourceService } from './generated';
+import { UserResourceService } from './generated';
 
 export const useUserQuery = () => {
   const { data } = useQuery({
     queryKey: ['whoami'],
-    queryFn: () => UserRessourceService.test(),
+    queryFn: () => UserResourceService.test(),
   });
 
   return data;
