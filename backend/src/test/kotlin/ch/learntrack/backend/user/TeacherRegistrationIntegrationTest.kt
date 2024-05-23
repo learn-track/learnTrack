@@ -30,6 +30,42 @@ class TeacherRegistrationIntegrationTest: IntegrationTest(){
     }
 
     @Test
+    fun `should return true if email does not exist`() {
+        val email = "testEmailCheck@gmail.com"
+
+        webClient.get()
+            .uri { uriBuilder ->
+                uriBuilder
+                    .path("/user/register/check-email-free")
+                    .queryParam("email", email)
+                    .build()
+            }
+            .exchange()
+            .expectStatus()
+            .isOk
+            .expectBody(Boolean::class.java)
+            .isEqualTo(true)
+    }
+
+    @Test
+    fun `should return false if email already exists`() {
+        val email = "testuser@gmail.com"
+
+        webClient.get()
+            .uri { uriBuilder ->
+                uriBuilder
+                    .path("/user/register/check-email-free")
+                    .queryParam("email", email)
+                    .build()
+            }
+            .exchange()
+            .expectStatus()
+            .isOk
+            .expectBody(Boolean::class.java)
+            .isEqualTo(false)
+    }
+
+    @Test
     fun `should return jws token with successful registration`() {
         val createUserDto1 = CreateUserDto(
             firstname = "John",

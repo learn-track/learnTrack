@@ -29,7 +29,7 @@ public class UserService(
         birthDate = pojo.birthdate,
     )
 
-    public fun findUserByEmail(email: String): User? = userDao.fetchOne(USER.E_MAIL, email)
+    public fun findUserByEmail(email: String): User? = userDao.fetchOne(USER.E_MAIL, email.lowercase())
 
     public fun createUser(createUserDto: CreateUserDto): User {
         val emailLowerCase = createUserDto.email.trim().lowercase()
