@@ -18,7 +18,6 @@ import java.util.UUID
 private const val TEACHER_UUID = "40d8b918-8f80-4b92-a3f5-4548d7883c54"
 private const val STUDENT_UUID = "40d8b918-8f80-4b92-a3f5-4548d7883c55"
 
-// TODO: Add path endpoints to ADMIN_ROOT_URL when role bases access control is implemented
 class AdminSecurityIntegrationTest: IntegrationTest() {
     private val teacherUUID = UUID.fromString(TEACHER_UUID)
     private val studentUUID = UUID.fromString(STUDENT_UUID)
@@ -59,7 +58,7 @@ class AdminSecurityIntegrationTest: IntegrationTest() {
     @Test
     fun `disallow access to admin endpoints for users with wrong credentials`() {
         webClient.post()
-            .uri("$ADMIN_ROOT_URL/grade/createGrade")
+            .uri(ADMIN_ROOT_URL)
             .setBasicAuthHeader("wrong", "credentials")
             .exchange()
             .expectStatus()
@@ -76,7 +75,7 @@ class AdminSecurityIntegrationTest: IntegrationTest() {
         webClient.post()
             .uri { uriBuilder ->
                 uriBuilder
-                    .path("$ADMIN_ROOT_URL/grade/createGrade")
+                    .path(ADMIN_ROOT_URL)
                     .queryParam("schoolId", schoolTemplateId)
                     .build()
             }
@@ -97,7 +96,7 @@ class AdminSecurityIntegrationTest: IntegrationTest() {
         webClient.post()
             .uri { uriBuilder ->
                 uriBuilder
-                    .path("$ADMIN_ROOT_URL/grade/createGrade")
+                    .path(ADMIN_ROOT_URL)
                     .queryParam("schoolId", schoolTemplateId)
                     .build()
             }
