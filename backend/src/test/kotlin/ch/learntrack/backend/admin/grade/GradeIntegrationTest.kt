@@ -10,6 +10,7 @@ import ch.learntrack.backend.utils.createUserSchoolFromTemplate
 import ch.learntrack.backend.utils.deleteAll
 import ch.learntrack.backend.utils.runInTransaction
 import ch.learntrack.backend.utils.schoolTemplateId
+import ch.learntrack.backend.utils.userTemplateId
 import org.springframework.http.HttpStatus
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
@@ -66,6 +67,7 @@ class GradeIntegrationTest: IntegrationTest() {
                     .queryParam("schoolId", schoolTemplateId)
                     .build()
             }
+            .headers { headers -> headers.setBearerAuth(tokenService.createJwtToken(userTemplateId)) }
             .body(BodyInserters.fromValue(createGradeDto))
             .exchange()
             .expectStatus()
@@ -86,6 +88,7 @@ class GradeIntegrationTest: IntegrationTest() {
                     .queryParam("schoolId", schoolTemplateId)
                     .build()
             }
+            .headers { headers -> headers.setBearerAuth(tokenService.createJwtToken(userTemplateId)) }
             .body(BodyInserters.fromValue(createGradeDto))
             .exchange()
             .expectStatus()

@@ -1,5 +1,7 @@
 package ch.learntrack.backend.security
 
+import ch.learntrack.backend.admin.ADMIN_ROOT_URL
+import ch.learntrack.backend.persistence.UserRole
 import org.springframework.context.support.BeanDefinitionDsl
 import org.springframework.context.support.beans
 import org.springframework.security.authentication.ProviderManager
@@ -18,6 +20,10 @@ private const val PATH_SWAGGER = "/swagger-ui/*"
 private const val PATH_HEALTH = "/actuator/health"
 private const val PATH_INFO = "/actuator/info"
 private const val PATH_BACKOFFICE = "/backoffice/**"
+private const val PATH_ADMIN = "$ADMIN_ROOT_URL/**"
+// TODO: Add const val for teacher and student base path
+private const val PATH_TEACHER = "/teacher/**"
+private const val PATH_STUDENT = "/student/**"
 
 public val securityBeans: BeanDefinitionDsl = beans {
     bean<UserAccessAuthorizer>("UserAccessAuthorizer")
@@ -32,6 +38,9 @@ public val securityBeans: BeanDefinitionDsl = beans {
         http {
             authorizeHttpRequests {
                 authorize(PATH_BACKOFFICE, hasRole(SECURITY_ROLE_BACKOFFICE))
+                authorize(PATH_ADMIN, hasRole(UserRole.ADMIN.name))
+                authorize(PATH_TEACHER, hasRole(UserRole.TEACHER.name))
+                authorize(PATH_STUDENT, hasRole(UserRole.STUDENT.name))
                 authorize(PATH_OPENAPI, permitAll)
                 authorize(PATH_SWAGGER, permitAll)
                 authorize(LOGIN_PATH, permitAll)
