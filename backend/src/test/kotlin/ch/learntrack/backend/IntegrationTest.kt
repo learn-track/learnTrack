@@ -1,7 +1,6 @@
 package ch.learntrack.backend
 
 import ch.learntrack.backend.persistence.tables.daos.*
-import ch.learntrack.backend.utils.userTemplateId
 import java.util.stream.Stream
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeAll
@@ -86,7 +85,6 @@ class IntegrationTest {
         webClient =
             WebTestClient.bindToServer()
                 .baseUrl("http://localhost:$localServerPort")
-                .defaultHeaders { httpHeader -> httpHeader.setBearerAuth(tokenService.createJwtToken(userTemplateId)) }
                 .build()
     }
 
