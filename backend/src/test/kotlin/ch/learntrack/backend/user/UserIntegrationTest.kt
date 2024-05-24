@@ -1,9 +1,10 @@
 package ch.learntrack.backend.user
 
 import ch.learntrack.backend.IntegrationTest
-import ch.learntrack.backend.utils.createUserFromTemplate
+import ch.learntrack.backend.utils.createAdminUserFromTemplate
 import ch.learntrack.backend.utils.deleteAll
 import ch.learntrack.backend.utils.runInTransaction
+import ch.learntrack.backend.utils.userAdminTemplateId
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -14,7 +15,7 @@ class UserIntegrationTest: IntegrationTest() {
     @BeforeEach
     fun seedDatabase() {
         transactionManager.runInTransaction {
-            userDao.insert(createUserFromTemplate())
+            userDao.insert(createAdminUserFromTemplate())
         }
     }
 
@@ -29,6 +30,7 @@ class UserIntegrationTest: IntegrationTest() {
     fun `should return test string`() {
         webClient.get()
             .uri("/user/test")
+            .headers { httpHeader -> httpHeader.setBearerAuth(tokenService.createJwtToken(userAdminTemplateId)) }
             .exchange()
             .expectBody()
             .jsonPath("$")

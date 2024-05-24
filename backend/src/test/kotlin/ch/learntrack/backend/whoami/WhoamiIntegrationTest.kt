@@ -3,14 +3,14 @@ package ch.learntrack.backend.whoami
 import ch.learntrack.backend.IntegrationTest
 import ch.learntrack.backend.utils.createGradeFromTemplate
 import ch.learntrack.backend.utils.createSchoolFromTemplate
-import ch.learntrack.backend.utils.createUserFromTemplate
+import ch.learntrack.backend.utils.createAdminUserFromTemplate
 import ch.learntrack.backend.utils.createUserGradeFromTemplate
 import ch.learntrack.backend.utils.createUserSchoolFromTemplate
 import ch.learntrack.backend.utils.deleteAll
 import ch.learntrack.backend.utils.gradeTemplateId
 import ch.learntrack.backend.utils.runInTransaction
 import ch.learntrack.backend.utils.schoolTemplateId
-import ch.learntrack.backend.utils.userTemplateId
+import ch.learntrack.backend.utils.userAdminTemplateId
 import java.util.UUID
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
@@ -25,12 +25,12 @@ class WhoamiIntegrationTest: IntegrationTest() {
     @BeforeEach
     fun seedDatabase() {
         transactionManager.runInTransaction {
-            userDao.insert(createUserFromTemplate())
+            userDao.insert(createAdminUserFromTemplate())
             schoolDao.insert(createSchoolFromTemplate())
             schoolDao.insert(createSchoolFromTemplate(id = schoolNotAssignedId))
             gradeDao.insert(createGradeFromTemplate())
             userSchoolDao.insert(createUserSchoolFromTemplate())
-            userGradeDao.insert(createUserGradeFromTemplate())
+            userGradeDao.insert(createUserGradeFromTemplate(userId = userAdminTemplateId))
         }
     }
 
@@ -49,13 +49,16 @@ class WhoamiIntegrationTest: IntegrationTest() {
     fun `should return whoami dto`() {
         val result = webClient.get()
             .uri("/whoami")
+            .headers { headers -> headers.setBearerAuth(tokenService.createJwtToken(userAdminTemplateId)) }
             .exchange()
-            .expectStatus().isOk()
+            .expectStatus()
+            .isOk()
             .expectBody(WhoamiDto::class.java)
-            .returnResult().responseBody
+            .returnResult()
+            .responseBody
 
         assertThat(requireNotNull(result?.user?.id))
-            .isEqualTo(userTemplateId)
+            .isEqualTo(userAdminTemplateId)
 
         assertThat(requireNotNull(result?.schools?.any { it.id == schoolTemplateId }))
             .isEqualTo(true)
@@ -68,13 +71,16 @@ class WhoamiIntegrationTest: IntegrationTest() {
     fun `should not return school for User`() {
         val result = webClient.get()
             .uri("/whoami")
+            .headers { headers -> headers.setBearerAuth(tokenService.createJwtToken(userAdminTemplateId)) }
             .exchange()
-            .expectStatus().isOk()
+            .expectStatus()
+            .isOk()
             .expectBody(WhoamiDto::class.java)
-            .returnResult().responseBody
+            .returnResult()
+            .responseBody
 
         assertThat(requireNotNull(result?.user?.id))
-            .isEqualTo(userTemplateId)
+            .isEqualTo(userAdminTemplateId)
 
         assertThat(requireNotNull(result?.schools?.any { it.id == schoolNotAssignedId }))
             .isEqualTo(false)

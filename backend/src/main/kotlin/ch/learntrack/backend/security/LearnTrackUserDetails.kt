@@ -9,7 +9,7 @@ private const val ROLE_PREFIX = "ROLE_"
 
 public class LearnTrackUserDetails(public val user: User) : UserDetails {
     override fun getAuthorities(): List<GrantedAuthority> = listOf(SimpleGrantedAuthority(
-        ROLE_PREFIX + user.userRole.toString(),
+        ROLE_PREFIX + user.userRole.name,
     ))
     override fun getPassword(): Nothing? = null
     override fun getUsername(): String = user.eMail
