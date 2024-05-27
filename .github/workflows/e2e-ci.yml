@@ -113,7 +113,7 @@ jobs:
           yarn test:ci --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
 
       - name: Lost Pixel Visual Test
-        uses: lost-pixel/lost-pixel@v3.16.0
+        uses: lost-pixel/lost-pixel@v3.17.0
         env:
           LOST_PIXEL_CONFIG_DIR: ./frontend
           LOST_PIXEL_API_KEY: ${{ secrets.LOST_PIXEL_API_KEY }}
