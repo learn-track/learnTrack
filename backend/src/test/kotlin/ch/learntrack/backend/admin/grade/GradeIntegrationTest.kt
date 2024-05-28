@@ -51,6 +51,36 @@ class GradeIntegrationTest: IntegrationTest() {
     }
 
     @Test
+    fun `should get all grades for assigned user`() {
+        webClient.get()
+            .uri { uriBuilder ->
+                uriBuilder
+                    .path("$ADMIN_ROOT_URL/grade")
+                    .queryParam("schoolId", schoolTemplateId)
+                    .build()
+            }
+            .headers { headers -> headers.setBearerAuth(tokenService.createJwtToken(userAdminTemplateId)) }
+            .exchange()
+            .expectStatus()
+            .isOk
+    }
+
+    @Test
+    fun `should not get grades if user not assigned to school`() {
+        webClient.get()
+            .uri { uriBuilder ->
+                uriBuilder
+                    .path("$ADMIN_ROOT_URL/grade")
+                    .queryParam("schoolId", schoolTemplateId)
+                    .build()
+            }
+            .headers { headers -> headers.setBearerAuth(tokenService.createJwtToken(userNotAssignedToSchoolId)) }
+            .exchange()
+            .expectStatus()
+            .isForbidden
+    }
+
+    @Test
     fun `should be able to create grade` () {
         val createGradeDto = CreateGradeDto(
             name = "Grade Test",

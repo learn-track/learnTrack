@@ -3,6 +3,7 @@ package ch.learntrack.backend.admin.grade
 import ch.learntrack.backend.admin.ADMIN_ROOT_URL
 import ch.learntrack.backend.persistence.tables.pojos.Grade
 import org.springframework.security.access.prepost.PreAuthorize
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -15,6 +16,13 @@ import java.util.UUID
 public class GradeResource(
     private val gradeService: GradeService,
 ) {
+    @PreAuthorize(
+        "@UserAccessAuthorizer.hasUserAccessToSchool(#root.authentication.principal, #schoolId)",
+    )
+    @GetMapping
+    public fun getGrades(@RequestParam schoolId: UUID): List<GradeDto> =
+        gradeService.getGrades(schoolId)
+
     @PreAuthorize(
         "@UserAccessAuthorizer.hasUserAccessToSchool(#root.authentication.principal, #schoolId)",
     )
