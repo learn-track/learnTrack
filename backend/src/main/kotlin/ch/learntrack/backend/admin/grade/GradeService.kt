@@ -2,7 +2,6 @@ package ch.learntrack.backend.admin.grade
 
 import ch.learntrack.backend.common.EntityService
 import ch.learntrack.backend.common.LearnTrackConflictException
-import ch.learntrack.backend.grade.GradeDto
 import ch.learntrack.backend.persistence.fetchByNameAndSchoolId
 import ch.learntrack.backend.persistence.tables.daos.GradeDao
 import ch.learntrack.backend.persistence.tables.pojos.Grade
@@ -15,8 +14,9 @@ public class GradeService(private val gradeDao: GradeDao) : EntityService<GradeD
     public override fun mapToDto(pojo: Grade): GradeDto = GradeDto(
         id = pojo.id,
         name = pojo.name,
-        schoolId = pojo.schoolId,
     )
+
+    public fun getGrades(schoolId: UUID): List<GradeDto> = gradeDao.fetchBySchoolId(schoolId).map(::mapToDto)
 
     public fun createGrade(createGradeDto: CreateGradeDto): Grade {
         gradeDao.fetchByNameAndSchoolId(createGradeDto)?.let {
