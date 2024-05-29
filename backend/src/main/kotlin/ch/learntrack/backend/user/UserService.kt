@@ -4,6 +4,7 @@ import ch.learntrack.backend.common.EntityService
 import ch.learntrack.backend.common.LearnTrackBadRequestException
 import ch.learntrack.backend.common.LearnTrackConflictException
 import ch.learntrack.backend.persistence.UserRole
+import ch.learntrack.backend.persistence.fetchAllUsersByRoleAndSchoolId
 import ch.learntrack.backend.persistence.tables.daos.UserDao
 import ch.learntrack.backend.persistence.tables.pojos.User
 import ch.learntrack.backend.persistence.tables.records.UserRecord
@@ -30,6 +31,9 @@ public class UserService(
     )
 
     public fun findUserByEmail(email: String): User? = userDao.fetchOne(USER.E_MAIL, email.lowercase())
+
+    public fun getUsersByRoleAndSchoolId(role: UserRole, schoolId: UUID): List<UserDto> =
+        userDao.fetchAllUsersByRoleAndSchoolId(role, schoolId).map(::mapToDto)
 
     public fun createUser(createUserDto: CreateUserDto): User {
         val emailLowerCase = createUserDto.email.trim().lowercase()

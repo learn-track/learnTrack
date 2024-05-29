@@ -29,7 +29,7 @@ class WhoamiIntegrationTest: IntegrationTest() {
             schoolDao.insert(createSchoolFromTemplate())
             schoolDao.insert(createSchoolFromTemplate(id = schoolNotAssignedId))
             gradeDao.insert(createGradeFromTemplate())
-            userSchoolDao.insert(createUserSchoolFromTemplate())
+            userSchoolDao.insert(createUserSchoolFromTemplate(userAdminTemplateId))
             userGradeDao.insert(createUserGradeFromTemplate(userId = userAdminTemplateId))
         }
     }

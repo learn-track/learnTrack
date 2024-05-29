@@ -29,7 +29,7 @@ class GradeIntegrationTest: IntegrationTest() {
             schoolDao.insert(createSchoolFromTemplate())
             gradeDao.insert(createGradeFromTemplate())
             userDao.insert(createAdminUserFromTemplate())
-            userSchoolDao.insert(createUserSchoolFromTemplate())
+            userSchoolDao.insert(createUserSchoolFromTemplate(userAdminTemplateId))
             userDao.insert(createAdminUserFromTemplate
                 (
                     id = userNotAssignedToSchoolId,
