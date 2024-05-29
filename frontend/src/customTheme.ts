@@ -39,6 +39,18 @@ export default extendTheme({
       fontSize: '74px',
       color: primaryColor,
     },
+    h3: {
+      fontFamily: 'Montserrat, sans-serif',
+      fontWeight: 500,
+
+      fontSize: '50px',
+    },
+    h4: {
+      fontFamily: 'Montserrat, sans-serif',
+      fontWeight: 360,
+
+      fontSize: '34px',
+    },
   },
   components: {
     JoyButton: {
