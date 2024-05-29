@@ -1,12 +1,45 @@
-import { useUserQuery } from '../state/api/user.ts';
+import { styled, Typography } from '@mui/joy';
+import { useAtom } from 'jotai/index';
+import { AlternateButton } from '../components/AlternateButton.tsx';
+import { ContentSection } from '../components/ContentSection.tsx';
+import { GradeCard } from '../components/GradeCard.tsx';
+import { useGetGradesForSchoolQuery } from '../state/api/grades.ts';
+import { whoamiAtom } from '../state/api/whoami.ts';
 
 export function GradePage() {
-  const backendDto = useUserQuery();
+  const [{ data: whoami }] = useAtom(whoamiAtom);
+  const grades = useGetGradesForSchoolQuery(whoami.schools[0].id);
 
   return (
-    <>
-      <h1>Klasse 📚🥳</h1>
-      <div>{backendDto}</div>
-    </>
+    <ContentSection>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px' }}>
+        <Typography level="h3" margin={0} lineHeight={1}>
+          Klassenübersicht
+        </Typography>
+        <AlternateButton>Klasse hinzufügen</AlternateButton>
+      </div>
+
+      <GradesCardWrapper>
+        {grades?.map((gradeDetailsDto) => {
+          return (
+            <GradeCard
+              key={gradeDetailsDto.grades.name}
+              className={gradeDetailsDto.grades.name}
+              teacherCount={gradeDetailsDto.teachers.length}
+              studentCount={gradeDetailsDto.students.length}
+            />
+          );
+        })}
+      </GradesCardWrapper>
+    </ContentSection>
   );
 }
+
+const GradesCardWrapper = styled('div')`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  width: 100%;
+`;

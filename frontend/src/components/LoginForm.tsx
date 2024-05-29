@@ -1,10 +1,11 @@
 import { ErrorOutline, Lock, Mail } from '@mui/icons-material';
 
-import { Button, FormControl, Input, Link, Snackbar, Stack, styled } from '@mui/joy';
+import { FormControl, Input, Link, Snackbar, Stack, styled } from '@mui/joy';
 import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserResourceService } from '../state/api/generated';
+import { AlternateButton } from './AlternateButton.tsx';
 
 export function LoginForm() {
   const [showInputError, setShowInputError] = useState(false);
@@ -90,7 +91,7 @@ export function LoginForm() {
               Passwort vergessen
             </Link>
           </LinkContainer>
-          <SubmitButton type={'submit'}>Anmelden</SubmitButton>
+          <AlternateButton type={'submit'}>Anmelden</AlternateButton>
         </Stack>
       </form>
 
@@ -124,35 +125,4 @@ const useLoginMutation = (email: string, password: string, onError: () => void) 
 
 const LinkContainer = styled('div')`
   width: 75%;
-`;
-
-const SubmitButton = styled(Button)`
-  &:hover {
-    background-color: #e191a1;
-    &::before {
-      height: 12px;
-    }
-
-    &::after {
-      height: 12px;
-    }
-  }
-
-  &::before {
-    transition: 0.3s;
-    content: '';
-    width: 2px;
-    height: 22px;
-    background: white;
-    margin-right: 30px;
-  }
-
-  &::after {
-    transition: 0.3s;
-    content: '';
-    width: 2px;
-    height: 22px;
-    background: white;
-    margin-left: 30px;
-  }
 `;
