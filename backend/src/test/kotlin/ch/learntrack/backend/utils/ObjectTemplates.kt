@@ -84,7 +84,7 @@ fun createGradeFromTemplate(
 )
 
 fun createUserSchoolFromTemplate(
-    userId: UUID = userAdminTemplateId,
+    userId: UUID,
     schoolId: UUID = schoolTemplateId,
 ) = UserSchool(
     userId = userId,
