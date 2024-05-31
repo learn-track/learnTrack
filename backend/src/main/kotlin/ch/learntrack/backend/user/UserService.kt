@@ -32,8 +32,8 @@ public class UserService(
 
     public fun findUserByEmail(email: String): User? = userDao.fetchOne(USER.E_MAIL, email.lowercase())
 
-    public fun getUsersByRoleAndSchoolId(role: UserRole, schoolId: UUID): List<UserDto> =
-        userDao.fetchAllUsersByRoleAndSchoolId(role, schoolId).map(::mapToDto)
+    public fun getUsersByRoleAndSchoolId(userRole: UserRole, schoolId: UUID): List<UserDto> =
+        userDao.fetchAllUsersByRoleAndSchoolId(userRole, schoolId).map(::mapToDto)
 
     public fun createUser(createUserDto: CreateUserDto): User {
         val emailLowerCase = createUserDto.email.trim().lowercase()

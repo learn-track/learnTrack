@@ -5,7 +5,7 @@ import ch.learntrack.backend.user.UserDto
 import ch.learntrack.backend.user.UserService
 import java.util.UUID
 
-public class TeacherService(
+public class AdminTeacherService(
     private val userService: UserService,
 ) {
     public fun getAllTeachersForSchool(schoolId: UUID): List<UserDto> =
