@@ -5,5 +5,5 @@ import org.springframework.context.support.beans
 
 public val gradeBeans: BeanDefinitionDsl = beans {
     bean<GradeResource>()
-    bean<GradeService>()
+    bean<AdminGradeService>()
 }

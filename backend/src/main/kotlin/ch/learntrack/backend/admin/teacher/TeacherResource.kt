@@ -11,11 +11,11 @@ import java.util.UUID
 
 @RestController
 @RequestMapping("$ADMIN_ROOT_URL/teacher")
-public class TeacherResource(private val teacherService: TeacherService) {
+public class TeacherResource(private val adminTeacherService: AdminTeacherService) {
     @PreAuthorize(
         "@UserAccessAuthorizer.hasUserAccessToSchool(#root.authentication.principal, #schoolId)",
     )
     @GetMapping
     public fun getAllTeachersForSchool(@RequestParam schoolId: UUID): List<UserDto> =
-        teacherService.getAllTeachersForSchool(schoolId)
+        adminTeacherService.getAllTeachersForSchool(schoolId)
 }

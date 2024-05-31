@@ -1,6 +1,6 @@
 package ch.learntrack.backend.persistence
 
-import ch.learntrack.backend.admin.grade.CreateGradeDto
+import ch.learntrack.backend.grade.CreateGradeDto
 import ch.learntrack.backend.persistence.tables.daos.GradeDao
 import ch.learntrack.backend.persistence.tables.pojos.Grade
 import ch.learntrack.backend.persistence.tables.references.GRADE

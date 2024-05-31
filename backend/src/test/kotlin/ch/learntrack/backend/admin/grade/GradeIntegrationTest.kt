@@ -2,6 +2,7 @@ package ch.learntrack.backend.admin.grade
 
 import ch.learntrack.backend.IntegrationTest
 import ch.learntrack.backend.admin.ADMIN_ROOT_URL
+import ch.learntrack.backend.grade.CreateGradeDto
 import ch.learntrack.backend.utils.createGradeFromTemplate
 import ch.learntrack.backend.utils.createSchoolFromTemplate
 import ch.learntrack.backend.utils.createAdminUserFromTemplate
