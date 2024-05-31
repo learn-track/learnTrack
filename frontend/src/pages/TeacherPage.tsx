@@ -1,12 +1,15 @@
-import { useUserQuery } from '../state/api/user.ts';
+import { Button, Typography } from '@mui/joy';
+import { ContentSection } from '../components/ContentSection.tsx';
+import { TeacherTable } from '../components/TeacherTable.tsx';
 
 export function TeacherPage() {
-  const backendDto = useUserQuery();
-
   return (
-    <>
-      <h1>Lehrer 📚🥳</h1>
-      <div>{backendDto}</div>
-    </>
+    <ContentSection>
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Typography level="h3">Lehrerübersicht</Typography>
+        <Button>Lehrer hinzufügen</Button>
+      </div>
+      <TeacherTable />
+    </ContentSection>
   );
 }
