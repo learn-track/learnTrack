@@ -5,24 +5,20 @@
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
-import type { CreateGradeDto } from '../models/CreateGradeDto';
-import type { Grade } from '../models/Grade';
-export class GradeResourceService {
+import type { UserDto } from '../models/UserDto';
+export class AdminTeacherResourceService {
   /**
    * @param schoolId
-   * @param requestBody
-   * @returns Grade OK
+   * @returns UserDto OK
    * @throws ApiError
    */
-  public static createGrade(schoolId: string, requestBody: CreateGradeDto): CancelablePromise<Grade> {
+  public static getAllTeachersForSchool(schoolId: string): CancelablePromise<Array<UserDto>> {
     return __request(OpenAPI, {
-      method: 'POST',
-      url: '/admin/grade/createGrade',
+      method: 'GET',
+      url: '/admin/teacher',
       query: {
         schoolId: schoolId,
       },
-      body: requestBody,
-      mediaType: 'application/json',
     });
   }
 }

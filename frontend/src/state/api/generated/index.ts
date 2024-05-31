@@ -9,7 +9,7 @@ export type { OpenAPIConfig } from './core/OpenAPI';
 
 export type { CreateGradeDto } from './models/CreateGradeDto';
 export type { CreateUserDto } from './models/CreateUserDto';
-export type { Grade } from './models/Grade';
+export type { GradeDetailsDto } from './models/GradeDetailsDto';
 export type { GradeDto } from './models/GradeDto';
 export type { LoginDto } from './models/LoginDto';
 export type { LoginResponseDto } from './models/LoginResponseDto';
@@ -17,6 +17,7 @@ export type { SchoolDto } from './models/SchoolDto';
 export type { UserDto } from './models/UserDto';
 export type { WhoamiDto } from './models/WhoamiDto';
 
-export { GradeResourceService } from './services/GradeResourceService';
+export { AdminGradeResourceService } from './services/AdminGradeResourceService';
+export { AdminTeacherResourceService } from './services/AdminTeacherResourceService';
 export { UserResourceService } from './services/UserResourceService';
 export { WhoamiResourceService } from './services/WhoamiResourceService';
