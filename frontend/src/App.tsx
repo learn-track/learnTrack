@@ -15,6 +15,7 @@ export function App() {
   `;
 
   const location = useLocation();
+
   const showHeader: boolean = location.pathname !== '/login' && location.pathname !== '/register';
 
   return (
