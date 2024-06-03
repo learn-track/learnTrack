@@ -11,6 +11,7 @@ export function Header() {
     localStorage.removeItem('token');
     window.location.href = '/login';
   };
+
   return (
     <HeaderContainer>
       <SideItems>

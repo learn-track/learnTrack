@@ -1,5 +1,7 @@
 import { keyframes } from '@emotion/react';
 import { Grid, Link, styled, Typography } from '@mui/joy';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import CertificateIcon from '../assets/login/certificate-icon.svg?react';
 import GraduationHatIcon from '../assets/login/graduation-hat-icon.svg?react';
 import LearnImageIcon from '../assets/login/learn-image.svg?react';
@@ -7,6 +9,14 @@ import { LoginForm } from '../components/LoginForm.tsx';
 import { LogoLight } from '../components/LogoLight.tsx';
 
 export function LoginPage() {
+  const navigate = useNavigate();
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      navigate('/');
+    }
+  }, []);
+
   return (
     <Grid container sx={{ flexGrow: 1, maxWidth: '100%', overflow: 'hidden' }}>
       <Grid xs={5.5} sx={{ position: 'relative' }}>

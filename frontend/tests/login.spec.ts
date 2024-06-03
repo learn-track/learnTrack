@@ -23,7 +23,7 @@ test.describe('Login page', () => {
     await page.screenshot({ path: 'lost-pixel/admin-landing-page.png', fullPage: true });
   });
 
-  test.fail('should redirect a user to landing page if logged in', async ({ page }) => {
+  test('should redirect a user to landing page if logged in', async ({ page }) => {
     await page.goto('/login');
 
     await page.getByPlaceholder('E-Mail').fill(testUser.admin.email);
