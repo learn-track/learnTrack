@@ -22,10 +22,11 @@ public class GradeService(private val gradeDao: GradeDao) : EntityService<GradeD
     public fun getGradesBySchoolId(schoolId: UUID): List<GradeDto> = gradeDao.fetchBySchoolId(schoolId).map(
         ::mapToDto)
 
-    public fun getGradeByNameAndSchoolId(createGradeDto: CreateGradeDto): Grade? = gradeDao.fetchByNameAndSchoolId(
-        createGradeDto,
+    public fun getGradeByNameAndSchoolId(schoolId: UUID, name: String): Grade? = gradeDao.fetchByNameAndSchoolId(
+        schoolId,
+        name,
     )
 
-    public fun isGradeNameExistingInThisSchool(createGradeDto: CreateGradeDto): Boolean =
-        getGradeByNameAndSchoolId(createGradeDto) != null
+    public fun isGradeNameExistingInThisSchool(schoolId: UUID, name: String): Boolean =
+        getGradeByNameAndSchoolId(schoolId, name) != null
 }

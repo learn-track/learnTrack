@@ -1,8 +1,6 @@
 package ch.learntrack.backend.admin.grade
 
 import ch.learntrack.backend.admin.ADMIN_ROOT_URL
-import ch.learntrack.backend.grade.CreateGradeDto
-import ch.learntrack.backend.grade.GradeDto
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
@@ -14,22 +12,23 @@ import java.util.UUID
 
 @RestController
 @RequestMapping("$ADMIN_ROOT_URL/grade")
-public class GradeResource(
+public class AdminGradeResource(
     private val adminGradeService: AdminGradeService,
 ) {
     @PreAuthorize(
         "@UserAccessAuthorizer.hasUserAccessToSchool(#root.authentication.principal, #schoolId)",
     )
     @GetMapping
-    public fun getGrades(@RequestParam schoolId: UUID): GradeDetailsDto =
-        adminGradeService.getGrades(schoolId)
+    public fun getAllGradesForSchool(@RequestParam schoolId: UUID): List<GradeDetailsDto> =
+        adminGradeService.getAllGradesForSchool(schoolId)
 
     @PreAuthorize(
         "@UserAccessAuthorizer.hasUserAccessToSchool(#root.authentication.principal, #schoolId)",
     )
     @PostMapping("/createGrade")
-    public fun createGrade(@RequestParam schoolId: UUID, @RequestBody createGradeDto: CreateGradeDto): GradeDto =
+    public fun createGrade(@RequestParam schoolId: UUID, @RequestBody createGradeDto: CreateGradeDto) {
         adminGradeService.createGrade(
             createGradeDto,
         )
+    }
 }
