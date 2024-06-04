@@ -1,7 +1,7 @@
 package ch.learntrack.backend.admin
 
 import ch.learntrack.backend.IntegrationTest
-import ch.learntrack.backend.grade.CreateGradeDto
+import ch.learntrack.backend.admin.grade.CreateGradeDto
 import ch.learntrack.backend.utils.createSchoolFromTemplate
 import ch.learntrack.backend.utils.createStudentUserFromTemplate
 import ch.learntrack.backend.utils.createTeacherUserFromTemplate

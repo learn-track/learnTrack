@@ -1,8 +1,6 @@
 package ch.learntrack.backend.admin.grade
 
 import ch.learntrack.backend.common.LearnTrackConflictException
-import ch.learntrack.backend.grade.CreateGradeDto
-import ch.learntrack.backend.grade.GradeDto
 import ch.learntrack.backend.grade.GradeService
 import ch.learntrack.backend.persistence.UserRole
 import ch.learntrack.backend.persistence.tables.daos.GradeDao
@@ -17,13 +15,17 @@ public class AdminGradeService(
     private val userService: UserService,
     private val gradeDao: GradeDao,
 ) {
-    public fun getGrades(schoolId: UUID): GradeDetailsDto = GradeDetailsDto(
-        grades = gradeService.getGradesBySchoolId(schoolId),
-        users = userService.getUsersByRoleAndSchoolId(UserRole.STUDENT, schoolId),
-    )
+    public fun getAllGradesForSchool(schoolId: UUID): List<GradeDetailsDto> =
+        gradeService.getGradesBySchoolId(schoolId).map { grade ->
+            GradeDetailsDto(
+                grades = grade,
+                students = userService.getUsersByRoleAndGradeId(UserRole.STUDENT, grade.id),
+                teachers = userService.getUsersByRoleAndGradeId(UserRole.TEACHER, grade.id),
+            )
+        }
 
-    public fun createGrade(createGradeDto: CreateGradeDto): GradeDto {
-        if (gradeService.isGradeNameExistingInThisSchool(createGradeDto)) {
+    public fun createGrade(createGradeDto: CreateGradeDto) {
+        if (gradeService.isGradeNameExistingInThisSchool(createGradeDto.schoolId, createGradeDto.name)) {
             throw LearnTrackConflictException("Grade with name ${createGradeDto.name} already exists in this school")
         }
 
@@ -36,7 +38,5 @@ public class AdminGradeService(
         )
 
         gradeDao.insert(grade)
-
-        return gradeService.mapToDto(grade)
     }
 }

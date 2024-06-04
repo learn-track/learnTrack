@@ -7,8 +7,3 @@ public data class GradeDto(
     val name: String,
     val schoolId: UUID,
 )
-
-public data class CreateGradeDto(
-    val name: String,
-    val schoolId: UUID,
-)
