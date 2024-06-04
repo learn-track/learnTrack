@@ -21,7 +21,6 @@ export function App() {
     <Wrapper>
       {showHeader && <Header />}
       <Routes>
-        {/*<Route path={'/'} element={<LandingPage />} />*/}
         <Route path={'/'} element={<Navigate to={'/grades'} />} />
         <Route path={'/login'} element={<LoginPage />} />
         <Route path={'/grades'} element={<GradePage />} />
