@@ -27,15 +27,15 @@ jobs:
       - name: Create version file
         uses: finnp/create-file-action@master
         env:
-          FILE_NAME: 'version'
-          FILE_DATA: 'LEARNTRACK_TAG=${{ steps.tag.outputs.TAG }}'
+          FILE_NAME: 'learntrack_version'
+          FILE_DATA: 'VERSION_TAG=${{ steps.tag.outputs.TAG }}'
 
       - name: Push version file
         uses: dmnemec/copy_file_to_another_repo_action@main
         env:
           API_TOKEN_GITHUB: ${{ secrets.LEARNTRACK_VERSION_BUMP }}
         with:
-          source_file: 'version'
+          source_file: 'learntrack_version'
           destination_repo: 'learn-track/learnTrack-Deployment'
           destination_branch: ${{ vars.TARGET_BRANCH }}
           user_email: 'nilsrothe05@icloud.com'
