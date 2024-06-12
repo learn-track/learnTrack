@@ -5,11 +5,18 @@ import ch.learntrack.backend.admin.ADMIN_ROOT_URL
 import ch.learntrack.backend.utils.createGradeFromTemplate
 import ch.learntrack.backend.utils.createSchoolFromTemplate
 import ch.learntrack.backend.utils.createAdminUserFromTemplate
+import ch.learntrack.backend.utils.createStudentUserFromTemplate
+import ch.learntrack.backend.utils.createTeacherUserFromTemplate
+import ch.learntrack.backend.utils.createUserGradeFromTemplate
 import ch.learntrack.backend.utils.createUserSchoolFromTemplate
 import ch.learntrack.backend.utils.deleteAll
+import ch.learntrack.backend.utils.gradeTemplateId
 import ch.learntrack.backend.utils.runInTransaction
 import ch.learntrack.backend.utils.schoolTemplateId
 import ch.learntrack.backend.utils.userAdminTemplateId
+import ch.learntrack.backend.utils.userStudentTemplateId
+import ch.learntrack.backend.utils.userTeacherTemplateId
+import org.assertj.core.api.Assertions.assertThat
 import org.springframework.http.HttpStatus
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
@@ -17,7 +24,7 @@ import org.junit.jupiter.api.Test
 import org.springframework.web.reactive.function.BodyInserters
 import java.util.UUID
 
-private const val USER_NOT_ASSIGNED_TO_SCHOOL = "40d8b918-8f80-4b92-a3f5-4548d7883c54"
+private const val USER_NOT_ASSIGNED_TO_SCHOOL = "40d8b918-8f80-4b92-a3f5-4548d7883c58"
 
 class GradeIntegrationTest: IntegrationTest() {
 
@@ -29,7 +36,13 @@ class GradeIntegrationTest: IntegrationTest() {
             schoolDao.insert(createSchoolFromTemplate())
             gradeDao.insert(createGradeFromTemplate())
             userDao.insert(createAdminUserFromTemplate())
+            userDao.insert(createTeacherUserFromTemplate())
+            userDao.insert(createStudentUserFromTemplate())
             userSchoolDao.insert(createUserSchoolFromTemplate(userAdminTemplateId))
+            userSchoolDao.insert(createUserSchoolFromTemplate(userTeacherTemplateId))
+            userSchoolDao.insert(createUserSchoolFromTemplate(userStudentTemplateId))
+            userGradeDao.insert(createUserGradeFromTemplate(userTeacherTemplateId))
+            userGradeDao.insert(createUserGradeFromTemplate(userStudentTemplateId))
             userDao.insert(createAdminUserFromTemplate
                 (
                     id = userNotAssignedToSchoolId,
@@ -51,8 +64,8 @@ class GradeIntegrationTest: IntegrationTest() {
     }
 
     @Test
-    fun `should get all grades for assigned user`() {
-        webClient.get()
+    fun `should get GradeDetailsDto for assigned user`() {
+        val response = webClient.get()
             .uri { uriBuilder ->
                 uriBuilder
                     .path("$ADMIN_ROOT_URL/grade")
@@ -63,6 +76,57 @@ class GradeIntegrationTest: IntegrationTest() {
             .exchange()
             .expectStatus()
             .isOk
+            .expectBodyList(GradeDetailsDto::class.java)
+            .returnResult()
+            .responseBody
+
+        assertThat(response).isNotNull
+        assertThat(response).hasSize(1)
+    }
+
+    @Test
+    fun `should get all grades for assigned user`() {
+        val response = webClient.get()
+            .uri { uriBuilder ->
+                uriBuilder
+                    .path("$ADMIN_ROOT_URL/grade")
+                    .queryParam("schoolId", schoolTemplateId)
+                    .build()
+            }
+            .headers { headers -> headers.setBearerAuth(tokenService.createJwtToken(userAdminTemplateId)) }
+            .exchange()
+            .expectStatus()
+            .isOk
+            .expectBodyList(GradeDetailsDto::class.java)
+            .returnResult()
+            .responseBody
+
+        assertThat(response).isNotNull
+        assertThat(response).hasSize(1)
+        assertThat(response?.first()?.grades?.id).isEqualTo(gradeTemplateId)
+    }
+
+    @Test
+    fun `should get all users for assigned user`() {
+        val response = webClient.get()
+            .uri { uriBuilder ->
+                uriBuilder
+                    .path("$ADMIN_ROOT_URL/grade")
+                    .queryParam("schoolId", schoolTemplateId)
+                    .build()
+            }
+            .headers { headers -> headers.setBearerAuth(tokenService.createJwtToken(userAdminTemplateId)) }
+            .exchange()
+            .expectStatus()
+            .isOk
+            .expectBodyList(GradeDetailsDto::class.java)
+            .returnResult()
+            .responseBody
+
+        assertThat(response).isNotNull
+        assertThat(response).hasSize(1)
+        assertThat(response?.first()?.teachers?.first()?.id).isEqualTo(userTeacherTemplateId)
+        assertThat(response?.first()?.students?.first()?.id).isEqualTo(userStudentTemplateId)
     }
 
     @Test
