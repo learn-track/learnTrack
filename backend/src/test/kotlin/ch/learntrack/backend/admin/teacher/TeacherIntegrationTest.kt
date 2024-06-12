@@ -2,6 +2,7 @@ package ch.learntrack.backend.admin.teacher
 
 import ch.learntrack.backend.IntegrationTest
 import ch.learntrack.backend.admin.ADMIN_ROOT_URL
+import ch.learntrack.backend.backoffice.user.UserDto
 import ch.learntrack.backend.utils.createAdminUserFromTemplate
 import ch.learntrack.backend.utils.createSchoolFromTemplate
 import ch.learntrack.backend.utils.createTeacherUserFromTemplate
@@ -11,6 +12,7 @@ import ch.learntrack.backend.utils.runInTransaction
 import ch.learntrack.backend.utils.schoolTemplateId
 import ch.learntrack.backend.utils.userAdminTemplateId
 import ch.learntrack.backend.utils.userTeacherTemplateId
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -52,7 +54,7 @@ class TeacherIntegrationTest : IntegrationTest() {
 
     @Test
     fun `should get all teachers for assigned school`() {
-        webClient.get()
+        val response = webClient.get()
             .uri { uriBuilder ->
                 uriBuilder
                     .path("$ADMIN_ROOT_URL/teacher")
@@ -63,8 +65,13 @@ class TeacherIntegrationTest : IntegrationTest() {
             .exchange()
             .expectStatus()
             .isOk
-            .expectBody()
-            .jsonPath("$.length()").isEqualTo(1)
+            .expectBodyList(UserDto::class.java)
+            .returnResult()
+            .responseBody
+
+        assertThat(response).isNotNull
+        assertThat(response).hasSize(1)
+        assertThat(response?.first()?.id).isEqualTo(userTeacherTemplateId)
     }
 
     @Test
