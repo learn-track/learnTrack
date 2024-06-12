@@ -19,7 +19,7 @@ public fun GradeDao.fetchGradesForUserByUserId(userId: UUID): MutableList<Grade>
     .fetch()
     .into(Grade::class.java)
 
-public fun GradeDao.fetchByNameAndSchoolId(schoolId: UUID, name: String): Grade? = ctx()
+public fun GradeDao.fetchByNameAndSchoolId(name: String, schoolId: UUID): Grade? = ctx()
     .select()
     .from(GRADE)
     .where(GRADE.SCHOOL_ID.eq(schoolId))

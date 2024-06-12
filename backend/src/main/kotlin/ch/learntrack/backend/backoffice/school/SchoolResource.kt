@@ -14,7 +14,6 @@ public class SchoolResource(private val schoolService: SchoolService) {
     public fun getAllSchools(): List<SchoolDto> = schoolService.getAllSchools()
 
     @PostMapping("/create")
-    public fun createSchool(@RequestBody createSchoolDto: CreateSchoolDto) {
+    public fun createSchool(@RequestBody createSchoolDto: CreateSchoolDto): Unit =
         schoolService.createSchool(createSchoolDto)
-    }
 }
