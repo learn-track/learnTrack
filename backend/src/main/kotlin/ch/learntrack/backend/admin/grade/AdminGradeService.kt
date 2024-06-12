@@ -25,8 +25,10 @@ public class AdminGradeService(
         }
 
     public fun createGrade(createGradeDto: CreateGradeDto) {
-        if (gradeService.isGradeNameExistingInThisSchool(createGradeDto.schoolId, createGradeDto.name)) {
-            throw LearnTrackConflictException("Grade with name ${createGradeDto.name} already exists in this school")
+        if (gradeService.isGradeExistingInSchool(createGradeDto.name, createGradeDto.schoolId)) {
+            throw LearnTrackConflictException(
+                "Grade with name ${createGradeDto.name} already exists in school ${createGradeDto.schoolId}",
+            )
         }
 
         val grade = Grade(
