@@ -24,32 +24,47 @@ import org.junit.jupiter.api.Test
 import org.springframework.web.reactive.function.BodyInserters
 import java.util.UUID
 
-private const val USER_NOT_ASSIGNED_TO_SCHOOL = "40d8b918-8f80-4b92-a3f5-4548d7883c58"
+private const val ETH_SCHOOL = "40d8b918-8f80-4b92-a3f5-4548d7883c59"
+private const val ETH_GRADE = "40d8b918-8f80-4b92-a3f5-4548d7883c60"
+private const val USER_ASSIGNED_TO_DIFFERENT_SCHOOL = "40d8b918-8f80-4b92-a3f5-4548d7883c58"
 
 class GradeIntegrationTest: IntegrationTest() {
 
-    private val userNotAssignedToSchoolId = UUID.fromString(USER_NOT_ASSIGNED_TO_SCHOOL)
+    private val ethSchoolId = UUID.fromString(ETH_SCHOOL)
+    private val ethGradeId = UUID.fromString(ETH_GRADE)
+    private val userAssignedToDifferentSchoolId = UUID.fromString(USER_ASSIGNED_TO_DIFFERENT_SCHOOL)
 
     @BeforeEach
     fun setUp() {
         transactionManager.runInTransaction {
+            // Schools
             schoolDao.insert(createSchoolFromTemplate())
+            schoolDao.insert(createSchoolFromTemplate(id = ethSchoolId, name = "ETH"))
+            // Grades
             gradeDao.insert(createGradeFromTemplate())
+            gradeDao.insert(createGradeFromTemplate(id = ethGradeId, name = "Grade 1A", schoolId = ethSchoolId))
+            // Users
             userDao.insert(createAdminUserFromTemplate())
             userDao.insert(createTeacherUserFromTemplate())
             userDao.insert(createStudentUserFromTemplate())
+            userDao.insert(createAdminUserFromTemplate
+                (
+                id = userAssignedToDifferentSchoolId,
+                firstName = "test2",
+                lastName = "user2",
+                eMail = "test2user@gmail.com",
+            ))
+            // User and school assignments
             userSchoolDao.insert(createUserSchoolFromTemplate(userAdminTemplateId))
             userSchoolDao.insert(createUserSchoolFromTemplate(userTeacherTemplateId))
             userSchoolDao.insert(createUserSchoolFromTemplate(userStudentTemplateId))
+            userSchoolDao.insert(createUserSchoolFromTemplate(userId = userAssignedToDifferentSchoolId, schoolId = ethSchoolId))
+            userSchoolDao.insert(createUserSchoolFromTemplate(userId = userTeacherTemplateId, schoolId = ethSchoolId))
+            // User and grade assignments
             userGradeDao.insert(createUserGradeFromTemplate(userTeacherTemplateId))
             userGradeDao.insert(createUserGradeFromTemplate(userStudentTemplateId))
-            userDao.insert(createAdminUserFromTemplate
-                (
-                    id = userNotAssignedToSchoolId,
-                    firstName = "test2",
-                    lastName = "user2",
-                    eMail = "test2user@gmail.com",
-                ))
+            userGradeDao.insert(createUserGradeFromTemplate(userId = userTeacherTemplateId, gradeId = ethGradeId)
+            )
         }
     }
 
@@ -103,6 +118,7 @@ class GradeIntegrationTest: IntegrationTest() {
 
         assertThat(response).isNotNull
         assertThat(response).hasSize(1)
+        assertThat(response?.first()?.grades?.id).isNotEqualTo(ethGradeId)
         assertThat(response?.first()?.grades?.id).isEqualTo(gradeTemplateId)
     }
 
@@ -130,6 +146,47 @@ class GradeIntegrationTest: IntegrationTest() {
     }
 
     @Test
+    fun `should get same teacher for assigned users in different schools`() {
+        val response1 = webClient.get()
+            .uri { uriBuilder ->
+                uriBuilder
+                    .path("$ADMIN_ROOT_URL/grade")
+                    .queryParam("schoolId", schoolTemplateId)
+                    .build()
+            }
+            .headers { headers -> headers.setBearerAuth(tokenService.createJwtToken(userAdminTemplateId)) }
+            .exchange()
+            .expectStatus()
+            .isOk
+            .expectBodyList(GradeDetailsDto::class.java)
+            .returnResult()
+            .responseBody
+
+        assertThat(response1).isNotNull
+        assertThat(response1).hasSize(1)
+        assertThat(response1?.first()?.teachers?.first()?.id).isEqualTo(userTeacherTemplateId)
+
+        val response2 = webClient.get()
+            .uri { uriBuilder ->
+                uriBuilder
+                    .path("$ADMIN_ROOT_URL/grade")
+                    .queryParam("schoolId", ethSchoolId)
+                    .build()
+            }
+            .headers { headers -> headers.setBearerAuth(tokenService.createJwtToken(userAssignedToDifferentSchoolId)) }
+            .exchange()
+            .expectStatus()
+            .isOk
+            .expectBodyList(GradeDetailsDto::class.java)
+            .returnResult()
+            .responseBody
+
+        assertThat(response2).isNotNull
+        assertThat(response2).hasSize(1)
+        assertThat(response2?.first()?.teachers?.first()?.id).isEqualTo(userTeacherTemplateId)
+    }
+
+    @Test
     fun `should not get grades if user not assigned to school`() {
         webClient.get()
             .uri { uriBuilder ->
@@ -138,7 +195,7 @@ class GradeIntegrationTest: IntegrationTest() {
                     .queryParam("schoolId", schoolTemplateId)
                     .build()
             }
-            .headers { headers -> headers.setBearerAuth(tokenService.createJwtToken(userNotAssignedToSchoolId)) }
+            .headers { headers -> headers.setBearerAuth(tokenService.createJwtToken(userAssignedToDifferentSchoolId)) }
             .exchange()
             .expectStatus()
             .isForbidden
@@ -201,7 +258,7 @@ class GradeIntegrationTest: IntegrationTest() {
                     .queryParam("schoolId", schoolTemplateId)
                     .build()
             }
-            .headers { headers -> headers.setBearerAuth(tokenService.createJwtToken(userNotAssignedToSchoolId)) }
+            .headers { headers -> headers.setBearerAuth(tokenService.createJwtToken(userAssignedToDifferentSchoolId)) }
             .body(BodyInserters.fromValue(createGradeDto))
             .exchange()
             .expectStatus()
