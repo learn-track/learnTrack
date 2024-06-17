@@ -16,5 +16,5 @@ public class AdminStudentResource(private val adminStudentService: AdminStudentS
     )
     @GetMapping
     public fun getAllStudentsWithDetailsBySchoolId(@RequestParam schoolId: UUID): List<StudentDetailsDto> =
-        adminStudentService.getAllStudentsForSchool(schoolId)
+        adminStudentService.getAllStudentsWithDetailsForSchool(schoolId)
 }

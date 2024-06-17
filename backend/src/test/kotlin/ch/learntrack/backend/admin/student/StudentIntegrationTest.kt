@@ -85,27 +85,6 @@ class StudentIntegrationTest : IntegrationTest() {
 
         assertThat(response).isNotNull
         assertThat(response).hasSize(2)
-    }
-
-    @Test
-    fun `should get same grade for different users for assigned user`() {
-        val response = webClient.get()
-            .uri { uriBuilder ->
-                uriBuilder
-                    .path("$ADMIN_ROOT_URL/student")
-                    .queryParam("schoolId", schoolTemplateId)
-                    .build()
-            }
-            .headers { headers -> headers.setBearerAuth(tokenService.createJwtToken(userAdminTemplateId)) }
-            .exchange()
-            .expectStatus()
-            .isOk
-            .expectBodyList(StudentDetailsDto::class.java)
-            .returnResult()
-            .responseBody
-
-        assertThat(response).isNotNull
-        assertThat(response).hasSize(2)
         assertThat(response)
             .anyMatch { it.grade.id == gradeTemplateId }
             .noneMatch { it.user.id == userNotAssignedToSchoolId }
