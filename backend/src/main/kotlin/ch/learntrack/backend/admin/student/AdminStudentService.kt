@@ -9,7 +9,7 @@ public class AdminStudentService(
     private val userService: UserService,
     private val gradeService: GradeService,
 ) {
-    public fun getAllStudentsForSchool(schoolId: UUID): List<StudentDetailsDto> =
+    public fun getAllStudentsWithDetailsForSchool(schoolId: UUID): List<StudentDetailsDto> =
         userService.getUsersByRoleAndSchoolId(UserRole.STUDENT, schoolId).map { user ->
             StudentDetailsDto(
                 user = user,
