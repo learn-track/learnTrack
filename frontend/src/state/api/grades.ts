@@ -6,6 +6,5 @@ export const useGetGradesForSchoolQuery = (schoolId: string) => {
     queryKey: ['gradeList', schoolId],
     queryFn: () => AdminGradeResourceService.getAllGradesWithDetailsBySchoolId(schoolId),
   });
-
   return data;
 };
