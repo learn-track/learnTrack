@@ -14,10 +14,12 @@ export type { GradeDto } from './models/GradeDto';
 export type { LoginDto } from './models/LoginDto';
 export type { LoginResponseDto } from './models/LoginResponseDto';
 export type { SchoolDto } from './models/SchoolDto';
+export type { StudentDetailsDto } from './models/StudentDetailsDto';
 export type { UserDto } from './models/UserDto';
 export type { WhoamiDto } from './models/WhoamiDto';
 
 export { AdminGradeResourceService } from './services/AdminGradeResourceService';
+export { AdminStudentResourceService } from './services/AdminStudentResourceService';
 export { AdminTeacherResourceService } from './services/AdminTeacherResourceService';
 export { UserResourceService } from './services/UserResourceService';
 export { WhoamiResourceService } from './services/WhoamiResourceService';
