@@ -2,6 +2,7 @@ package ch.learntrack.backend.admin.student
 
 import ch.learntrack.backend.grade.GradeService
 import ch.learntrack.backend.persistence.UserRole
+import ch.learntrack.backend.user.CreateUserDto
 import ch.learntrack.backend.user.UserService
 import java.util.UUID
 
@@ -16,4 +17,17 @@ public class AdminStudentService(
                 grade = gradeService.getGradesForUserByUserId(user.id).first(),
             )
         }
+
+    public fun createStudent(createStudentDto: CreateStudentDto) {
+        val createUserDto = CreateUserDto(
+            firstname = createStudentDto.firstname,
+            middlename = createStudentDto.middlename,
+            lastname = createStudentDto.lastname,
+            email = createStudentDto.email,
+            birthDate = createStudentDto.birthDate,
+            password = createStudentDto.password,
+        )
+
+        userService.createUser(createUserDto, UserRole.STUDENT, createStudentDto.schoolId, createStudentDto.gradeId)
+    }
 }

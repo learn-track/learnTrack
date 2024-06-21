@@ -28,5 +28,6 @@ public data class CreateUserDto(
     val middlename: String?,
     val lastname: String,
     val email: String,
+    val birthDate: LocalDateTime?,
     val password: String,
 )

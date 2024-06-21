@@ -1,6 +1,7 @@
 package ch.learntrack.backend.user
 
 import ch.learntrack.backend.common.LearnTrackAuthorizationException
+import ch.learntrack.backend.persistence.UserRole
 import ch.learntrack.backend.security.PasswordService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
@@ -35,7 +36,7 @@ public class UserResource(
 
     @PostMapping("/register")
     public fun register(@RequestBody createUserDto: CreateUserDto): LoginResponseDto {
-        val user = userService.createUser(createUserDto)
+        val user = userService.createUser(createUserDto, UserRole.TEACHER, null, null)
 
         return LoginResponseDto(
             token = tokenService.createJwtToken(user.id),
