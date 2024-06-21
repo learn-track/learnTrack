@@ -26,3 +26,11 @@ public fun UserDao.fetchAllUsersByRoleAndGradeId(userRole: UserRole, gradeId: UU
     .where(USER.USER_ROLE.eq(userRole))
     .fetch()
     .into(User::class.java)
+
+public fun UserDao.searchUserByUserRoleAndEmailSearchQuery(email: String, userRole: UserRole): List<User> = ctx()
+    .select()
+    .from(USER)
+    .where(USER.E_MAIL.likeIgnoreCase("%$email%"))
+    .and(USER.USER_ROLE.eq(userRole))
+    .fetch()
+    .into(User::class.java)
