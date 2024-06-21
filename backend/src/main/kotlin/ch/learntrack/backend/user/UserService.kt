@@ -6,6 +6,7 @@ import ch.learntrack.backend.common.LearnTrackConflictException
 import ch.learntrack.backend.persistence.UserRole
 import ch.learntrack.backend.persistence.fetchAllUsersByRoleAndGradeId
 import ch.learntrack.backend.persistence.fetchAllUsersByRoleAndSchoolId
+import ch.learntrack.backend.persistence.searchUserByUserRoleAndEmailSearchQuery
 import ch.learntrack.backend.persistence.tables.daos.UserDao
 import ch.learntrack.backend.persistence.tables.daos.UserGradeDao
 import ch.learntrack.backend.persistence.tables.daos.UserSchoolDao
@@ -18,6 +19,7 @@ import ch.learntrack.backend.security.PasswordService
 import ch.learntrack.backend.utils.isEmailValid
 import ch.learntrack.backend.utils.isPasswordValid
 import ch.learntrack.backend.utils.sanitizeInputString
+
 import java.time.LocalDateTime
 import java.util.UUID
 
@@ -44,6 +46,9 @@ public class UserService(
 
     public fun getUsersByRoleAndGradeId(userRole: UserRole, gradeId: UUID): List<UserDto> =
         userDao.fetchAllUsersByRoleAndGradeId(userRole, gradeId).map(::mapToDto)
+
+    public fun searchForUserByEmail(email: String, userRole: UserRole): List<User> =
+        userDao.searchUserByUserRoleAndEmailSearchQuery(email, userRole)
 
     public fun createUser(
         createUserDto: CreateUserDto,
