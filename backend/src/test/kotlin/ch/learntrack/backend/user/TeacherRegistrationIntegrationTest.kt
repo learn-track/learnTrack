@@ -1,6 +1,7 @@
 package ch.learntrack.backend.user
 
 import ch.learntrack.backend.IntegrationTest
+import ch.learntrack.backend.persistence.UserRole
 import ch.learntrack.backend.persistence.tables.references.USER
 import ch.learntrack.backend.utils.createAdminUserFromTemplate
 import ch.learntrack.backend.utils.deleteAll
@@ -75,6 +76,7 @@ class TeacherRegistrationIntegrationTest: IntegrationTest(){
             middlename = "Doe",
             lastname = "test",
             email = "test.user@gmail.com",
+            birthDate = null,
             password = "test!1234H*",
         )
 
@@ -91,6 +93,7 @@ class TeacherRegistrationIntegrationTest: IntegrationTest(){
         val user1 = userDao.fetchOne(USER.E_MAIL, createUserDto1.email)
 
         assertThat(user1).isNotNull
+        assertThat(user1?.userRole).isEqualTo(UserRole.TEACHER)
         assertThat(user1?.firstName).isEqualTo(createUserDto1.firstname)
         assertThat(user1?.middleName).isEqualTo(createUserDto1.middlename)
         assertThat(user1?.lastName).isEqualTo(createUserDto1.lastname)
@@ -103,6 +106,7 @@ class TeacherRegistrationIntegrationTest: IntegrationTest(){
             middlename = null,
             lastname = "test",
             email = "user.test@gmail.com",
+            birthDate = null,
             password = "test!1234H*",
         )
 
@@ -119,6 +123,7 @@ class TeacherRegistrationIntegrationTest: IntegrationTest(){
         val user2 = userDao.fetchOne(USER.E_MAIL, createUserDto2.email)
 
         assertThat(user2).isNotNull
+        assertThat(user2?.userRole).isEqualTo(UserRole.TEACHER)
         assertThat(user2?.firstName).isEqualTo(createUserDto2.firstname)
         assertThat(user2?.middleName).isEqualTo(createUserDto2.middlename)
         assertThat(user2?.lastName).isEqualTo(createUserDto2.lastname)
@@ -131,6 +136,7 @@ class TeacherRegistrationIntegrationTest: IntegrationTest(){
             middlename = null,
             lastname = "bene",
             email = "BENEDICT-EDU@GMAIL.COM",
+            birthDate = null,
             password = "test!1234H*",
         )
 
@@ -147,6 +153,7 @@ class TeacherRegistrationIntegrationTest: IntegrationTest(){
         val user3 = userDao.fetchOne(USER.E_MAIL, createUserDto3.email.lowercase())
 
         assertThat(user3).isNotNull
+        assertThat(user3?.userRole).isEqualTo(UserRole.TEACHER)
         assertThat(user3?.firstName).isEqualTo(createUserDto3.firstname)
         assertThat(user3?.middleName).isEqualTo(createUserDto3.middlename)
         assertThat(user3?.lastName).isEqualTo(createUserDto3.lastname)
@@ -162,6 +169,7 @@ class TeacherRegistrationIntegrationTest: IntegrationTest(){
             middlename = "Doe",
             lastname = "test",
             email = "@gmail.com",
+            birthDate = null,
             password = "test!1234H*",
         )
 
@@ -181,6 +189,7 @@ class TeacherRegistrationIntegrationTest: IntegrationTest(){
             middlename = "Doe",
             lastname = "test",
             email = "test.usergmail.com",
+            birthDate = null,
             password = "test!1234H*",
         )
 
@@ -196,6 +205,7 @@ class TeacherRegistrationIntegrationTest: IntegrationTest(){
             middlename = "Doe",
             lastname = "test",
             email = "test.user@gmail.",
+            birthDate = null,
             password = "test!1234H*",)
 
         webClient.post()
@@ -210,6 +220,7 @@ class TeacherRegistrationIntegrationTest: IntegrationTest(){
             middlename = "Doe",
             lastname = "test",
             email = "testuser@gmailcom",
+            birthDate = null,
             password = "test!1234H*",
         )
 
@@ -223,7 +234,7 @@ class TeacherRegistrationIntegrationTest: IntegrationTest(){
 
     @Test
     fun `should throw exception if email is already existing`() {
-        val userDtoEmailExisting = CreateUserDto("John", "Doe", "test", "testuser@gmail.com", "test")
+        val userDtoEmailExisting = CreateUserDto("John", "Doe", "test", "testuser@gmail.com", null,"test")
 
         webClient.post()
             .uri("/user/register")
@@ -242,6 +253,7 @@ class TeacherRegistrationIntegrationTest: IntegrationTest(){
             middlename = "Doe",
             lastname = "test",
             email = "user.test@gmail.com",
+            birthDate = null,
             password = "test"
         )
 
@@ -258,6 +270,7 @@ class TeacherRegistrationIntegrationTest: IntegrationTest(){
             middlename = "Doe",
             lastname = "test",
             email = "user2.test@gmail.com",
+            birthDate = null,
             password = "testdasdadad"
         )
 
@@ -274,6 +287,7 @@ class TeacherRegistrationIntegrationTest: IntegrationTest(){
             middlename = "Doe",
             lastname = "test",
             email = "user3.test@gmail.com",
+            birthDate = null,
             password = "TestDddasdd"
         )
 
@@ -290,6 +304,7 @@ class TeacherRegistrationIntegrationTest: IntegrationTest(){
             middlename = "Doe",
             lastname = "test",
             email = "user4.test@gmail.com",
+            birthDate = null,
             password = "TestF23213"
         )
 
@@ -306,6 +321,7 @@ class TeacherRegistrationIntegrationTest: IntegrationTest(){
             middlename = "Doe",
             lastname = "test",
             email = "user5.test@gmail.com",
+            birthDate = null,
             password = "*%=)+23213"
         )
 
@@ -324,6 +340,7 @@ class TeacherRegistrationIntegrationTest: IntegrationTest(){
             middlename = "don",
             lastname = "test",
             email = "user.test@gmail.com",
+            birthDate = null,
             password = "test!1234H*",
         )
 
@@ -340,6 +357,7 @@ class TeacherRegistrationIntegrationTest: IntegrationTest(){
         val user1 = userDao.fetchOne(USER.E_MAIL, createUserDto1.email)
 
         assertThat(user1).isNotNull
+        assertThat(user1?.userRole).isEqualTo(UserRole.TEACHER)
         assertThat(user1?.firstName).isEqualTo(createUserDto1.firstname.sanitizeInputString())
         assertThat(user1?.middleName).isEqualTo(createUserDto1.middlename)
         assertThat(user1?.lastName).isEqualTo(createUserDto1.lastname)
@@ -352,6 +370,7 @@ class TeacherRegistrationIntegrationTest: IntegrationTest(){
             middlename = "don",
             lastname = "SELECT * FROM users WHERE user.name = 'dasdad';",
             email = "user2.test@gmail.com",
+            birthDate = null,
             password = "test!1234H*",
         )
 
@@ -368,6 +387,7 @@ class TeacherRegistrationIntegrationTest: IntegrationTest(){
         val user2 = userDao.fetchOne(USER.E_MAIL, createUserDto2.email)
 
         assertThat(user2).isNotNull
+        assertThat(user2?.userRole).isEqualTo(UserRole.TEACHER)
         assertThat(user2?.firstName).isEqualTo(createUserDto2.firstname)
         assertThat(user2?.middleName).isEqualTo(createUserDto2.middlename)
         assertThat(user2?.lastName).isEqualTo(createUserDto2.lastname.sanitizeInputString())
@@ -380,6 +400,7 @@ class TeacherRegistrationIntegrationTest: IntegrationTest(){
             middlename = "don",
             lastname = "von",
             email = "user3.test@gmail.com",
+            birthDate = null,
             password = "test!1234H*",
         )
 
@@ -396,6 +417,7 @@ class TeacherRegistrationIntegrationTest: IntegrationTest(){
         val user3 = userDao.fetchOne(USER.E_MAIL, createUserDto3.email)
 
         assertThat(user3).isNotNull
+        assertThat(user3?.userRole).isEqualTo(UserRole.TEACHER)
         assertThat(user3?.firstName).isEqualTo(createUserDto3.firstname.sanitizeInputString())
         assertThat(user3?.middleName).isEqualTo(createUserDto3.middlename)
         assertThat(user3?.lastName).isEqualTo(createUserDto3.lastname)

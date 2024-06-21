@@ -7,7 +7,11 @@ import ch.learntrack.backend.persistence.UserRole
 import ch.learntrack.backend.persistence.fetchAllUsersByRoleAndGradeId
 import ch.learntrack.backend.persistence.fetchAllUsersByRoleAndSchoolId
 import ch.learntrack.backend.persistence.tables.daos.UserDao
+import ch.learntrack.backend.persistence.tables.daos.UserGradeDao
+import ch.learntrack.backend.persistence.tables.daos.UserSchoolDao
 import ch.learntrack.backend.persistence.tables.pojos.User
+import ch.learntrack.backend.persistence.tables.pojos.UserGrade
+import ch.learntrack.backend.persistence.tables.pojos.UserSchool
 import ch.learntrack.backend.persistence.tables.records.UserRecord
 import ch.learntrack.backend.persistence.tables.references.USER
 import ch.learntrack.backend.security.PasswordService
@@ -19,6 +23,8 @@ import java.util.UUID
 
 public class UserService(
     private val userDao: UserDao,
+    private val userSchoolDao: UserSchoolDao,
+    private val userGradeDao: UserGradeDao,
     private val passwordService: PasswordService,
 ) : EntityService<UserDto, UserRecord, User>(userDao) {
     public override fun mapToDto(pojo: User): UserDto = UserDto(
@@ -39,38 +45,54 @@ public class UserService(
     public fun getUsersByRoleAndGradeId(userRole: UserRole, gradeId: UUID): List<UserDto> =
         userDao.fetchAllUsersByRoleAndGradeId(userRole, gradeId).map(::mapToDto)
 
-    public fun createUser(createUserDto: CreateUserDto): User {
-        val emailLowerCase = createUserDto.email.trim().lowercase()
+    public fun createUser(
+        createUserDto: CreateUserDto,
+        userRole: UserRole,
+        schoolId: UUID?,
+        gradeId: UUID?,
+    ): User {
+        val emailToLowerCase = createUserDto.email.trim().lowercase()
 
-        if (!emailLowerCase.isEmailValid()) {
-            throw LearnTrackBadRequestException("Email $emailLowerCase is not valid")
-        }
-
-        findUserByEmail(emailLowerCase)?.let {
-            throw LearnTrackConflictException("Email $emailLowerCase already exists")
-        }
-
-        if (!createUserDto.password.isPasswordValid()) {
-            throw LearnTrackBadRequestException(
-                "Password must contain at least 8 characters, one uppercase letter, one lowercase letter, " +
-                        "one number and one special character",
-            )
-        }
+        validateEmailAndPassword(emailToLowerCase, createUserDto.password)
 
         val user = User(
             id = UUID.randomUUID(),
             firstName = createUserDto.firstname.sanitizeInputString(),
             middleName = createUserDto.middlename?.sanitizeInputString(),
             lastName = createUserDto.lastname.sanitizeInputString(),
-            eMail = emailLowerCase,
+            eMail = emailToLowerCase,
             password = passwordService.createPasswordHash(createUserDto.password),
-            userRole = UserRole.TEACHER,
-            birthdate = null,
+            userRole = userRole,
+            birthdate = createUserDto.birthDate,
             created = LocalDateTime.now(),
             updated = LocalDateTime.now(),
         )
         userDao.insert(user)
 
+        schoolId?.let {
+            userSchoolDao.insert(UserSchool(userId = user.id, schoolId = it))
+        }
+
+        gradeId?.let {
+            userGradeDao.insert(UserGrade(userId = user.id, gradeId = it))
+        }
         return user
+    }
+
+    private fun validateEmailAndPassword(email: String, password: String) {
+        if (!email.isEmailValid()) {
+            throw LearnTrackBadRequestException("Email $email is not valid")
+        }
+
+        findUserByEmail(email)?.let {
+            throw LearnTrackConflictException("Email $email already exists")
+        }
+
+        if (!password.isPasswordValid()) {
+            throw LearnTrackBadRequestException(
+                "Password must contain at least 8 characters, one uppercase letter, one lowercase letter, " +
+                        "one number and one special character",
+            )
+        }
     }
 }
