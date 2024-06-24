@@ -5,7 +5,7 @@
 import type { GradeDto } from './GradeDto';
 import type { UserDto } from './UserDto';
 export type GradeDetailsDto = {
-  grades: GradeDto;
+  grade: GradeDto;
   students: Array<UserDto>;
   teachers: Array<UserDto>;
 };

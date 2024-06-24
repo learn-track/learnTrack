@@ -1,8 +1,10 @@
 import { styled, Table } from '@mui/joy';
 
+import { parseISO } from 'date-fns';
 import { useAtom } from 'jotai';
 import { useGetAllStudentsForSchoolQuery } from '../state/api/students.ts';
 import { whoamiAtom } from '../state/api/whoami.ts';
+import { formatDate } from '../utils/date.ts';
 
 export function StudentTable() {
   const [{ data: whoami }] = useAtom(whoamiAtom);
@@ -27,7 +29,7 @@ export function StudentTable() {
                 {student.user.firstname} {student.user.middlename}
               </TableData>
               <TableData>{student.user.lastname}</TableData>
-              <TableData>{student.user.birthDate ?? '-'}</TableData>
+              <TableData>{student.user.birthDate ? formatDate(parseISO(student.user.birthDate)) : '-'}</TableData>
               <TableData>{student.user.email}</TableData>
               <TableData>{student.grade.name}</TableData>
             </tr>
