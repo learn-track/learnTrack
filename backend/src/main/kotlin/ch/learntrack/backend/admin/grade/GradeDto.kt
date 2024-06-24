@@ -5,7 +5,7 @@ import ch.learntrack.backend.user.UserDto
 import java.util.UUID
 
 public data class GradeDetailsDto(
-    val grades: GradeDto,
+    val grade: GradeDto,
     val students: List<UserDto>,
     val teachers: List<UserDto>,
 )

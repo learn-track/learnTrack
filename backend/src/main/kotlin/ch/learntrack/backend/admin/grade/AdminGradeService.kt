@@ -18,7 +18,7 @@ public class AdminGradeService(
     public fun getAllGradesForSchool(schoolId: UUID): List<GradeDetailsDto> =
         gradeService.getGradesBySchoolId(schoolId).map { grade ->
             GradeDetailsDto(
-                grades = grade,
+                grade = grade,
                 students = userService.getUsersByRoleAndGradeId(UserRole.STUDENT, grade.id),
                 teachers = userService.getUsersByRoleAndGradeId(UserRole.TEACHER, grade.id),
             )

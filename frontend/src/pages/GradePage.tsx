@@ -25,26 +25,23 @@ export function GradePage() {
         <CreateGradeDialog isOpen={open} setOpen={setOpen}></CreateGradeDialog>
       </div>
       <GradesCardWrapper>
-        {grades?.map((gradeDetailsDto) => {
-          return (
-            <GradeCard
-              key={gradeDetailsDto.grades.name}
-              className={gradeDetailsDto.grades.name}
-              teacherCount={gradeDetailsDto.teachers.length}
-              studentCount={gradeDetailsDto.students.length}
-            />
-          );
-        })}
+        {grades?.map((gradeDetailsDto) => (
+          <GradeCard
+            key={gradeDetailsDto.grade.id}
+            className={gradeDetailsDto.grade.name}
+            teacherCount={gradeDetailsDto.teachers.length}
+            studentCount={gradeDetailsDto.students.length}
+          />
+        ))}
       </GradesCardWrapper>
     </ContentSection>
   );
 }
 
 const GradesCardWrapper = styled('div')`
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 30px;
-  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  justify-content: center;
+  min-width: 100%;
+  gap: 60px;
 `;

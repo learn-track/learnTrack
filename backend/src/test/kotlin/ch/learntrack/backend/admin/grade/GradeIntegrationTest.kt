@@ -118,8 +118,8 @@ class GradeIntegrationTest: IntegrationTest() {
 
         assertThat(response).isNotNull
         assertThat(response).hasSize(1)
-        assertThat(response?.first()?.grades?.id).isNotEqualTo(ethGradeId)
-        assertThat(response?.first()?.grades?.id).isEqualTo(gradeTemplateId)
+        assertThat(response?.first()?.grade?.id).isNotEqualTo(ethGradeId)
+        assertThat(response?.first()?.grade?.id).isEqualTo(gradeTemplateId)
     }
 
     @Test
