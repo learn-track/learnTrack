@@ -1,7 +1,7 @@
 [versions]
 kotlin = "1.9.24"
-spring = "6.1.9"
-springboot = "3.3.0"
+spring = "6.1.10"
+springboot = "3.3.1"
 springdoc = "2.5.0"
 
 [libraries]
@@ -37,9 +37,9 @@ spring-boot-docker-compose = { module = "org.springframework.boot:spring-boot-do
 spring-boot-devtools = { module = "org.springframework.boot:spring-boot-devtools", version.ref = "springboot" }
 org-testcontainers-postgresql = { module = "org.testcontainers:postgresql" }
 postgresql = "org.postgresql:postgresql:42.7.3"
-jsonwebtoken = "io.jsonwebtoken:jjwt-api:0.12.5"
-jsonwebtoken-impl = "io.jsonwebtoken:jjwt-impl:0.12.5"
-jsonwebtoken-orgjson = "io.jsonwebtoken:jjwt-orgjson:0.12.5"
+jsonwebtoken = "io.jsonwebtoken:jjwt-api:0.12.6"
+jsonwebtoken-impl = "io.jsonwebtoken:jjwt-impl:0.12.6"
+jsonwebtoken-orgjson = "io.jsonwebtoken:jjwt-orgjson:0.12.6"
 
 [plugins]
 detekt = "io.gitlab.arturbosch.detekt:1.23.6"
