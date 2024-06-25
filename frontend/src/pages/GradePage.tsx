@@ -1,11 +1,9 @@
-import { ErrorOutline } from '@mui/icons-material';
-import { Snackbar, styled, Typography } from '@mui/joy';
-import { useQueryClient } from '@tanstack/react-query';
+import { styled, Typography } from '@mui/joy';
 import { useAtom } from 'jotai/index';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { AlternateButton } from '../components/AlternateButton.tsx';
 import { ContentSection } from '../components/ContentSection.tsx';
-import { CreateGrade } from '../components/CreateGrade.tsx';
+import { CreateGradeDialog } from '../components/CreateGradeDialog.tsx';
 import { GradeCard } from '../components/GradeCard.tsx';
 import { useGetGradesForSchoolQuery } from '../state/api/grades.ts';
 import { whoamiAtom } from '../state/api/whoami.ts';
@@ -16,16 +14,6 @@ export function GradePage() {
   const [open, setOpen] = useState(false);
 
   const grades = useGetGradesForSchoolQuery(schoolId);
-  const queryClient = useQueryClient();
-
-  const [showSnackbar, setShowSnackbar] = useState(false);
-  const [showSnackbarError, setShowSnackbarError] = useState(false);
-
-  useEffect(() => {
-    if (showSnackbar == true) {
-      queryClient.invalidateQueries(['gradeList', schoolId]);
-    }
-  }, [showSnackbar]);
 
   return (
     <ContentSection>
@@ -36,11 +24,7 @@ export function GradePage() {
         <AlternateButton type="submit" onClick={() => setOpen(!open)}>
           Klasse hinzufügen
         </AlternateButton>
-        <CreateGrade
-          isOpen={open}
-          setOpen={setOpen}
-          setShowSnackbar={setShowSnackbar}
-          setShowSnackbarError={setShowSnackbarError}></CreateGrade>
+        <CreateGradeDialog isOpen={open} setOpen={setOpen}></CreateGradeDialog>
       </div>
       <GradesCardWrapper>
         {grades?.map((gradeDetailsDto) => {
@@ -54,25 +38,6 @@ export function GradePage() {
           );
         })}
       </GradesCardWrapper>
-      <Snackbar
-        open={showSnackbar}
-        color={'success'}
-        autoHideDuration={3000}
-        onClose={() => {
-          setShowSnackbar(false);
-        }}>
-        Klasse wurde erfolgreich erstellt
-      </Snackbar>
-      <Snackbar
-        open={showSnackbarError}
-        color={'danger'}
-        autoHideDuration={3000}
-        onClose={() => {
-          setShowSnackbarError(false);
-        }}
-        startDecorator={<ErrorOutline />}>
-        Ein Fehler ist wärend der Kreierung aufgetreten
-      </Snackbar>
     </ContentSection>
   );
 }
