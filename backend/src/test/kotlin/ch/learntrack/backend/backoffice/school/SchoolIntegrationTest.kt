@@ -149,5 +149,41 @@ class SchoolIntegrationTest: IntegrationTest() {
 
         assertThat(response).isNotNull
         assertThat(response?.first()?.id).isEqualTo(schoolTemplateId)
+
+        val response2 = webClient.get()
+            .uri { uriBuilder ->
+                uriBuilder
+                    .path("$BACKOFFICE_ROOT_URL/school/getAllSchoolsForAdmin")
+                    .queryParam("userId", userAdminTemplateId)
+                    .build()
+            }
+            .setBasicAuthHeader(backendProperties)
+            .exchange()
+            .expectBodyList(SchoolDto::class.java)
+            .returnResult()
+            .responseBody
+
+        assertThat(response2).isNotNull
+        assertThat(response2?.any { it.id ==  schoolTemplateId}).isTrue()
+        assertThat(response2?.any { it.id ==  ethSchoolId}).isTrue()
+        assertThat(response2?.any { it.id !=  phzSchoolId}).isTrue()
+
+        val response3 = webClient.get()
+            .uri { uriBuilder ->
+                uriBuilder
+                    .path("$BACKOFFICE_ROOT_URL/school/getAllSchoolsForAdmin")
+                    .queryParam("userId", adminUserSecondSchoolId)
+                    .build()
+            }
+            .setBasicAuthHeader(backendProperties)
+            .exchange()
+            .expectBodyList(SchoolDto::class.java)
+            .returnResult()
+            .responseBody
+
+        assertThat(response3).isNotNull
+        assertThat(response3?.any { it.id !=  schoolTemplateId}).isTrue()
+        assertThat(response3?.any { it.id !=  ethSchoolId}).isTrue()
+        assertThat(response3?.any { it.id ==  phzSchoolId}).isTrue()
     }
 }
