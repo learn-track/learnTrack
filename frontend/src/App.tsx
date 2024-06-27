@@ -1,6 +1,7 @@
 import { styled } from '@mui/joy';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { Header } from './components/Header.tsx';
+import { GradeDetailPage } from './pages/GradeDetailPage.tsx';
 import { GradePage } from './pages/GradePage.tsx';
 import { LoginPage } from './pages/LoginPage.tsx';
 import { RegisterPage } from './pages/RegisterPage.tsx';
@@ -24,6 +25,7 @@ export function App() {
         <Route path={'/'} element={<Navigate to={'/grades'} />} />
         <Route path={'/login'} element={<LoginPage />} />
         <Route path={'/grades'} element={<GradePage />} />
+        <Route path={'/grades/detail'} element={<GradeDetailPage />} />
         <Route path={'/register'} element={<RegisterPage />} />
         <Route path={'/students'} element={<StudentPage />} />
         <Route path={'/teachers'} element={<TeacherPage />} />

@@ -9,7 +9,7 @@ export function StudentTable() {
   const students = useGetAllStudentsForSchoolQuery(whoami.schools[0].id);
 
   return (
-    <div style={{ marginTop: '40px', height: 500, overflow: 'auto', backgroundColor: '#f6fbfa' }}>
+    <div style={{ marginTop: '40px', maxHeight: 500, overflow: 'auto', backgroundColor: '#f6fbfa' }}>
       <Table stickyHeader>
         <thead>
           <tr>
