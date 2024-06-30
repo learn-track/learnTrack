@@ -75,6 +75,9 @@ class IntegrationTest {
     lateinit var gradeDao: GradeDao
 
     @Autowired
+    lateinit var subjectDao: SubjectDao
+
+    @Autowired
     lateinit var userSchoolDao: UserSchoolDao
 
     @Autowired

@@ -7,7 +7,9 @@ package ch.learntrack.backend.persistence.tables
 import ch.learntrack.backend.persistence.Public
 import ch.learntrack.backend.persistence.keys.PK_SUBJECT
 import ch.learntrack.backend.persistence.keys.T_SUBJECT__FK_SUBJECT_GRADE
+import ch.learntrack.backend.persistence.keys.T_USER__FK_USER_SUBJECT
 import ch.learntrack.backend.persistence.tables.GradeTable.TGradePath
+import ch.learntrack.backend.persistence.tables.UserTable.TUserPath
 import ch.learntrack.backend.persistence.tables.records.SubjectRecord
 
 import java.time.LocalDateTime
@@ -150,6 +152,22 @@ public open class SubjectTable(
 
     public val tGrade: TGradePath
         get(): TGradePath = tGrade()
+
+    private lateinit var _tUser: TUserPath
+
+    /**
+     * Get the implicit to-many join path to the <code>public.t_user</code>
+     * table
+     */
+    public fun tUser(): TUserPath {
+        if (!this::_tUser.isInitialized)
+            _tUser = TUserPath(this, null, T_USER__FK_USER_SUBJECT.inverseKey)
+
+        return _tUser;
+    }
+
+    public val tUser: TUserPath
+        get(): TUserPath = tUser()
     public override fun `as`(alias: String): SubjectTable = SubjectTable(DSL.name(alias), this)
     public override fun `as`(alias: Name): SubjectTable = SubjectTable(alias, this)
     public override fun `as`(alias: Table<*>): SubjectTable = SubjectTable(alias.qualifiedName, this)

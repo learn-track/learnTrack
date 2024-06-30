@@ -6,6 +6,7 @@ import ch.learntrack.backend.utils.createGradeFromTemplate
 import ch.learntrack.backend.utils.createSchoolFromTemplate
 import ch.learntrack.backend.utils.createAdminUserFromTemplate
 import ch.learntrack.backend.utils.createStudentUserFromTemplate
+import ch.learntrack.backend.utils.createSubjectFromTemplate
 import ch.learntrack.backend.utils.createTeacherUserFromTemplate
 import ch.learntrack.backend.utils.createUserGradeFromTemplate
 import ch.learntrack.backend.utils.createUserSchoolFromTemplate
@@ -13,6 +14,7 @@ import ch.learntrack.backend.utils.deleteAll
 import ch.learntrack.backend.utils.gradeTemplateId
 import ch.learntrack.backend.utils.runInTransaction
 import ch.learntrack.backend.utils.schoolTemplateId
+import ch.learntrack.backend.utils.subjectTemplateId
 import ch.learntrack.backend.utils.userAdminTemplateId
 import ch.learntrack.backend.utils.userStudentTemplateId
 import ch.learntrack.backend.utils.userTeacherTemplateId
@@ -26,12 +28,14 @@ import java.util.UUID
 
 private const val ETH_SCHOOL = "40d8b918-8f80-4b92-a3f5-4548d7883c59"
 private const val ETH_GRADE = "40d8b918-8f80-4b92-a3f5-4548d7883c60"
+private const val ETH_SUBJECT = "40d8b918-8f80-4b92-a3f5-4548d7883c61"
 private const val USER_ASSIGNED_TO_DIFFERENT_SCHOOL = "40d8b918-8f80-4b92-a3f5-4548d7883c58"
 
 class GradeIntegrationTest: IntegrationTest() {
 
     private val ethSchoolId = UUID.fromString(ETH_SCHOOL)
     private val ethGradeId = UUID.fromString(ETH_GRADE)
+    private val ethSubjectId = UUID.fromString(ETH_SUBJECT)
     private val userAssignedToDifferentSchoolId = UUID.fromString(USER_ASSIGNED_TO_DIFFERENT_SCHOOL)
 
     @BeforeEach
@@ -43,6 +47,9 @@ class GradeIntegrationTest: IntegrationTest() {
             // Grades
             gradeDao.insert(createGradeFromTemplate())
             gradeDao.insert(createGradeFromTemplate(id = ethGradeId, name = "Grade 1A", schoolId = ethSchoolId))
+            // Subjects
+            subjectDao.insert(createSubjectFromTemplate())
+            subjectDao.insert(createSubjectFromTemplate(id = ethSubjectId, name = "Quantum Physics", gradeId = ethGradeId))
             // Users
             userDao.insert(createAdminUserFromTemplate())
             userDao.insert(createTeacherUserFromTemplate())
@@ -79,7 +86,7 @@ class GradeIntegrationTest: IntegrationTest() {
     }
 
     @Test
-    fun `should get GradeDetailsDto for assigned user`() {
+    fun `should get GradeInfoDto for assigned user`() {
         val response = webClient.get()
             .uri { uriBuilder ->
                 uriBuilder
@@ -91,7 +98,7 @@ class GradeIntegrationTest: IntegrationTest() {
             .exchange()
             .expectStatus()
             .isOk
-            .expectBodyList(GradeDetailsDto::class.java)
+            .expectBodyList(GradeInfoDto::class.java)
             .returnResult()
             .responseBody
 
@@ -112,7 +119,7 @@ class GradeIntegrationTest: IntegrationTest() {
             .exchange()
             .expectStatus()
             .isOk
-            .expectBodyList(GradeDetailsDto::class.java)
+            .expectBodyList(GradeInfoDto::class.java)
             .returnResult()
             .responseBody
 
@@ -135,7 +142,7 @@ class GradeIntegrationTest: IntegrationTest() {
             .exchange()
             .expectStatus()
             .isOk
-            .expectBodyList(GradeDetailsDto::class.java)
+            .expectBodyList(GradeInfoDto::class.java)
             .returnResult()
             .responseBody
 
@@ -158,7 +165,7 @@ class GradeIntegrationTest: IntegrationTest() {
             .exchange()
             .expectStatus()
             .isOk
-            .expectBodyList(GradeDetailsDto::class.java)
+            .expectBodyList(GradeInfoDto::class.java)
             .returnResult()
             .responseBody
 
@@ -177,7 +184,7 @@ class GradeIntegrationTest: IntegrationTest() {
             .exchange()
             .expectStatus()
             .isOk
-            .expectBodyList(GradeDetailsDto::class.java)
+            .expectBodyList(GradeInfoDto::class.java)
             .returnResult()
             .responseBody
 
@@ -263,5 +270,51 @@ class GradeIntegrationTest: IntegrationTest() {
             .exchange()
             .expectStatus()
             .isEqualTo(HttpStatus.FORBIDDEN)
+    }
+
+    @Test
+    fun `should get GradeDetailsDto for assigned user` () {
+        val response =  webClient.get()
+            .uri { uriBuilder ->
+                uriBuilder
+                    .path("$ADMIN_ROOT_URL/grade/getGradeDetails")
+                    .queryParam("schoolId", schoolTemplateId)
+                    .queryParam("gradeId", gradeTemplateId)
+                    .build()
+            }
+            .headers { headers -> headers.setBearerAuth(tokenService.createJwtToken(userAdminTemplateId)) }
+            .exchange()
+            .expectStatus()
+            .isOk
+            .expectBodyList(GradeDetailsDto::class.java)
+            .returnResult()
+            .responseBody
+
+        assertThat(response).isNotNull
+        assertThat(response).hasSize(1)
+        assertThat(response?.map { it.students.any { it.id == userStudentTemplateId } })
+        assertThat(response?.map { it.subjectDetailsDto.any { it.teacher?.id == userTeacherTemplateId } })
+        assertThat(response?.map { it.subjectDetailsDto.any { it.id == subjectTemplateId } })
+
+        val response1 =  webClient.get()
+            .uri { uriBuilder ->
+                uriBuilder
+                    .path("$ADMIN_ROOT_URL/grade/getGradeDetails")
+                    .queryParam("schoolId", ethSchoolId)
+                    .queryParam("gradeId", ethGradeId)
+                    .build()
+            }
+            .headers { headers -> headers.setBearerAuth(tokenService.createJwtToken(userAssignedToDifferentSchoolId)) }
+            .exchange()
+            .expectStatus()
+            .isOk
+            .expectBodyList(GradeDetailsDto::class.java)
+            .returnResult()
+            .responseBody
+
+        assertThat(response1).isNotNull
+        assertThat(response1?.map { it.students.isEmpty()})
+        assertThat(response1?.map { it.subjectDetailsDto.any { it.teacher == null } })
+        assertThat(response1?.map { it.subjectDetailsDto.any { it.id == ethSubjectId } })
     }
 }

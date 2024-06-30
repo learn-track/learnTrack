@@ -151,4 +151,15 @@ public open class UserDao(configuration: Configuration?) : DAOImpl<UserRecord, U
      * Fetch records that have <code>updated IN (values)</code>
      */
     public fun fetchByUpdated(vararg values: LocalDateTime): List<User> = fetch(UserTable.USER.UPDATED, *values)
+
+    /**
+     * Fetch records that have <code>subject_id BETWEEN lowerInclusive AND
+     * upperInclusive</code>
+     */
+    public fun fetchRangeOfSubjectId(lowerInclusive: UUID?, upperInclusive: UUID?): List<User> = fetchRange(UserTable.USER.SUBJECT_ID, lowerInclusive, upperInclusive)
+
+    /**
+     * Fetch records that have <code>subject_id IN (values)</code>
+     */
+    public fun fetchBySubjectId(vararg values: UUID): List<User> = fetch(UserTable.USER.SUBJECT_ID, *values)
 }

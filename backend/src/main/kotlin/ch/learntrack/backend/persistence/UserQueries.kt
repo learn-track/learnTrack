@@ -34,3 +34,9 @@ public fun UserDao.searchUserByUserRoleAndEmailSearchQuery(email: String, userRo
     .and(USER.USER_ROLE.eq(userRole))
     .fetch()
     .into(User::class.java)
+
+public fun UserDao.fetchUserBySubjectId(subjectId: UUID): User? = ctx()
+    .select()
+    .from(USER)
+    .where(USER.SUBJECT_ID.eq(subjectId))
+    .fetchOneInto(User::class.java)

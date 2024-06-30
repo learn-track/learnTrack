@@ -4,6 +4,7 @@ import ch.learntrack.backend.persistence.UserRole
 import ch.learntrack.backend.persistence.tables.pojos.User
 import ch.learntrack.backend.persistence.tables.pojos.School
 import ch.learntrack.backend.persistence.tables.pojos.Grade
+import ch.learntrack.backend.persistence.tables.pojos.Subject
 import ch.learntrack.backend.persistence.tables.pojos.UserSchool
 import ch.learntrack.backend.persistence.tables.pojos.UserGrade
 import java.util.UUID
@@ -11,8 +12,9 @@ import java.util.UUID
 val userAdminTemplateId: UUID = UUID.fromString("40d8b918-8f80-4b92-a3f5-4548d7883c51")
 val userTeacherTemplateId: UUID = UUID.fromString("40d8b918-8f80-4b92-a3f5-4548d7883c54")
 val userStudentTemplateId: UUID = UUID.fromString("40d8b918-8f80-4b92-a3f5-4548d7883c55")
-val gradeTemplateId: UUID = UUID.fromString("40d8b918-8f80-4b92-a3f5-4548d7883c52")
 val schoolTemplateId: UUID = UUID.fromString("40d8b918-8f80-4b92-a3f5-4548d7883c53")
+val gradeTemplateId: UUID = UUID.fromString("40d8b918-8f80-4b92-a3f5-4548d7883c52")
+val subjectTemplateId: UUID = UUID.fromString("40d8b918-8f80-4b92-a3f5-4548d7883c56")
 
 fun createAdminUserFromTemplate(
     id: UUID = userAdminTemplateId,
@@ -35,6 +37,7 @@ fun createTeacherUserFromTemplate(
     lastName: String = "user",
     eMail: String = "teacheruser@gmail.com",
     password: String = "\$2a\$10\$IVLBCJ8ed8zh1aYeui6Nwu4uauH/Uwtrdkd5PshFdCP9Yo0U2ltjK",
+    subjectId: UUID? = subjectTemplateId,
 ) = User(
     id = id,
     firstName = firstName,
@@ -42,6 +45,7 @@ fun createTeacherUserFromTemplate(
     eMail = eMail,
     password = password,
     userRole = UserRole.TEACHER,
+    subjectId = subjectId,
 )
 
 fun createStudentUserFromTemplate(
@@ -81,6 +85,16 @@ fun createGradeFromTemplate(
     id = id,
     name = name,
     schoolId = schoolId,
+)
+
+fun createSubjectFromTemplate(
+    id: UUID = subjectTemplateId,
+    name: String = "Math",
+    gradeId: UUID = gradeTemplateId,
+) = Subject(
+    id = id,
+    name = name,
+    gradeId = gradeId,
 )
 
 fun createUserSchoolFromTemplate(

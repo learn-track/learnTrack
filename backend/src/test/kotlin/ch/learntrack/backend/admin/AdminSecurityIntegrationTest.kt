@@ -21,7 +21,7 @@ class AdminSecurityIntegrationTest: IntegrationTest() {
     fun setUp() {
         transactionManager.runInTransaction {
             schoolDao.insert(createSchoolFromTemplate())
-            userDao.insert(createTeacherUserFromTemplate())
+            userDao.insert(createTeacherUserFromTemplate(subjectId = null))
             userDao.insert(createStudentUserFromTemplate())
         }
     }

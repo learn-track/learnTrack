@@ -15,9 +15,9 @@ public class AdminGradeService(
     private val userService: UserService,
     private val gradeDao: GradeDao,
 ) {
-    public fun getAllGradesForSchool(schoolId: UUID): List<GradeDetailsDto> =
+    public fun getAllGradesForSchool(schoolId: UUID): List<GradeInfoDto> =
         gradeService.getGradesBySchoolId(schoolId).map { grade ->
-            GradeDetailsDto(
+            GradeInfoDto(
                 grades = grade,
                 students = userService.getUsersByRoleAndGradeId(UserRole.STUDENT, grade.id),
                 teachers = userService.getUsersByRoleAndGradeId(UserRole.TEACHER, grade.id),
@@ -41,4 +41,9 @@ public class AdminGradeService(
 
         gradeDao.insert(grade)
     }
+
+    public fun getGradeDetails(gradeId: UUID): GradeDetailsDto = GradeDetailsDto(
+        students = userService.getUsersByRoleAndGradeId(UserRole.STUDENT, gradeId),
+        subjectDetailsDto = gradeService.getSubjectDetailsByGradeId(gradeId),
+    )
 }

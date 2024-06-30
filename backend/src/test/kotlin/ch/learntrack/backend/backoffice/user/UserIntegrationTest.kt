@@ -21,7 +21,7 @@ class UserIntegrationTest: IntegrationTest() {
     fun setUp() {
         transactionManager.runInTransaction {
             userDao.insert(createAdminUserFromTemplate())
-            userDao.insert(createTeacherUserFromTemplate())
+            userDao.insert(createTeacherUserFromTemplate(subjectId = null))
         }
     }
 

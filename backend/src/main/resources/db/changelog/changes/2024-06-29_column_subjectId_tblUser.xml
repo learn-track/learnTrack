@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="2024-06-29_column_subjectId_tblUser" author="alejandro.wenzler">
+        <addColumn tableName="t_user">
+            <column name="subject_id" type="uuid">
+                <constraints nullable="true"/>
+            </column>
+        </addColumn>
+        <addForeignKeyConstraint constraintName="fk_user_subject" baseTableName="t_user" baseColumnNames="subject_id" referencedTableName="t_subject" referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>

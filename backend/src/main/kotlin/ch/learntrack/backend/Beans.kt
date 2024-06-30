@@ -8,6 +8,7 @@ import ch.learntrack.backend.grade.gradeBeans
 import ch.learntrack.backend.jwt.jwtBeans
 import ch.learntrack.backend.school.schoolBeans
 import ch.learntrack.backend.security.securityBeans
+import ch.learntrack.backend.subject.subjectBeans
 import ch.learntrack.backend.user.userBeans
 import ch.learntrack.backend.usergrade.userGradeBeans
 import ch.learntrack.backend.userschool.userSchoolBeans
@@ -64,6 +65,7 @@ public val coreBeans: List<BeanDefinitionDsl> = listOf(
     whoamiBeans,
     gradeBeans,
     schoolBeans,
+    subjectBeans,
     userSchoolBeans,
     userGradeBeans,
 )
