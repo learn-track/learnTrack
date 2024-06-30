@@ -7,6 +7,7 @@ import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
 import type { CreateGradeDto } from '../models/CreateGradeDto';
 import type { GradeDetailsDto } from '../models/GradeDetailsDto';
+import type { GradeInfoDto } from '../models/GradeInfoDto';
 export class AdminGradeResourceService {
   /**
    * @param schoolId
@@ -27,15 +28,31 @@ export class AdminGradeResourceService {
   }
   /**
    * @param schoolId
-   * @returns GradeDetailsDto OK
+   * @returns GradeInfoDto OK
    * @throws ApiError
    */
-  public static getAllGradesWithDetailsBySchoolId(schoolId: string): CancelablePromise<Array<GradeDetailsDto>> {
+  public static getAllGradesWithInfosBySchoolId(schoolId: string): CancelablePromise<Array<GradeInfoDto>> {
     return __request(OpenAPI, {
       method: 'GET',
       url: '/admin/grade',
       query: {
         schoolId: schoolId,
+      },
+    });
+  }
+  /**
+   * @param schoolId
+   * @param gradeId
+   * @returns GradeDetailsDto OK
+   * @throws ApiError
+   */
+  public static getGradeDetails(schoolId: string, gradeId: string): CancelablePromise<GradeDetailsDto> {
+    return __request(OpenAPI, {
+      method: 'GET',
+      url: '/admin/grade/getGradeDetails',
+      query: {
+        schoolId: schoolId,
+        gradeId: gradeId,
       },
     });
   }

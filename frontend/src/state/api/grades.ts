@@ -4,7 +4,7 @@ import { AdminGradeResourceService } from './generated';
 export const useGetGradesForSchoolQuery = (schoolId: string) => {
   const { data } = useQuery({
     queryKey: ['gradeList', schoolId],
-    queryFn: () => AdminGradeResourceService.getAllGradesWithDetailsBySchoolId(schoolId),
+    queryFn: () => AdminGradeResourceService.getAllGradesWithInfosBySchoolId(schoolId),
   });
   return data;
 };

@@ -7,5 +7,6 @@ export type CreateUserDto = {
   middlename?: string | null;
   lastname: string;
   email: string;
+  birthDate?: string | null;
   password: string;
 };
