@@ -137,8 +137,8 @@ class SchoolIntegrationTest: IntegrationTest() {
         val response = webClient.get()
             .uri { uriBuilder ->
                 uriBuilder
-                    .path("$BACKOFFICE_ROOT_URL/school/getAllSchoolsForAdmin")
-                    .queryParam("userId", userAdminTemplateId)
+                    .path("$BACKOFFICE_ROOT_URL/school")
+                    .queryParam("assignedUserId", userAdminTemplateId)
                     .build()
             }
             .setBasicAuthHeader(backendProperties)
@@ -153,8 +153,8 @@ class SchoolIntegrationTest: IntegrationTest() {
         val response2 = webClient.get()
             .uri { uriBuilder ->
                 uriBuilder
-                    .path("$BACKOFFICE_ROOT_URL/school/getAllSchoolsForAdmin")
-                    .queryParam("userId", userAdminTemplateId)
+                    .path("$BACKOFFICE_ROOT_URL/school")
+                    .queryParam("assignedUserId", userAdminTemplateId)
                     .build()
             }
             .setBasicAuthHeader(backendProperties)
@@ -164,6 +164,7 @@ class SchoolIntegrationTest: IntegrationTest() {
             .responseBody
 
         assertThat(response2).isNotNull
+        assertThat(response2).hasSize(2)
         assertThat(response2?.any { it.id ==  schoolTemplateId}).isTrue()
         assertThat(response2?.any { it.id ==  ethSchoolId}).isTrue()
         assertThat(response2?.any { it.id !=  phzSchoolId}).isTrue()
@@ -171,8 +172,8 @@ class SchoolIntegrationTest: IntegrationTest() {
         val response3 = webClient.get()
             .uri { uriBuilder ->
                 uriBuilder
-                    .path("$BACKOFFICE_ROOT_URL/school/getAllSchoolsForAdmin")
-                    .queryParam("userId", adminUserSecondSchoolId)
+                    .path("$BACKOFFICE_ROOT_URL/school")
+                    .queryParam("assignedUserId", adminUserSecondSchoolId)
                     .build()
             }
             .setBasicAuthHeader(backendProperties)
