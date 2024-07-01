@@ -12,12 +12,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: snok/container-retention-policy@v2.2.1
+      - uses: snok/container-retention-policy@v3.0.0
         with:
           image-names: learntrack*
-          cut-off: One month ago UTC
-          keep-at-least: 10
-          skip-tags: v*
-          account-type: org
-          org-name: learn-track
+          cut-off: 4w
+          keep-n-most-recent: 10
+          image-tags: "!v*"
+          account: learn-track
           token: ${{ secrets.DELETE_PACKAGES_TOKEN }}
