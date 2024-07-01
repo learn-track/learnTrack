@@ -12,7 +12,7 @@ public fun SchoolDao.fetchAllSchools(): MutableList<School> = ctx()
     .fetch()
     .into(School::class.java)
 
-public fun SchoolDao.fetchAllSchoolsForAdmin(userId: UUID): MutableList<School> = ctx()
+public fun SchoolDao.fetchSchoolsByUserId(userId: UUID): List<School> = ctx()
     .select(SCHOOL)
     .from(USER_SCHOOL)
     .join(SCHOOL)
