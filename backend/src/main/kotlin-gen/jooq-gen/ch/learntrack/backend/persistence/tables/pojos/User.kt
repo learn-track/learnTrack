@@ -25,8 +25,7 @@ public data class User(
     public val userRole: UserRole,
     public val birthdate: LocalDateTime? = null,
     public val created: LocalDateTime? = null,
-    public val updated: LocalDateTime? = null,
-    public val subjectId: UUID? = null
+    public val updated: LocalDateTime? = null
 ): Serializable {
 
     public override fun equals(other: Any?): Boolean {
@@ -73,12 +72,6 @@ public data class User(
         }
         else if (this.updated != o.updated)
             return false
-        if (this.subjectId == null) {
-            if (o.subjectId != null)
-                return false
-        }
-        else if (this.subjectId != o.subjectId)
-            return false
         return true
     }
 
@@ -95,7 +88,6 @@ public data class User(
         result = prime * result + (if (this.birthdate == null) 0 else this.birthdate.hashCode())
         result = prime * result + (if (this.created == null) 0 else this.created.hashCode())
         result = prime * result + (if (this.updated == null) 0 else this.updated.hashCode())
-        result = prime * result + (if (this.subjectId == null) 0 else this.subjectId.hashCode())
         return result
     }
 
@@ -112,7 +104,6 @@ public data class User(
         sb.append(", ").append(birthdate)
         sb.append(", ").append(created)
         sb.append(", ").append(updated)
-        sb.append(", ").append(subjectId)
 
         sb.append(")")
         return sb.toString()

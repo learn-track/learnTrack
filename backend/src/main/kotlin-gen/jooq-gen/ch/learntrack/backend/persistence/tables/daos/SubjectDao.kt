@@ -89,4 +89,15 @@ public open class SubjectDao(configuration: Configuration?) : DAOImpl<SubjectRec
      * Fetch records that have <code>updated IN (values)</code>
      */
     public fun fetchByUpdated(vararg values: LocalDateTime): List<Subject> = fetch(SubjectTable.SUBJECT.UPDATED, *values)
+
+    /**
+     * Fetch records that have <code>teacher_id BETWEEN lowerInclusive AND
+     * upperInclusive</code>
+     */
+    public fun fetchRangeOfTeacherId(lowerInclusive: UUID?, upperInclusive: UUID?): List<Subject> = fetchRange(SubjectTable.SUBJECT.TEACHER_ID, lowerInclusive, upperInclusive)
+
+    /**
+     * Fetch records that have <code>teacher_id IN (values)</code>
+     */
+    public fun fetchByTeacherId(vararg values: UUID): List<Subject> = fetch(SubjectTable.SUBJECT.TEACHER_ID, *values)
 }

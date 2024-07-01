@@ -7,9 +7,9 @@ package ch.learntrack.backend.persistence.tables
 import ch.learntrack.backend.persistence.Public
 import ch.learntrack.backend.persistence.UserRole
 import ch.learntrack.backend.persistence.keys.PK_USER
+import ch.learntrack.backend.persistence.keys.T_SUBJECT__FK_SUBJECT_USER
 import ch.learntrack.backend.persistence.keys.T_USER_GRADE__FK_USER_GRADE_USER
 import ch.learntrack.backend.persistence.keys.T_USER_SCHOOL__FK_USER_SCHOOL_USER
-import ch.learntrack.backend.persistence.keys.T_USER__FK_USER_SUBJECT
 import ch.learntrack.backend.persistence.keys.USER_E_MAIL_ID
 import ch.learntrack.backend.persistence.tables.GradeTable.TGradePath
 import ch.learntrack.backend.persistence.tables.SchoolTable.TSchoolPath
@@ -135,11 +135,6 @@ public open class UserTable(
      */
     public val UPDATED: TableField<UserRecord, LocalDateTime?> = createField(DSL.name("updated"), SQLDataType.LOCALDATETIME(6), this, "")
 
-    /**
-     * The column <code>public.t_user.subject_id</code>.
-     */
-    public val SUBJECT_ID: TableField<UserRecord, UUID?> = createField(DSL.name("subject_id"), SQLDataType.UUID, this, "")
-
     private constructor(alias: Name, aliased: Table<UserRecord>?): this(alias, null, null, null, aliased, null, null)
     private constructor(alias: Name, aliased: Table<UserRecord>?, parameters: Array<Field<*>?>?): this(alias, null, null, null, aliased, parameters, null)
     private constructor(alias: Name, aliased: Table<UserRecord>?, where: Condition): this(alias, null, null, null, aliased, null, where)
@@ -174,16 +169,16 @@ public open class UserTable(
     public override fun getSchema(): Schema? = if (aliased()) null else Public.PUBLIC
     public override fun getPrimaryKey(): UniqueKey<UserRecord> = PK_USER
     public override fun getUniqueKeys(): List<UniqueKey<UserRecord>> = listOf(USER_E_MAIL_ID)
-    public override fun getReferences(): List<ForeignKey<UserRecord, *>> = listOf(T_USER__FK_USER_SUBJECT)
 
     private lateinit var _tSubject: TSubjectPath
 
     /**
-     * Get the implicit join path to the <code>public.t_subject</code> table.
+     * Get the implicit to-many join path to the <code>public.t_subject</code>
+     * table
      */
     public fun tSubject(): TSubjectPath {
         if (!this::_tSubject.isInitialized)
-            _tSubject = TSubjectPath(this, T_USER__FK_USER_SUBJECT, null)
+            _tSubject = TSubjectPath(this, null, T_SUBJECT__FK_SUBJECT_USER.inverseKey)
 
         return _tSubject;
     }

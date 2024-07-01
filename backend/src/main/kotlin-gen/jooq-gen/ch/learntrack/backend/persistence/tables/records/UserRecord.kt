@@ -73,11 +73,6 @@ public open class UserRecord private constructor() : UpdatableRecordImpl<UserRec
     @Nullable
         get(): LocalDateTime? = get(9) as LocalDateTime?
 
-    public open var subjectId: UUID?
-        set(value): Unit = set(10, value)
-    @Nullable
-        get(): UUID? = get(10) as UUID?
-
     // -------------------------------------------------------------------------
     // Primary key information
     // -------------------------------------------------------------------------
@@ -87,7 +82,7 @@ public open class UserRecord private constructor() : UpdatableRecordImpl<UserRec
     /**
      * Create a detached, initialised UserRecord
      */
-    public constructor(id: UUID, firstName: String, middleName: String? = null, lastName: String, eMail: String, password: String, userRole: UserRole, birthdate: LocalDateTime? = null, created: LocalDateTime? = null, updated: LocalDateTime? = null, subjectId: UUID? = null): this() {
+    public constructor(id: UUID, firstName: String, middleName: String? = null, lastName: String, eMail: String, password: String, userRole: UserRole, birthdate: LocalDateTime? = null, created: LocalDateTime? = null, updated: LocalDateTime? = null): this() {
         this.id = id
         this.firstName = firstName
         this.middleName = middleName
@@ -98,7 +93,6 @@ public open class UserRecord private constructor() : UpdatableRecordImpl<UserRec
         this.birthdate = birthdate
         this.created = created
         this.updated = updated
-        this.subjectId = subjectId
         resetChangedOnNotNull()
     }
 
@@ -117,7 +111,6 @@ public open class UserRecord private constructor() : UpdatableRecordImpl<UserRec
             this.birthdate = value.birthdate
             this.created = value.created
             this.updated = value.updated
-            this.subjectId = value.subjectId
             resetChangedOnNotNull()
         }
     }

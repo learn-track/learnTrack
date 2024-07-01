@@ -37,7 +37,6 @@ fun createTeacherUserFromTemplate(
     lastName: String = "user",
     eMail: String = "teacheruser@gmail.com",
     password: String = "\$2a\$10\$IVLBCJ8ed8zh1aYeui6Nwu4uauH/Uwtrdkd5PshFdCP9Yo0U2ltjK",
-    subjectId: UUID? = subjectTemplateId,
 ) = User(
     id = id,
     firstName = firstName,
@@ -45,7 +44,6 @@ fun createTeacherUserFromTemplate(
     eMail = eMail,
     password = password,
     userRole = UserRole.TEACHER,
-    subjectId = subjectId,
 )
 
 fun createStudentUserFromTemplate(
@@ -91,10 +89,12 @@ fun createSubjectFromTemplate(
     id: UUID = subjectTemplateId,
     name: String = "Math",
     gradeId: UUID = gradeTemplateId,
+    teacherId: UUID = userTeacherTemplateId,
 ) = Subject(
     id = id,
     name = name,
     gradeId = gradeId,
+    teacherId = teacherId,
 )
 
 fun createUserSchoolFromTemplate(

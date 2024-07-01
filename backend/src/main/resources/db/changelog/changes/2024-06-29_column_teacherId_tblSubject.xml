@@ -4,12 +4,12 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                    https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
-    <changeSet id="2024-06-29_column_subjectId_tblUser" author="alejandro.wenzler">
-        <addColumn tableName="t_user">
-            <column name="subject_id" type="uuid">
+    <changeSet id="2024-06-29_column_teacherId_tblSubject" author="alejandro.wenzler">
+        <addColumn tableName="t_subject">
+            <column name="teacher_id" type="uuid">
                 <constraints nullable="true"/>
             </column>
         </addColumn>
-        <addForeignKeyConstraint constraintName="fk_user_subject" baseTableName="t_user" baseColumnNames="subject_id" referencedTableName="t_subject" referencedColumnNames="id"/>
+        <addForeignKeyConstraint constraintName="fk_subject_user" baseTableName="t_subject" baseColumnNames="teacher_id" referencedTableName="t_user" referencedColumnNames="id"/>
     </changeSet>
 </databaseChangeLog>

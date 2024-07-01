@@ -34,7 +34,7 @@ class TeacherIntegrationTest : IntegrationTest() {
         transactionManager.runInTransaction {
             schoolDao.insert(createSchoolFromTemplate())
             userDao.insert(createAdminUserFromTemplate())
-            userDao.insert(createTeacherUserFromTemplate(subjectId = null))
+            userDao.insert(createTeacherUserFromTemplate())
             userDao.insert(createStudentUserFromTemplate())
             userDao.insert(createAdminUserFromTemplate
                 (
@@ -48,7 +48,6 @@ class TeacherIntegrationTest : IntegrationTest() {
                 firstName = "testTeacher",
                 lastName = "userTeacher2",
                 eMail = "testTeacheruser@gmail.com",
-                subjectId = null,
             ))
             userSchoolDao.insert(createUserSchoolFromTemplate(userAdminTemplateId))
             userSchoolDao.insert(createUserSchoolFromTemplate(userTeacherTemplateId))

@@ -47,9 +47,6 @@ class GradeIntegrationTest: IntegrationTest() {
             // Grades
             gradeDao.insert(createGradeFromTemplate())
             gradeDao.insert(createGradeFromTemplate(id = ethGradeId, name = "Grade 1A", schoolId = ethSchoolId))
-            // Subjects
-            subjectDao.insert(createSubjectFromTemplate())
-            subjectDao.insert(createSubjectFromTemplate(id = ethSubjectId, name = "Quantum Physics", gradeId = ethGradeId))
             // Users
             userDao.insert(createAdminUserFromTemplate())
             userDao.insert(createTeacherUserFromTemplate())
@@ -61,6 +58,9 @@ class GradeIntegrationTest: IntegrationTest() {
                 lastName = "user2",
                 eMail = "test2user@gmail.com",
             ))
+            // Subjects
+            subjectDao.insert(createSubjectFromTemplate())
+            subjectDao.insert(createSubjectFromTemplate(id = ethSubjectId, name = "Quantum Physics", gradeId = ethGradeId))
             // User and school assignments
             userSchoolDao.insert(createUserSchoolFromTemplate(userAdminTemplateId))
             userSchoolDao.insert(createUserSchoolFromTemplate(userTeacherTemplateId))
