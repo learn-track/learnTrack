@@ -294,7 +294,7 @@ class GradeIntegrationTest: IntegrationTest() {
         assertThat(response).hasSize(1)
         assertThat(response?.map { it.students.any { it.id == userStudentTemplateId } })
         assertThat(response?.map { it.subjectDetailsDto.any { it.teacher?.id == userTeacherTemplateId } })
-        assertThat(response?.map { it.subjectDetailsDto.any { it.id == subjectTemplateId } })
+        assertThat(response?.map { it.subjectDetailsDto.any { it.subject.id == subjectTemplateId } })
 
         val response1 =  webClient.get()
             .uri { uriBuilder ->
@@ -315,6 +315,6 @@ class GradeIntegrationTest: IntegrationTest() {
         assertThat(response1).isNotNull
         assertThat(response1?.map { it.students.isEmpty()})
         assertThat(response1?.map { it.subjectDetailsDto.any { it.teacher == null } })
-        assertThat(response1?.map { it.subjectDetailsDto.any { it.id == ethSubjectId } })
+        assertThat(response1?.map { it.subjectDetailsDto.any { it.subject.id == ethSubjectId } })
     }
 }

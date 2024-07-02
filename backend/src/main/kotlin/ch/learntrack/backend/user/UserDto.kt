@@ -1,7 +1,6 @@
 package ch.learntrack.backend.user
 
 import ch.learntrack.backend.persistence.UserRole
-import java.time.LocalDate
 import java.time.LocalDateTime
 import java.util.UUID
 
@@ -29,6 +28,6 @@ public data class CreateUserDto(
     val middlename: String?,
     val lastname: String,
     val email: String,
-    val birthDate: LocalDate?,
+    val birthDate: LocalDateTime?,
     val password: String,
 )

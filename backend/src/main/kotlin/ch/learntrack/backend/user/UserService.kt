@@ -6,7 +6,7 @@ import ch.learntrack.backend.common.LearnTrackConflictException
 import ch.learntrack.backend.persistence.UserRole
 import ch.learntrack.backend.persistence.fetchAllUsersByRoleAndGradeId
 import ch.learntrack.backend.persistence.fetchAllUsersByRoleAndSchoolId
-import ch.learntrack.backend.persistence.fetchUserBySubjectId
+import ch.learntrack.backend.persistence.fetchTeacherBySubjectId
 import ch.learntrack.backend.persistence.searchUserByUserRoleAndEmailSearchQuery
 import ch.learntrack.backend.persistence.tables.daos.UserDao
 import ch.learntrack.backend.persistence.tables.daos.UserGradeDao
@@ -52,7 +52,7 @@ public class UserService(
         userDao.searchUserByUserRoleAndEmailSearchQuery(email, userRole)
 
     public fun getUserBySubjectId(subjectId: UUID): UserDto? =
-        userDao.fetchUserBySubjectId(subjectId)?.let(::mapToDto)
+        userDao.fetchTeacherBySubjectId(subjectId)?.let(::mapToDto)
 
     public fun createUser(
         createUserDto: CreateUserDto,
@@ -72,7 +72,7 @@ public class UserService(
             eMail = emailToLowerCase,
             password = passwordService.createPasswordHash(createUserDto.password),
             userRole = userRole,
-            birthdate = createUserDto.birthDate?.atTime(0, 0, 0, 0),
+            birthdate = createUserDto.birthDate,
             created = LocalDateTime.now(),
             updated = LocalDateTime.now(),
         )

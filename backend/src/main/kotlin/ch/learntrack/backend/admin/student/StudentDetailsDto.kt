@@ -2,7 +2,7 @@ package ch.learntrack.backend.admin.student
 
 import ch.learntrack.backend.grade.GradeDto
 import ch.learntrack.backend.user.UserDto
-import java.time.LocalDate
+import java.time.LocalDateTime
 import java.util.UUID
 
 public data class StudentDetailsDto(
@@ -15,7 +15,7 @@ public data class CreateStudentDto(
     val middlename: String?,
     val lastname: String,
     val email: String,
-    val birthDate: LocalDate,
+    val birthDate: LocalDateTime,
     val password: String,
     val schoolId: UUID,
     val gradeId: UUID,

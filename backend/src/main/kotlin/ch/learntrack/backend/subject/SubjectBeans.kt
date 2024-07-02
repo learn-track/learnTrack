@@ -6,4 +6,5 @@ import org.springframework.context.support.beans
 
 public val subjectBeans: BeanDefinitionDsl = beans {
     bean<SubjectDao>()
+    bean<SubjectService>()
 }

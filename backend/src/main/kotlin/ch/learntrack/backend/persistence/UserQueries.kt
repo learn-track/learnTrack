@@ -36,7 +36,7 @@ public fun UserDao.searchUserByUserRoleAndEmailSearchQuery(email: String, userRo
     .fetch()
     .into(User::class.java)
 
-public fun UserDao.fetchUserBySubjectId(subjectId: UUID): User? = ctx()
+public fun UserDao.fetchTeacherBySubjectId(subjectId: UUID): User? = ctx()
     .select()
     .from(USER)
     .join(SUBJECT)
