@@ -5,6 +5,7 @@ import ch.learntrack.backend.common.LearnTrackConflictException
 import ch.learntrack.backend.grade.GradeService
 import ch.learntrack.backend.persistence.UserRole
 import ch.learntrack.backend.persistence.tables.daos.GradeDao
+import ch.learntrack.backend.persistence.tables.daos.UserDao
 import ch.learntrack.backend.persistence.tables.pojos.Grade
 import ch.learntrack.backend.subject.SubjectService
 import ch.learntrack.backend.user.UserService
@@ -17,6 +18,7 @@ public class AdminGradeService(
     private val userService: UserService,
     private val subjectService: SubjectService,
     private val gradeDao: GradeDao,
+    private val userDao: UserDao,
 ) {
     public fun getAllGradesForSchool(schoolId: UUID): List<GradeInfoDto> =
         gradeService.getGradesBySchoolId(schoolId).map { grade ->
@@ -47,10 +49,14 @@ public class AdminGradeService(
 
     public fun getGradeDetails(gradeId: UUID): GradeDetailsDto = GradeDetailsDto(
         students = userService.getUsersByRoleAndGradeId(UserRole.STUDENT, gradeId),
-        subjectDetailsDto = subjectService.getSubjectsByGradeId(gradeId).map {
+        subjectDetailsDto = subjectService.getSubjectsByGradeId(gradeId).map { subject ->
             SubjectDetailsDto(
-                subject = it,
-                teacher = userService.getUserBySubjectId(it.id),
+                subject = subject,
+                teacher = subject.teacherId?.let { teacherId ->
+                    userDao.fetchOneById(teacherId)?.let { teacher ->
+                        userService.mapToDto(teacher)
+                    }
+                },
             )
         },
     )

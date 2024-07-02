@@ -8,8 +8,8 @@ import java.util.UUID
 
 public fun SubjectDao.fetchSubjectsByGradeId(gradeId: UUID): List<Subject> = ctx()
     .select()
-    .from(GRADE)
-    .join(SUBJECT)
+    .from(SUBJECT)
+    .join(GRADE)
     .on(SUBJECT.GRADE_ID.eq(GRADE.ID))
     .where(GRADE.ID.eq(gradeId))
     .fetch()

@@ -13,6 +13,8 @@ public class SubjectService(
     public override fun mapToDto(pojo: Subject): SubjectDto = SubjectDto(
         id = pojo.id,
         name = pojo.name,
+        gradeId = pojo.gradeId,
+        teacherId = pojo.teacherId,
     )
 
     public fun getSubjectsByGradeId(gradeId: UUID): List<SubjectDto> =
