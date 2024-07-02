@@ -9,3 +9,11 @@ export const useGetTeachersForSchoolQuery = (schoolId: string) => {
 
   return data;
 };
+
+export const useSearchTeacherByEmailQuery = (schoolId: string, searchText: string, enabled: boolean) => {
+  return useQuery({
+    queryKey: ['teacherSearch', searchText],
+    queryFn: () => AdminTeacherResourceService.searchTeacherByEmail(schoolId, searchText),
+    enabled: enabled,
+  });
+};

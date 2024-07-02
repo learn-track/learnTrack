@@ -5,8 +5,26 @@
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
+import type { CreateStudentDto } from '../models/CreateStudentDto';
 import type { StudentDetailsDto } from '../models/StudentDetailsDto';
 export class AdminStudentResourceService {
+  /**
+   * @param schoolId
+   * @param requestBody
+   * @returns any OK
+   * @throws ApiError
+   */
+  public static createStudent(schoolId: string, requestBody: CreateStudentDto): CancelablePromise<any> {
+    return __request(OpenAPI, {
+      method: 'POST',
+      url: '/admin/student/createStudent',
+      query: {
+        schoolId: schoolId,
+      },
+      body: requestBody,
+      mediaType: 'application/json',
+    });
+  }
   /**
    * @param schoolId
    * @returns StudentDetailsDto OK
