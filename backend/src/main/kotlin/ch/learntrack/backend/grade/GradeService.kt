@@ -8,7 +8,9 @@ import ch.learntrack.backend.persistence.tables.pojos.Grade
 import ch.learntrack.backend.persistence.tables.records.GradeRecord
 import java.util.UUID
 
-public class GradeService(private val gradeDao: GradeDao) : EntityService<GradeDto, GradeRecord, Grade>(gradeDao) {
+public class GradeService(
+    private val gradeDao: GradeDao,
+) : EntityService<GradeDto, GradeRecord, Grade>(gradeDao) {
     public override fun mapToDto(pojo: Grade): GradeDto = GradeDto(
         id = pojo.id,
         name = pojo.name,

@@ -25,13 +25,13 @@ export function GradePage() {
         <CreateGradeDialog isOpen={open} setOpen={setOpen}></CreateGradeDialog>
       </div>
       <GradesCardWrapper>
-        {grades?.map((gradeDetailsDto) => {
+        {grades?.map((gradeInfoDto) => {
           return (
             <GradeCard
-              key={gradeDetailsDto.grades.name}
-              className={gradeDetailsDto.grades.name}
-              teacherCount={gradeDetailsDto.teachers.length}
-              studentCount={gradeDetailsDto.students.length}
+              key={gradeInfoDto.grades.name}
+              className={gradeInfoDto.grades.name}
+              teacherCount={gradeInfoDto.teachers.length}
+              studentCount={gradeInfoDto.students.length}
             />
           );
         })}

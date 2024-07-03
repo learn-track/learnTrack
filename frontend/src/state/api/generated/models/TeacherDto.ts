@@ -2,11 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type CreateUserDto = {
-  firstname: string;
-  middlename?: string | null;
-  lastname: string;
+export type TeacherDto = {
+  id: string;
   email: string;
-  birthDate?: string | null;
-  password: string;
+  isAssignedToSchool: boolean;
 };

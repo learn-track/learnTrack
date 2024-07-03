@@ -7,7 +7,9 @@ package ch.learntrack.backend.persistence.tables
 import ch.learntrack.backend.persistence.Public
 import ch.learntrack.backend.persistence.keys.PK_SUBJECT
 import ch.learntrack.backend.persistence.keys.T_SUBJECT__FK_SUBJECT_GRADE
+import ch.learntrack.backend.persistence.keys.T_SUBJECT__FK_SUBJECT_USER
 import ch.learntrack.backend.persistence.tables.GradeTable.TGradePath
+import ch.learntrack.backend.persistence.tables.UserTable.TUserPath
 import ch.learntrack.backend.persistence.tables.records.SubjectRecord
 
 import java.time.LocalDateTime
@@ -101,6 +103,11 @@ public open class SubjectTable(
      */
     public val UPDATED: TableField<SubjectRecord, LocalDateTime?> = createField(DSL.name("updated"), SQLDataType.LOCALDATETIME(6), this, "")
 
+    /**
+     * The column <code>public.t_subject.teacher_id</code>.
+     */
+    public val TEACHER_ID: TableField<SubjectRecord, UUID?> = createField(DSL.name("teacher_id"), SQLDataType.UUID, this, "")
+
     private constructor(alias: Name, aliased: Table<SubjectRecord>?): this(alias, null, null, null, aliased, null, null)
     private constructor(alias: Name, aliased: Table<SubjectRecord>?, parameters: Array<Field<*>?>?): this(alias, null, null, null, aliased, parameters, null)
     private constructor(alias: Name, aliased: Table<SubjectRecord>?, where: Condition): this(alias, null, null, null, aliased, null, where)
@@ -134,7 +141,7 @@ public open class SubjectTable(
     }
     public override fun getSchema(): Schema? = if (aliased()) null else Public.PUBLIC
     public override fun getPrimaryKey(): UniqueKey<SubjectRecord> = PK_SUBJECT
-    public override fun getReferences(): List<ForeignKey<SubjectRecord, *>> = listOf(T_SUBJECT__FK_SUBJECT_GRADE)
+    public override fun getReferences(): List<ForeignKey<SubjectRecord, *>> = listOf(T_SUBJECT__FK_SUBJECT_GRADE, T_SUBJECT__FK_SUBJECT_USER)
 
     private lateinit var _tGrade: TGradePath
 
@@ -150,6 +157,21 @@ public open class SubjectTable(
 
     public val tGrade: TGradePath
         get(): TGradePath = tGrade()
+
+    private lateinit var _tUser: TUserPath
+
+    /**
+     * Get the implicit join path to the <code>public.t_user</code> table.
+     */
+    public fun tUser(): TUserPath {
+        if (!this::_tUser.isInitialized)
+            _tUser = TUserPath(this, T_SUBJECT__FK_SUBJECT_USER, null)
+
+        return _tUser;
+    }
+
+    public val tUser: TUserPath
+        get(): TUserPath = tUser()
     public override fun `as`(alias: String): SubjectTable = SubjectTable(DSL.name(alias), this)
     public override fun `as`(alias: Name): SubjectTable = SubjectTable(alias, this)
     public override fun `as`(alias: Table<*>): SubjectTable = SubjectTable(alias.qualifiedName, this)

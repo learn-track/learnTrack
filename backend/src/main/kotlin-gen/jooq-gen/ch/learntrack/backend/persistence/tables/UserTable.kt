@@ -7,11 +7,13 @@ package ch.learntrack.backend.persistence.tables
 import ch.learntrack.backend.persistence.Public
 import ch.learntrack.backend.persistence.UserRole
 import ch.learntrack.backend.persistence.keys.PK_USER
+import ch.learntrack.backend.persistence.keys.T_SUBJECT__FK_SUBJECT_USER
 import ch.learntrack.backend.persistence.keys.T_USER_GRADE__FK_USER_GRADE_USER
 import ch.learntrack.backend.persistence.keys.T_USER_SCHOOL__FK_USER_SCHOOL_USER
 import ch.learntrack.backend.persistence.keys.USER_E_MAIL_ID
 import ch.learntrack.backend.persistence.tables.GradeTable.TGradePath
 import ch.learntrack.backend.persistence.tables.SchoolTable.TSchoolPath
+import ch.learntrack.backend.persistence.tables.SubjectTable.TSubjectPath
 import ch.learntrack.backend.persistence.tables.UserGradeTable.TUserGradePath
 import ch.learntrack.backend.persistence.tables.UserSchoolTable.TUserSchoolPath
 import ch.learntrack.backend.persistence.tables.records.UserRecord
@@ -167,6 +169,22 @@ public open class UserTable(
     public override fun getSchema(): Schema? = if (aliased()) null else Public.PUBLIC
     public override fun getPrimaryKey(): UniqueKey<UserRecord> = PK_USER
     public override fun getUniqueKeys(): List<UniqueKey<UserRecord>> = listOf(USER_E_MAIL_ID)
+
+    private lateinit var _tSubject: TSubjectPath
+
+    /**
+     * Get the implicit to-many join path to the <code>public.t_subject</code>
+     * table
+     */
+    public fun tSubject(): TSubjectPath {
+        if (!this::_tSubject.isInitialized)
+            _tSubject = TSubjectPath(this, null, T_SUBJECT__FK_SUBJECT_USER.inverseKey)
+
+        return _tSubject;
+    }
+
+    public val tSubject: TSubjectPath
+        get(): TSubjectPath = tSubject()
 
     private lateinit var _tUserGrade: TUserGradePath
 

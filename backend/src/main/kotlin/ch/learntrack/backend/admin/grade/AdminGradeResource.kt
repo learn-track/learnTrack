@@ -19,7 +19,7 @@ public class AdminGradeResource(
         "@UserAccessAuthorizer.hasUserAccessToSchool(#root.authentication.principal, #schoolId)",
     )
     @GetMapping
-    public fun getAllGradesWithDetailsBySchoolId(@RequestParam schoolId: UUID): List<GradeDetailsDto> =
+    public fun getAllGradesWithInfosBySchoolId(@RequestParam schoolId: UUID): List<GradeInfoDto> =
         adminGradeService.getAllGradesForSchool(schoolId)
 
     @PreAuthorize(
@@ -28,4 +28,11 @@ public class AdminGradeResource(
     @PostMapping("/createGrade")
     public fun createGrade(@RequestParam schoolId: UUID, @RequestBody createGradeDto: CreateGradeDto): Unit =
         adminGradeService.createGrade(createGradeDto)
+
+    @PreAuthorize(
+        "@UserAccessAuthorizer.hasUserAccessToSchool(#root.authentication.principal, #schoolId)",
+    )
+    @GetMapping("/getGradeDetails")
+    public fun getGradeDetails(@RequestParam schoolId: UUID, @RequestParam gradeId: UUID): GradeDetailsDto =
+        adminGradeService.getGradeDetails(gradeId)
 }

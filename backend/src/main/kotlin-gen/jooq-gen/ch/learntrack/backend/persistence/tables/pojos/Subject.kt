@@ -18,7 +18,8 @@ public data class Subject(
     public val name: String,
     public val gradeId: UUID,
     public val created: LocalDateTime? = null,
-    public val updated: LocalDateTime? = null
+    public val updated: LocalDateTime? = null,
+    public val teacherId: UUID? = null
 ): Serializable {
 
     public override fun equals(other: Any?): Boolean {
@@ -47,6 +48,12 @@ public data class Subject(
         }
         else if (this.updated != o.updated)
             return false
+        if (this.teacherId == null) {
+            if (o.teacherId != null)
+                return false
+        }
+        else if (this.teacherId != o.teacherId)
+            return false
         return true
     }
 
@@ -58,6 +65,7 @@ public data class Subject(
         result = prime * result + this.gradeId.hashCode()
         result = prime * result + (if (this.created == null) 0 else this.created.hashCode())
         result = prime * result + (if (this.updated == null) 0 else this.updated.hashCode())
+        result = prime * result + (if (this.teacherId == null) 0 else this.teacherId.hashCode())
         return result
     }
 
@@ -69,6 +77,7 @@ public data class Subject(
         sb.append(", ").append(gradeId)
         sb.append(", ").append(created)
         sb.append(", ").append(updated)
+        sb.append(", ").append(teacherId)
 
         sb.append(")")
         return sb.toString()

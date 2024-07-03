@@ -47,6 +47,11 @@ public open class SubjectRecord private constructor() : UpdatableRecordImpl<Subj
     @Nullable
         get(): LocalDateTime? = get(4) as LocalDateTime?
 
+    public open var teacherId: UUID?
+        set(value): Unit = set(5, value)
+    @Nullable
+        get(): UUID? = get(5) as UUID?
+
     // -------------------------------------------------------------------------
     // Primary key information
     // -------------------------------------------------------------------------
@@ -56,12 +61,13 @@ public open class SubjectRecord private constructor() : UpdatableRecordImpl<Subj
     /**
      * Create a detached, initialised SubjectRecord
      */
-    public constructor(id: UUID, name: String, gradeId: UUID, created: LocalDateTime? = null, updated: LocalDateTime? = null): this() {
+    public constructor(id: UUID, name: String, gradeId: UUID, created: LocalDateTime? = null, updated: LocalDateTime? = null, teacherId: UUID? = null): this() {
         this.id = id
         this.name = name
         this.gradeId = gradeId
         this.created = created
         this.updated = updated
+        this.teacherId = teacherId
         resetChangedOnNotNull()
     }
 
@@ -75,6 +81,7 @@ public open class SubjectRecord private constructor() : UpdatableRecordImpl<Subj
             this.gradeId = value.gradeId
             this.created = value.created
             this.updated = value.updated
+            this.teacherId = value.teacherId
             resetChangedOnNotNull()
         }
     }
