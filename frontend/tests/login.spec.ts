@@ -19,6 +19,8 @@ test.describe('Login page', () => {
     await page.getByRole('button', { name: 'Anmelden' }).click();
 
     await expect(page.getByRole('link', { name: 'Learn Track' })).toBeVisible();
+    await page.mouse.move(0, 0);
+    await page.waitForTimeout(200);
 
     await page.screenshot({ path: 'lost-pixel/admin-landing-page.png', fullPage: true });
   });
