@@ -3,7 +3,9 @@ package ch.learntrack.backend.backoffice.school
 import ch.learntrack.backend.common.EntityService
 import ch.learntrack.backend.common.LearnTrackConflictException
 import ch.learntrack.backend.persistence.tables.daos.SchoolDao
+import ch.learntrack.backend.persistence.tables.daos.UserSchoolDao
 import ch.learntrack.backend.persistence.tables.pojos.School
+import ch.learntrack.backend.persistence.tables.pojos.UserSchool
 import ch.learntrack.backend.persistence.tables.records.SchoolRecord
 import ch.learntrack.backend.utils.sanitizeInputString
 import java.time.LocalDateTime
@@ -11,6 +13,7 @@ import java.util.UUID
 
 public class SchoolService(
     private val schoolDao: SchoolDao,
+    private val userSchoolDao: UserSchoolDao,
 ) : EntityService<SchoolDto, SchoolRecord, School>(schoolDao) {
     public override fun mapToDto(pojo: School): SchoolDto = SchoolDto(
         id = pojo.id,
@@ -43,6 +46,15 @@ public class SchoolService(
             updated = LocalDateTime.now(),
         )
         schoolDao.insert(school)
+    }
+
+    public fun assignUserToSchool(schoolId: UUID, userId: UUID) {
+        userSchoolDao.insert(
+            UserSchool(
+                userId = userId,
+                schoolId = schoolId,
+            ),
+        )
     }
 
     private fun isSchoolExisting(createSchoolDto: CreateSchoolDto): Boolean = schoolDao.fetchByName(

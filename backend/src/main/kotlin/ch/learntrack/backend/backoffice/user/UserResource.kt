@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
-
 import java.util.UUID
 
 @RestController
@@ -34,4 +33,8 @@ public class UserResource(private val userService: UserService) {
     @GetMapping("/getStudentCount")
     public fun getStudentCounts(@RequestParam schoolId: UUID): Int = userService.getUserCount(schoolId,
         UserRole.STUDENT)
+
+    @GetMapping("/getAllAdminUsersNotAssignedToSchool")
+    public fun getAllAdminUsersNotAssignedToSchool(@RequestParam schoolId: UUID): List<UserDto> =
+        userService.getAllAdminUsersNotAssignedToSchool(schoolId)
 }

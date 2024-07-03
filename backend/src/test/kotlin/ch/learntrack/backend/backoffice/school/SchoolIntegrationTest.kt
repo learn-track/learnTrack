@@ -39,10 +39,12 @@ class SchoolIntegrationTest: IntegrationTest() {
     @BeforeEach
     fun setUp() {
         transactionManager.runInTransaction {
+            // School
             schoolDao.insert(createSchoolFromTemplate())
             schoolDao.insert(createSchoolFromTemplate(id = ethSchoolId, name = "ETH"))
             schoolDao.insert(createSchoolFromTemplate(id = benedictSchoolId, name = "BENEDICT"))
             schoolDao.insert(createSchoolFromTemplate(id = phzSchoolId, name = "PHZ"))
+            // User
             userDao.insert(createAdminUserFromTemplate())
             userDao.insert(createAdminUserFromTemplate(id = adminUserSecondSchoolId, eMail = ADMIN_USER_SECOND_SCHOOL))
             userDao.insert(createStudentUserFromTemplate(id = studentOneId, eMail = STUDENT_ONE))
@@ -51,6 +53,7 @@ class SchoolIntegrationTest: IntegrationTest() {
             userDao.insert(createTeacherUserFromTemplate(id = teacherOneId, eMail = TEACHER_ONE))
             userDao.insert(createTeacherUserFromTemplate(id = teacherTwoId, eMail = TEACHER_TWO))
             userDao.insert(createTeacherUserFromTemplate(id = teacherThreeId, eMail = TEACHER_THREE))
+            // UserSchool
             userSchoolDao.insert(createUserSchoolFromTemplate(userId = userAdminTemplateId))
             userSchoolDao.insert(createUserSchoolFromTemplate(userId = userAdminTemplateId, schoolId = ethSchoolId))
             userSchoolDao.insert(createUserSchoolFromTemplate(userId = adminUserSecondSchoolId, schoolId = phzSchoolId))
@@ -273,5 +276,42 @@ class SchoolIntegrationTest: IntegrationTest() {
         assertThat(response).isNotNull
         assertThat(response).hasSize(1)
         assertThat(response?.first()?.id).isEqualTo(adminUserSecondSchoolId)
+    }
+
+    @Test
+    fun `should assign admin user to school`() {
+        webClient.put()
+            .uri { uriBuilder ->
+                uriBuilder
+                    .path("$BACKOFFICE_ROOT_URL/school/assignUserToSchool")
+                    .queryParam("schoolId", ethSchoolId)
+                    .queryParam("userId", adminUserSecondSchoolId)
+                    .build()
+            }
+            .setBasicAuthHeader(backendProperties)
+            .exchange()
+            .expectStatus()
+            .isOk
+
+        val userSchool = userSchoolDao.fetchBySchoolId(ethSchoolId)
+
+        assertThat(userSchool).isNotNull
+        assertThat(userSchool.any { user_School -> user_School.schoolId == ethSchoolId && user_School.userId == adminUserSecondSchoolId}).isTrue()
+    }
+
+    @Test
+    fun `should not assign admin user to school if already assigned to school`() {
+        webClient.put()
+            .uri { uriBuilder ->
+                uriBuilder
+                    .path("$BACKOFFICE_ROOT_URL/school/assignUserToSchool")
+                    .queryParam("schoolId", ethSchoolId)
+                    .queryParam("userId", userAdminTemplateId)
+                    .build()
+            }
+            .setBasicAuthHeader(backendProperties)
+            .exchange()
+            .expectStatus()
+            .is5xxServerError
     }
 }

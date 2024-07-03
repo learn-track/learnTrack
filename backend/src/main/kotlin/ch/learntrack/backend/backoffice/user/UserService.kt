@@ -65,5 +65,8 @@ public class UserService(
         userDao.insert(user)
     }
 
+    public fun getAllAdminUsersNotAssignedToSchool(schoolId: UUID): List<UserDto> =
+        userDao.fetchAllAdminUsersNotAssignedToSchool(schoolId).map(::mapToDto)
+
     private fun isEmailExisting(email: String): Boolean = userDao.fetchByEMail(email).isNotEmpty()
 }
