@@ -4,7 +4,9 @@ import ch.learntrack.backend.IntegrationTest
 import ch.learntrack.backend.backoffice.BACKOFFICE_ROOT_URL
 import ch.learntrack.backend.persistence.tables.references.USER
 import ch.learntrack.backend.utils.createAdminUserFromTemplate
+import ch.learntrack.backend.utils.createSchoolFromTemplate
 import ch.learntrack.backend.utils.createTeacherUserFromTemplate
+import ch.learntrack.backend.utils.createUserSchoolFromTemplate
 import ch.learntrack.backend.utils.deleteAll
 import ch.learntrack.backend.utils.runInTransaction
 import ch.learntrack.backend.utils.setBasicAuthHeader
@@ -15,20 +17,33 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.http.HttpStatus
 import org.springframework.web.reactive.function.BodyInserters
+import java.util.UUID
+
+private const val PHZ_SCHOOL = "65b454d0-f496-4df1-ae11-01a87b618a6e"
+private const val ADMIN_USER_SECOND_SCHOOL = "90f8dffc-3bd8-4ff4-b2c9-71b48aa57ede"
 
 class UserIntegrationTest: IntegrationTest() {
+    private val phzSchoolId = UUID.fromString(PHZ_SCHOOL)
+    private val adminUserSecondSchoolId = UUID.fromString(ADMIN_USER_SECOND_SCHOOL)
+
     @BeforeEach
     fun setUp() {
         transactionManager.runInTransaction {
+            schoolDao.insert(createSchoolFromTemplate())
+            schoolDao.insert(createSchoolFromTemplate(id = phzSchoolId, name = "PHZ"))
             userDao.insert(createAdminUserFromTemplate())
             userDao.insert(createTeacherUserFromTemplate())
+            userDao.insert(createAdminUserFromTemplate(id = adminUserSecondSchoolId, eMail = "test@phzhAdmin.ch"))
+            userSchoolDao.insert(createUserSchoolFromTemplate(userId = adminUserSecondSchoolId, schoolId = phzSchoolId))
         }
     }
 
     @AfterEach
     fun cleanUp() {
         transactionManager.runInTransaction {
+            schoolDao.deleteAll()
             userDao.deleteAll()
+            userSchoolDao.deleteAll()
         }
     }
 
@@ -53,7 +68,7 @@ class UserIntegrationTest: IntegrationTest() {
             .responseBody
 
         assertThat(response).isNotNull
-        assertThat(response).hasSize(1)
+        assertThat(response).hasSize(2)
         assertThat(response?.first()?.id).isEqualTo(userAdminTemplateId)
     }
 
@@ -177,4 +192,23 @@ class UserIntegrationTest: IntegrationTest() {
         assertThat(user?.eMail).isEqualTo("testlowercase@gmail.com")
     }
 
+    @Test
+    fun `should return all admins not assigned to school`() {
+        val response = webClient.get()
+            .uri { uriBuilder ->
+                uriBuilder
+                    .path("$BACKOFFICE_ROOT_URL/user/getAllAdminUsersNotAssignedToSchool")
+                    .queryParam("schoolId", phzSchoolId)
+                    .build()
+            }
+            .setBasicAuthHeader(backendProperties)
+            .exchange()
+            .expectBodyList(UserDto::class.java)
+            .returnResult()
+            .responseBody
+
+        assertThat(response).isNotNull
+        assertThat(response).hasSize(1)
+        assertThat(response?.any {userDto ->  userDto.id == userAdminTemplateId && userDto.id != adminUserSecondSchoolId}).isTrue()
+    }
 }

@@ -33,3 +33,16 @@ public fun UserDao.fetchUserCountBySchoolIdAndUserRole(schoolId: UUID, userRole:
     .and(USER.USER_ROLE.eq(userRole))
     .fetchOne(0, Int::class.java)
     ?: 0
+
+public fun UserDao.fetchAllAdminUsersNotAssignedToSchool(schoolId: UUID): List<User> = ctx()
+    .select()
+    .from(USER)
+    .where(USER.USER_ROLE.eq(UserRole.ADMIN))
+    .andNotExists(
+        ctx().selectOne()
+            .from(USER_SCHOOL)
+            .where(USER_SCHOOL.USER_ID.eq(USER.ID))
+            .and(USER_SCHOOL.SCHOOL_ID.eq(schoolId)),
+    )
+    .fetch()
+    .into(User::class.java)
