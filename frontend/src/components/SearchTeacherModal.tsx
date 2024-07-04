@@ -1,11 +1,12 @@
 import { ErrorOutline } from '@mui/icons-material';
-import { Autocomplete, AutocompleteOption, Button, Modal, ModalDialog, Snackbar, styled, Typography } from '@mui/joy';
+import { Autocomplete, AutocompleteOption, Button, Modal, ModalDialog, Snackbar, Typography } from '@mui/joy';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 import { AdminTeacherResourceService } from '../state/api/generated';
 import { useSearchTeacherByEmailQuery } from '../state/api/teachers.ts';
 import { whoamiAtom } from '../state/api/whoami.ts';
+import { ModalButtonsWrapper } from './ModalButtonsWrapper.tsx';
 
 export function SearchTeacherModal({ open, onClose }: { open: boolean; onClose: () => void }) {
   const [{ data: whoami }] = useAtom(whoamiAtom);
@@ -13,7 +14,7 @@ export function SearchTeacherModal({ open, onClose }: { open: boolean; onClose: 
   const [isSearchQueryEnabled, setIsSearchQueryEnabled] = useState(false);
   const [selectedTeacherId, setSelectedTeacherId] = useState<null | string>(null);
   const { data, isPending } = useSearchTeacherByEmailQuery(whoami.schools[0].id, searchText, isSearchQueryEnabled);
-  const [showErrorSnackbar, setShowErrorSnackBar] = useState(false);
+  const [showErrorSnackbar, setShowErrorSnackbar] = useState(false);
   const [showSuccessSnackbar, setShowSuccessSnackbar] = useState(false);
 
   const addTeacherToSchoolMutation = useAddTeacherToSchoolMutation(
@@ -22,7 +23,7 @@ export function SearchTeacherModal({ open, onClose }: { open: boolean; onClose: 
       setShowSuccessSnackbar(true);
       onClose();
     },
-    () => setShowErrorSnackBar(true),
+    () => setShowErrorSnackbar(true),
   );
 
   useEffect(() => {
@@ -88,7 +89,7 @@ export function SearchTeacherModal({ open, onClose }: { open: boolean; onClose: 
         color={'danger'}
         autoHideDuration={3000}
         onClose={() => {
-          setShowErrorSnackBar(false);
+          setShowErrorSnackbar(false);
         }}
         startDecorator={<ErrorOutline />}>
         Beim hinzufügen des Lehrers ist ein Fehler aufgetreten.
@@ -108,10 +109,3 @@ const useAddTeacherToSchoolMutation = (schoolId: string, onSuccess: () => void, 
     onError,
   });
 };
-
-const ModalButtonsWrapper = styled('div')`
-  margin-top: 1.5rem;
-  display: flex;
-  gap: 24px;
-  justify-content: space-between;
-`;
