@@ -5,8 +5,9 @@ import { useAtom } from 'jotai/index';
 import { useState } from 'react';
 import { AdminGradeResourceService, CreateGradeDto } from '../state/api/generated';
 import { whoamiAtom } from '../state/api/whoami.ts';
+import { ModalButtonsWrapper } from './ModalButtonsWrapper.tsx';
 
-export function CreateGradeDialog({ isOpen, setOpen }: { isOpen: boolean; setOpen: (open: boolean) => void }) {
+export function CreateGradeModal({ open, onClose }: { open: boolean; onClose: () => void }) {
   const [{ data: whoami }] = useAtom(whoamiAtom);
   const schoolId = whoami.schools[0].id;
   const [gradeName, setGradeName] = useState('');
@@ -14,27 +15,20 @@ export function CreateGradeDialog({ isOpen, setOpen }: { isOpen: boolean; setOpe
   const [showSnackbar, setShowSnackbar] = useState(false);
   const [showSnackbarError, setShowSnackbarError] = useState(false);
 
-  const createGrade = useCreateGradeForSchoolMutation(
+  const createGradeMutation = useCreateGradeForSchoolMutation(
     schoolId,
     () => {
       setShowSnackbar(true);
+      setGradeName('');
+      onClose();
     },
     () => setShowSnackbarError(true),
   );
 
-  const handleModelSubmit = () => {
-    if (gradeName != '') {
-      createGrade.mutate({ name: gradeName, schoolId });
-    } else {
-      setShowSnackbarError(true);
-    }
-    setOpen(false);
-  };
-
   return (
     <>
-      <Modal open={isOpen} onClose={() => setOpen(false)}>
-        <ModalDialog>
+      <Modal open={open} onClose={onClose}>
+        <ModalDialog sx={{ minWidth: 450 }}>
           <Typography level="h4">Neue Klasse erstellen</Typography>
           <Input
             value={gradeName}
@@ -42,10 +36,20 @@ export function CreateGradeDialog({ isOpen, setOpen }: { isOpen: boolean; setOpe
             placeholder="Geben sie den namen ein"
             fullWidth
           />
-          <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '8px' }}>
-            <Button onClick={() => setOpen(false)}>Cancel</Button>
-            <Button onClick={handleModelSubmit}>Submit</Button>
-          </div>
+          <ModalButtonsWrapper>
+            <Button onClick={onClose} variant={'plain'}>
+              Abbrechen
+            </Button>
+            <Button
+              disabled={!(gradeName !== '')}
+              onClick={() => {
+                if (gradeName !== '') {
+                  createGradeMutation.mutate({ name: gradeName, schoolId });
+                }
+              }}>
+              Speichern
+            </Button>
+          </ModalButtonsWrapper>
         </ModalDialog>
       </Modal>
       <Snackbar

@@ -1,6 +1,7 @@
 import {
   Autocomplete,
   AutocompleteOption,
+  Button,
   FormControl,
   FormHelperText,
   FormLabel,
@@ -14,7 +15,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { AdminStudentResourceService, CreateStudentDto, GradeDetailsDto } from '../state/api/generated';
 import { useGetGradesForSchoolQuery } from '../state/api/grades.ts';
 import { whoamiAtom } from '../state/api/whoami.ts';
-import { AlternateButton } from './AlternateButton.tsx';
+import { ModalButtonsWrapper } from './ModalButtonsWrapper.tsx';
 
 type Inputs = {
   firstname: string;
@@ -155,10 +156,14 @@ export function StudentRegisterForm({
           )}
           {errors.gradeDetails?.type === 'required' && <FormHelperText>Keine Klasse gewählt</FormHelperText>}
         </FixedHeightFormControl>
-
-        <AlternateButton loading={registerMutation.isPending} type={'submit'} sx={{ width: '750px' }}>
-          Schüler erstellen
-        </AlternateButton>
+        <ModalButtonsWrapper>
+          <Button onClick={onClose} variant={'plain'}>
+            Abbrechen
+          </Button>
+          <Button loading={registerMutation.isPending} disabled={registerMutation.isPending} type={'submit'}>
+            Speichern
+          </Button>
+        </ModalButtonsWrapper>
       </StudentRegisterFormWrapper>
     </>
   );
