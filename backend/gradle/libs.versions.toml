@@ -1,6 +1,6 @@
 [versions]
 kotlin = "1.9.24"
-spring = "6.1.10"
+spring = "6.1.11"
 springboot = "3.3.1"
 springdoc = "2.6.0"
 
@@ -17,7 +17,7 @@ kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect" }
 liquibase-core = { module = "org.liquibase:liquibase-core" }
 mockserver = { module = "org.testcontainers:mockserver" }
 mockserver-client-java = "org.mock-server:mockserver-client-java:5.15.0"
-mockito-kotlin = "org.mockito.kotlin:mockito-kotlin:5.3.1"
+mockito-kotlin = "org.mockito.kotlin:mockito-kotlin:5.4.0"
 spring-boot-configuration-processor = { module = "org.springframework.boot:spring-boot-configuration-processor", version.ref = "springboot" }
 spring-boot-dependencies = { module = "org.springframework.boot:spring-boot-dependencies", version.ref = "springboot" }
 spring-boot-starter-actuator = { module = "org.springframework.boot:spring-boot-starter-actuator" }
