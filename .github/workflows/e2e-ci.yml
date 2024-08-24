@@ -63,7 +63,7 @@ jobs:
         run: |
           (
             cd frontend/tests/resources
-            docker-compose up -d
+            docker compose up -d
           ) &
           (
             cd frontend
@@ -130,7 +130,7 @@ jobs:
         if: always()
         run: |
           cd frontend/tests/resources
-          docker-compose down
+          docker compose down
 
   merge-reports-ci:
     if: ${{ !cancelled() }}
