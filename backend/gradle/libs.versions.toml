@@ -1,7 +1,7 @@
 [versions]
-kotlin = "1.9.24"
-spring = "6.1.10"
-springboot = "3.3.1"
+kotlin = "1.9.25"
+spring = "6.1.12"
+springboot = "3.3.3"
 springdoc = "2.6.0"
 
 [libraries]
@@ -17,7 +17,7 @@ kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect" }
 liquibase-core = { module = "org.liquibase:liquibase-core" }
 mockserver = { module = "org.testcontainers:mockserver" }
 mockserver-client-java = "org.mock-server:mockserver-client-java:5.15.0"
-mockito-kotlin = "org.mockito.kotlin:mockito-kotlin:5.3.1"
+mockito-kotlin = "org.mockito.kotlin:mockito-kotlin:5.4.0"
 spring-boot-configuration-processor = { module = "org.springframework.boot:spring-boot-configuration-processor", version.ref = "springboot" }
 spring-boot-dependencies = { module = "org.springframework.boot:spring-boot-dependencies", version.ref = "springboot" }
 spring-boot-starter-actuator = { module = "org.springframework.boot:spring-boot-starter-actuator" }
@@ -31,12 +31,12 @@ spring-security-test = { module = "org.springframework.security:spring-security-
 spring-webflux = { module = "org.springframework:spring-webflux" }
 springdoc-openapi-kotlin = { module = "org.springdoc:springdoc-openapi-starter-common", version.ref = "springdoc" }
 springdoc-openapi-ui = { module = "org.springdoc:springdoc-openapi-starter-webmvc-ui", version.ref = "springdoc" }
-testcontainers-bom = "org.testcontainers:testcontainers-bom:1.19.8"
+testcontainers-bom = "org.testcontainers:testcontainers-bom:1.20.1"
 archunit = "com.tngtech.archunit:archunit-junit5:1.3.0"
 spring-boot-docker-compose = { module = "org.springframework.boot:spring-boot-docker-compose", version.ref = "springboot" }
 spring-boot-devtools = { module = "org.springframework.boot:spring-boot-devtools", version.ref = "springboot" }
 org-testcontainers-postgresql = { module = "org.testcontainers:postgresql" }
-postgresql = "org.postgresql:postgresql:42.7.3"
+postgresql = "org.postgresql:postgresql:42.7.4"
 jsonwebtoken = "io.jsonwebtoken:jjwt-api:0.12.6"
 jsonwebtoken-impl = "io.jsonwebtoken:jjwt-impl:0.12.6"
 jsonwebtoken-orgjson = "io.jsonwebtoken:jjwt-orgjson:0.12.6"
