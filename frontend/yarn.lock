@@ -1367,14 +1367,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@playwright/test@npm:^1.46.1":
-  version: 1.46.1
-  resolution: "@playwright/test@npm:1.46.1"
+"@playwright/test@npm:^1.47.0":
+  version: 1.47.0
+  resolution: "@playwright/test@npm:1.47.0"
   dependencies:
-    playwright: "npm:1.46.1"
+    playwright: "npm:1.47.0"
   bin:
     playwright: cli.js
-  checksum: b2d33f33bedfa5a5c72cfc5ee212dfbf531d9c46320b0af901e71ab61b96845e43cc636181b33b3faae27f2f87ce2d44017ac65235bf9c95209f476477b16f93
+  checksum: 8fcfcb36b3aef3171d5db6c6b5a505823b50fbb09d571f1b176acc032c08d406e7fe441e3816e6955383a07fb9808f555ab6264fa580f5e7bb15a20b8c2a0f31
   languageName: node
   linkType: hard
 
@@ -1779,21 +1779,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/query-core@npm:5.52.0, @tanstack/query-core@npm:^5.52.0":
-  version: 5.52.0
-  resolution: "@tanstack/query-core@npm:5.52.0"
-  checksum: 6f2309294d23721e4508241a4e109d6134bd125b732271217181ae99cc7994ec02ff964397e08bc5e9af5302e3838a3f3259d6e49fdf6fc8aaf324bc4fde4939
+"@tanstack/query-core@npm:5.55.4, @tanstack/query-core@npm:^5.55.4":
+  version: 5.55.4
+  resolution: "@tanstack/query-core@npm:5.55.4"
+  checksum: c463b582b8c7c24fddd8da9c6fd311805df48bbfbdf9feae5662cd6e3d1df3eba47a1fc0c6e7f3feed6e0add2e363fbfcaad25e931b1bda6da6aabdccf3e5898
   languageName: node
   linkType: hard
 
-"@tanstack/react-query@npm:^5.52.1":
-  version: 5.52.1
-  resolution: "@tanstack/react-query@npm:5.52.1"
+"@tanstack/react-query@npm:^5.55.4":
+  version: 5.55.4
+  resolution: "@tanstack/react-query@npm:5.55.4"
   dependencies:
-    "@tanstack/query-core": "npm:5.52.0"
+    "@tanstack/query-core": "npm:5.55.4"
   peerDependencies:
     react: ^18 || ^19
-  checksum: a07697446311e908173bcce25ccbf019d7ffde19a7607b6791195414f1b337754f48d3d40b8100283e0fea556295240ecf9fe7bb39b3c1f3040d1ac38da03485
+  checksum: b81f4e2942aa4e978278816e7939ac4df500cc38e052fd24c48e6ee5eddb89809b546e8536b50558f65ad679635ac0763ddfa3c14e73d60cfcf0646d5e57fd2a
   languageName: node
   linkType: hard
 
@@ -1848,12 +1848,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^20.16.1":
-  version: 20.16.1
-  resolution: "@types/node@npm:20.16.1"
+"@types/node@npm:^20.16.5":
+  version: 20.16.5
+  resolution: "@types/node@npm:20.16.5"
   dependencies:
     undici-types: "npm:~6.19.2"
-  checksum: cac13c0f42467df3254805a671ca9e74a6eb7c41568de972e26b10dcc448a45743aaf00e9e5fce4a9214da5bc8444fe902918e105dac5a224e24e83fd9989a97
+  checksum: 6af7994129815010bcbc4cf8221865559c8116ff43e74a6549525c2108267596fc2d18aff5d5ecfe089fb60a119f975631343e2c65c52bfa0955ed9dc56733d6
   languageName: node
   linkType: hard
 
@@ -1907,13 +1907,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:^18.3.4":
-  version: 18.3.4
-  resolution: "@types/react@npm:18.3.4"
+"@types/react@npm:^18.3.5":
+  version: 18.3.5
+  resolution: "@types/react@npm:18.3.5"
   dependencies:
     "@types/prop-types": "npm:*"
     csstype: "npm:^3.0.2"
-  checksum: 5c52e1e6f540cff21e3c2a5212066d02e005f6fb21e4a536a29097fae878db9f407cd7a4b43778f51359349c5f692e08bc77ddb5f5cecbfca9ca4d4e3c91a48e
+  checksum: 548b1d3d7c2f0242fbfdbbd658731b4ce69a134be072fa83e6ab516f2840402a3f20e3e7f72e95133b23d4880ef24a6d864050dc8e1f7c68f39fa87ca8445917
   languageName: node
   linkType: hard
 
@@ -2341,14 +2341,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.7.4":
-  version: 1.7.5
-  resolution: "axios@npm:1.7.5"
+"axios@npm:^1.7.7":
+  version: 1.7.7
+  resolution: "axios@npm:1.7.7"
   dependencies:
     follow-redirects: "npm:^1.15.6"
     form-data: "npm:^4.0.0"
     proxy-from-env: "npm:^1.1.0"
-  checksum: 1d5daeb28b3d1bb2a7b9f0743433c4bfbeaddc15461e50ebde487eec6c009af2515749d5261096dd430c90cd891bd310bcba5ec3967bae2033c4a307f58a6ad3
+  checksum: 4499efc89e86b0b49ffddc018798de05fab26e3bf57913818266be73279a6418c3ce8f9e934c7d2d707ab8c095e837fc6c90608fb7715b94d357720b5f568af7
   languageName: node
   linkType: hard
 
@@ -3275,9 +3275,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-react@npm:^7.35.0":
-  version: 7.35.0
-  resolution: "eslint-plugin-react@npm:7.35.0"
+"eslint-plugin-react@npm:^7.35.2":
+  version: 7.35.2
+  resolution: "eslint-plugin-react@npm:7.35.2"
   dependencies:
     array-includes: "npm:^3.1.8"
     array.prototype.findlast: "npm:^1.2.5"
@@ -3299,7 +3299,7 @@ __metadata:
     string.prototype.repeat: "npm:^1.0.0"
   peerDependencies:
     eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8 || ^9.7
-  checksum: eedcc33de4b2cda91d56ae517a4f771a0c76da9c1e26c95543969012871381e11d4d6cffdf6fa8423036585c289eb3500f3f93fb1d314fb2624e0aa1e463305e
+  checksum: 5f891f5a77e902a0ca8d10b23d0b800e90a09400187febe5986c5078d6277baa4b974d6acdbba25baae065dbcf12eb9241b5f5782527d0780314c2ee5006a8af
   languageName: node
   linkType: hard
 
@@ -4501,20 +4501,20 @@ __metadata:
     "@mui/icons-material": "npm:^5.16.7"
     "@mui/joy": "npm:^5.0.0-beta.47"
     "@mui/material": "npm:^5.16.7"
-    "@playwright/test": "npm:^1.46.1"
-    "@tanstack/query-core": "npm:^5.52.0"
-    "@tanstack/react-query": "npm:^5.52.1"
-    "@types/node": "npm:^20.16.1"
-    "@types/react": "npm:^18.3.4"
+    "@playwright/test": "npm:^1.47.0"
+    "@tanstack/query-core": "npm:^5.55.4"
+    "@tanstack/react-query": "npm:^5.55.4"
+    "@types/node": "npm:^20.16.5"
+    "@types/react": "npm:^18.3.5"
     "@types/react-dom": "npm:^18.3.0"
     "@typescript-eslint/eslint-plugin": "npm:^7.18.0"
     "@typescript-eslint/parser": "npm:^7.18.0"
     "@vitejs/plugin-react-swc": "npm:^3.7.0"
-    axios: "npm:^1.7.4"
+    axios: "npm:^1.7.7"
     date-fns: "npm:^3.6.0"
     eslint: "npm:^8.57.0"
     eslint-config-prettier: "npm:^9.1.0"
-    eslint-plugin-react: "npm:^7.35.0"
+    eslint-plugin-react: "npm:^7.35.2"
     eslint-plugin-react-hooks: "npm:^4.6.2"
     eslint-plugin-react-refresh: "npm:^0.4.11"
     jotai: "npm:^2.9.3"
@@ -4528,7 +4528,7 @@ __metadata:
     react-hook-form: "npm:^7.53.0"
     react-router-dom: "npm:^6.26.1"
     typescript: "npm:^5.5.4"
-    vite: "npm:^5.4.2"
+    vite: "npm:^5.4.3"
     vite-plugin-svgr: "npm:^4.2.0"
     wonka: "npm:^6.3.4"
   languageName: unknown
@@ -5260,27 +5260,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"playwright-core@npm:1.46.1":
-  version: 1.46.1
-  resolution: "playwright-core@npm:1.46.1"
+"playwright-core@npm:1.47.0":
+  version: 1.47.0
+  resolution: "playwright-core@npm:1.47.0"
   bin:
     playwright-core: cli.js
-  checksum: 98e48e271caccaa6c54b3c591cbddbef36a679eef011b38e2af11fbaba0aab1f997b45f9207c4099468a0c79047a1e879bbd9e81bd880ae24501a0ee3c7a33c7
+  checksum: 70fdd2e62849176ff5403ec530a69d0ef07e6bebc8486f1f4bf49bc4b8a34ab27be0f91950f74a448db13b383d2ba6d934041493f286603de190937ebd0e7508
   languageName: node
   linkType: hard
 
-"playwright@npm:1.46.1":
-  version: 1.46.1
-  resolution: "playwright@npm:1.46.1"
+"playwright@npm:1.47.0":
+  version: 1.47.0
+  resolution: "playwright@npm:1.47.0"
   dependencies:
     fsevents: "npm:2.3.2"
-    playwright-core: "npm:1.46.1"
+    playwright-core: "npm:1.47.0"
   dependenciesMeta:
     fsevents:
       optional: true
   bin:
     playwright: cli.js
-  checksum: 2a328a2073313136192d74b48b981d9aeb1d4cc54926ed235f638c875f9de59c41370bb20bb2d8cf30126c52c6e25cc02db21ffafeb487c92c84c52c84846912
+  checksum: fa47134246baf0951db435ae004a0ee98d5d1cfbb675d07a2c5dd3709866e69c092a568f0e8ec652e9e9fcb45e77335a44cd74b03d15369a7acb9c6e7a0a88d0
   languageName: node
   linkType: hard
 
@@ -5305,14 +5305,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.4.41":
-  version: 8.4.41
-  resolution: "postcss@npm:8.4.41"
+"postcss@npm:^8.4.43":
+  version: 8.4.45
+  resolution: "postcss@npm:8.4.45"
   dependencies:
     nanoid: "npm:^3.3.7"
     picocolors: "npm:^1.0.1"
     source-map-js: "npm:^1.2.0"
-  checksum: c1828fc59e7ec1a3bf52b3a42f615dba53c67960ed82a81df6441b485fe43c20aba7f4e7c55425762fd99c594ecabbaaba8cf5b30fd79dfec5b52a9f63a2d690
+  checksum: ad6f8b9b1157d678560373696109745ab97a947d449f8a997acac41c7f1e4c0f3ca4b092d6df1387f430f2c9a319987b1780dbdc27e35800a88cde9b606c1e8f
   languageName: node
   linkType: hard
 
@@ -6477,13 +6477,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^5.4.2":
-  version: 5.4.2
-  resolution: "vite@npm:5.4.2"
+"vite@npm:^5.4.3":
+  version: 5.4.3
+  resolution: "vite@npm:5.4.3"
   dependencies:
     esbuild: "npm:^0.21.3"
     fsevents: "npm:~2.3.3"
-    postcss: "npm:^8.4.41"
+    postcss: "npm:^8.4.43"
     rollup: "npm:^4.20.0"
   peerDependencies:
     "@types/node": ^18.0.0 || >=20.0.0
@@ -6516,7 +6516,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 23e347ca8aa6f0a774227e4eb7abae228f12c6806a727b046aa75e7ee37ffc2d68cff74360e12a42c347f79adc294e2363bc723b957bf4b382b5a8fb39e4df9d
+  checksum: 7afe601bcba82f81980c718fc171ba8f0c45e3bffaeb7ef831b64b84e396f963c3c87818b74da4c8e817d1bce1c179f1efae3bcb14d2e94b4eb635071722c8f2
   languageName: node
   linkType: hard
 
