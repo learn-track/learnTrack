@@ -1,11 +1,11 @@
 [versions]
 kotlin = "1.9.25"
-spring = "6.1.12"
+spring = "6.1.13"
 springboot = "3.3.3"
 springdoc = "2.6.0"
 
 [libraries]
-detekt-formatting = "io.gitlab.arturbosch.detekt:detekt-formatting:1.23.6"
+detekt-formatting = "io.gitlab.arturbosch.detekt:detekt-formatting:1.23.7"
 jackson-module-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin" }
 
 jakarta-xml-bind-api = "jakarta.xml.bind:jakarta.xml.bind-api:4.0.2"
@@ -42,7 +42,7 @@ jsonwebtoken-impl = "io.jsonwebtoken:jjwt-impl:0.12.6"
 jsonwebtoken-orgjson = "io.jsonwebtoken:jjwt-orgjson:0.12.6"
 
 [plugins]
-detekt = "io.gitlab.arturbosch.detekt:1.23.6"
+detekt = "io.gitlab.arturbosch.detekt:1.23.7"
 diktat = "com.saveourtool.diktat:2.0.0"
 jooq = "nu.studer.jooq:8.2.3"
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
